@@ -400,9 +400,7 @@ with tabs[3]:
 with tabs[4]:
     # Vérification clé API
     try:
-        import google.generativeai as genai
-        api_key = st.secrets["GEMINI_API_KEY"]
-        genai.configure(api_key=api_key)
+        from google import genai as genai_client
         api_ok = True
     except Exception:
         api_ok = False
