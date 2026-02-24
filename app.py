@@ -455,7 +455,7 @@ with tabs[4]:
 
     # ── Génération Gemini ─────────────────────────────────────────────────────
     def appel_gemini(prompt):
-    try:
+     try:
         from google import genai as genai_client
         client = genai_client.Client(api_key=st.secrets["GEMINI_API_KEY"])
         response = client.models.generate_content(
@@ -463,7 +463,7 @@ with tabs[4]:
             contents=prompt
         )
         return response.text.strip()
-    except Exception as e:
+     except Exception as e:
         return f"Erreur Gemini : {e}"
 
     THEMES = {
