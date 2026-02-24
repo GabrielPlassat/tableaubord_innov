@@ -521,24 +521,6 @@ with tabs[3]:
             st.cache_data.clear()
             st.rerun()
 
-    # ── Profils ────────────────────────────────────────────────────────────────
-    st.markdown('<div class="section-header">Profils suivis</div>', unsafe_allow_html=True)
-
-    df_p = personnes if filtre_courant == "Tous" else personnes[personnes["courant"] == filtre_courant]
-    cols = st.columns(2)
-    for i, (_, row) in enumerate(df_p.iterrows()):
-        with cols[i % 2]:
-            url_html  = f'<a class="person-link" href="{row["url_profil"]}" target="_blank">→ Profil</a>' if pd.notna(row.get("url_profil","")) and row.get("url_profil","") else ""
-            rss_html  = f'&nbsp;&nbsp;<a class="person-link" href="{row["url_flux"]}" target="_blank">RSS</a>'  if pd.notna(row.get("url_flux",""))  and row.get("url_flux","")  else ""
-            st.markdown(f"""
-            <div class="person-card">
-                <div class="person-name">{row['nom']}</div>
-                <div class="person-courant">{row['courant']}</div>
-                <div class="person-focus">{row['focus']}</div>
-                <div class="person-note">{row['note']}</div>
-                <div style="margin-top:0.5rem">{url_html}{rss_html}</div>
-            </div>""", unsafe_allow_html=True)
-
     # ── Derniers articles RSS ──────────────────────────────────────────────────
     st.markdown('<div class="section-header">📡 Derniers articles publiés</div>', unsafe_allow_html=True)
 
@@ -564,6 +546,24 @@ with tabs[3]:
                 <div class="signal-meta">{row['date']} · {row['courant']}</div>
                 <div class="signal-note">{row['resume']}</div>
                 <div style="margin-top:0.4rem">{url_html}</div>
+            </div>""", unsafe_allow_html=True)
+  
+    # ── Profils ────────────────────────────────────────────────────────────────
+    st.markdown('<div class="section-header">Profils suivis</div>', unsafe_allow_html=True)
+
+    df_p = personnes if filtre_courant == "Tous" else personnes[personnes["courant"] == filtre_courant]
+    cols = st.columns(2)
+    for i, (_, row) in enumerate(df_p.iterrows()):
+        with cols[i % 2]:
+            url_html  = f'<a class="person-link" href="{row["url_profil"]}" target="_blank">→ Profil</a>' if pd.notna(row.get("url_profil","")) and row.get("url_profil","") else ""
+            rss_html  = f'&nbsp;&nbsp;<a class="person-link" href="{row["url_flux"]}" target="_blank">RSS</a>'  if pd.notna(row.get("url_flux",""))  and row.get("url_flux","")  else ""
+            st.markdown(f"""
+            <div class="person-card">
+                <div class="person-name">{row['nom']}</div>
+                <div class="person-courant">{row['courant']}</div>
+                <div class="person-focus">{row['focus']}</div>
+                <div class="person-note">{row['note']}</div>
+                <div style="margin-top:0.5rem">{url_html}{rss_html}</div>
             </div>""", unsafe_allow_html=True)
 
     # ── Ajouter une personne ───────────────────────────────────────────────────
@@ -623,37 +623,8 @@ with tabs[4]:
                 <div class="signal-note">{row['resume']}</div>
                 <div style="margin-top:0.4rem">{url_html}</div>
             </div>""", unsafe_allow_html=True)
-
-    # ── Signaux manuels curatés ────────────────────────────────────────────────
-    st.markdown('<div class="section-header">📋 Signaux curatés manuellement</div>', unsafe_allow_html=True)
-
-    trl_min, trl_max = st.slider("TRL estimé", 1, 9, (1, 9))
-    df_s = signaux.copy()
-    if filtre_t_dom != "Tous":
-        df_s = df_s[df_s["domaine"] == filtre_t_dom]
-    df_s = df_s[(df_s["trl_estime"] >= trl_min) & (df_s["trl_estime"] <= trl_max)]
-    df_s = df_s.sort_values("date", ascending=False)
-
-    for _, row in df_s.iterrows():
-        c = color_for(row["domaine"])
-        tags_html = "".join([f'<span class="tag">{t.strip()}</span>' for t in str(row["tags"]).split(",")])
-        url_html  = f'<a class="person-link" href="{row["url"]}" target="_blank">→ Source</a>' if pd.notna(row["url"]) else ""
-        st.markdown(f"""
-        <div class="signal-card" style="border-color: {c}">
-            <div style="display:flex; justify-content:space-between">
-                <div class="signal-title">{row['titre']}</div>
-                <div style="font-family:Space Mono; font-size:0.75rem; color:{c}">{row['intensite']}</div>
-            </div>
-            <div class="signal-meta">{row['date']} · {row['domaine']} · TRL ~{row['trl_estime']} · {row['source']}</div>
-            <div class="signal-note">{row['note']}</div>
-            <div style="margin-top:0.5rem">{tags_html} &nbsp; {url_html}</div>
-        </div>""", unsafe_allow_html=True)
-
-    st.markdown('<div class="section-header">Ajouter un signal</div>', unsafe_allow_html=True)
-    st.info("💡 Éditez `data/signaux_faibles.csv` dans GitHub pour ajouter un signal manuellement.")
-    with st.expander("Modèle de ligne — signaux_faibles.csv"):
-        st.code("DATE,TITRE,DOMAINE,TRL_ESTIME,INTENSITE,SOURCE,URL,TAGS,NOTE", language="text")
     with st.expander("Ajouter une source thématique RSS"):
         st.info("Éditez `data/thematiques_rss.csv` dans GitHub.")
         st.code("NOM,URL_FLUX,DOMAINE,LANGUE", language="text")
+
 
