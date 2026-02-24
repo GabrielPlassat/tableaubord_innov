@@ -1,0 +1,8 @@
+nom,url_flux,categorie,emoji
+GitHub Trending - Tous langages,https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml,GitHub Trending,⭐
+GitHub Trending - Python,https://mshibanami.github.io/GitHubTrendingRSS/daily/python.xml,GitHub Trending,🐍
+GitHub Trending - JavaScript,https://mshibanami.github.io/GitHubTrendingRSS/daily/javascript.xml,GitHub Trending,🟨
+Changelog Nightly,https://changelog.com/nightly/feed,GitHub Trending,📦
+Hugging Face - Daily Papers,https://papers.takara.ai/api/feed,Hugging Face,📄
+Hugging Face - Blog officiel,https://huggingface.co/blog/feed.xml,Hugging Face,🤗
+HF Leaderboard - Chatbot Arena,https://huggingface.co/datasets/lmsys/chatbot_arena_leaderboard/commits/main.atom,Hugging Face,🏆

@@ -1,0 +1,8 @@
+nom,url_flux,categorie,emoji
+Investing.com - Pétrole & Commodités,https://www.investing.com/rss/news_11.rss,Énergie & Matières premières,🛢️
+EnergyTrend - Prix Solaire,https://www.energytrend.com/rss/solar.xml,Énergie & Matières premières,☀️
+BloombergNEF - Batteries & Énergie,https://about.bnef.com/feed/,Énergie & Matières premières,🔋
+FXStreet - Devises & Crypto,https://www.fxstreet.com/rss/news,Devises & Crypto,💱
+CoinTelegraph - Bitcoin & Crypto,https://cointelegraph.com/rss/tag/bitcoin,Devises & Crypto,₿
+Xinhua - Économie & Yuan Chine,https://feeds.a.j.news.cn/v1/rss/en/china-economy.xml,Devises & Crypto,🇨🇳
+Epoch AI - Performances LLM,https://epoch.ai/feed.xml,IA Benchmarks,🤖
