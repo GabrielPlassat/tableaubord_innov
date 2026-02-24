@@ -4,6 +4,8 @@ import os
 import plotly.graph_objects as go
 import plotly.express as px
 import numpy as np
+import feedparser
+import datetime
 
 # ── PAGE CONFIG ────────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -468,16 +470,87 @@ with tabs[3]:
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 5 — SIGNAUX FAIBLES
 # ══════════════════════════════════════════════════════════════════════════════
-with tabs[4]:
-    st.markdown('<div class="section-header">Signaux faibles récents</div>', unsafe_allow_html=True)
+@st.cache_data(ttl=3600)  # rafraîchit toutes les heures
+def fetch_rss_feeds(sources_path):
+    import feedparser, datetime, os
+    sources = pd.read_csv(sources_path)
+    items = []
+    for _, src in sources.iterrows():
+        try:
+            feed = feedparser.parse(src["url_flux"])
+            for entry in feed.entries[:5]:  # 5 articles max par source
+                pub = entry.get("published_parsed") or entry.get("updated_parsed")
+                date_str = datetime.datetime(*pub[:6]).strftime("%Y-%m-%d") if pub else "—"
+                items.append({
+                    "date": date_str,
+                    "titre": entry.get("title", "Sans titre"),
+                    "source": src["nom"],
+                    "domaine": src["domaine"],
+                    "url": entry.get("link", ""),
+                    "resume": entry.get("summary", "")[:200].replace("<p>","").replace("</p>","").strip() + "…",
+                    "type": src["type"],
+                    "origine": "🔴 Live RSS",
+                })
+        except Exception:
+            pass  # si un flux échoue, on continue sans bloquer
+    df = pd.DataFrame(items)
+    if not df.empty:
+        df = df.sort_values("date", ascending=False)
+    return df
 
-    col1, col2 = st.columns(2)
+with tabs[4]:
+    st.markdown('<div class="section-header">Signaux faibles — flux automatiques</div>', unsafe_allow_html=True)
+
+    base = os.path.dirname(os.path.abspath(__file__))
+    sources_path = os.path.join(base, "data", "sources_rss.csv")
+    sources_df = pd.read_csv(sources_path)
+
+    # ── Contrôles ─────────────────────────────────────────────────────────────
+    col1, col2, col3 = st.columns([2, 2, 1])
     with col1:
-        dom_opts = ["Tous"] + sorted(signaux["domaine"].unique().tolist())
+        dom_opts = ["Tous"] + sorted(sources_df["domaine"].unique().tolist())
         filtre_s_dom = st.selectbox("Domaine", dom_opts, key="sf_dom", label_visibility="collapsed")
     with col2:
-        trl_min, trl_max = st.slider("TRL estimé", 1, 9, (1, 9))
+        type_opts = ["Tous"] + sorted(sources_df["type"].unique().tolist())
+        filtre_type = st.selectbox("Type de source", type_opts, key="sf_type", label_visibility="collapsed")
+    with col3:
+        if st.button("🔄 Rafraîchir", use_container_width=True):
+            st.cache_data.clear()
+            st.rerun()
 
+    # ── Section RSS Live ───────────────────────────────────────────────────────
+    st.markdown('<div class="section-header">📡 Articles récents — RSS live</div>', unsafe_allow_html=True)
+
+    with st.spinner("Chargement des flux RSS…"):
+        rss_df = fetch_rss_feeds(sources_path)
+
+    if rss_df.empty:
+        st.warning("Aucun flux RSS chargé. Vérifiez votre connexion ou les URLs dans sources_rss.csv")
+    else:
+        df_rss_f = rss_df.copy()
+        if filtre_s_dom != "Tous":
+            df_rss_f = df_rss_f[df_rss_f["domaine"] == filtre_s_dom]
+        if filtre_type != "Tous":
+            df_rss_f = df_rss_f[df_rss_f["type"] == filtre_type]
+
+        for _, row in df_rss_f.head(30).iterrows():
+            c = color_for(row["domaine"])
+            url_html = f'<a class="person-link" href="{row["url"]}" target="_blank">→ Lire l\'article</a>' if row["url"] else ""
+            st.markdown(f"""
+            <div class="signal-card" style="border-color: {c}">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                    <div class="signal-title">{row['titre']}</div>
+                    <span class="tag" style="white-space:nowrap; margin-left:8px">{row['origine']}</span>
+                </div>
+                <div class="signal-meta">{row['date']} · {row['source']} · {row['domaine']}</div>
+                <div class="signal-note">{row['resume']}</div>
+                <div style="margin-top:0.4rem">{url_html}</div>
+            </div>""", unsafe_allow_html=True)
+
+    # ── Section manuelle (CSV) ─────────────────────────────────────────────────
+    st.markdown('<div class="section-header">📋 Signaux curatés manuellement</div>', unsafe_allow_html=True)
+
+    trl_min, trl_max = st.slider("Filtrer par TRL estimé", 1, 9, (1, 9))
     df_s = signaux.copy()
     if filtre_s_dom != "Tous":
         df_s = df_s[df_s["domaine"] == filtre_s_dom]
@@ -494,12 +567,12 @@ with tabs[4]:
                 <div class="signal-title">{row['titre']}</div>
                 <div style="font-family:Space Mono; font-size:0.75rem; color:{c}">{row['intensite']}</div>
             </div>
-            <div class="signal-meta">{row['date']} · {row['domaine']} · TRL ~{row['trl_estime']} · Source : {row['source']}</div>
+            <div class="signal-meta">{row['date']} · {row['domaine']} · TRL ~{row['trl_estime']} · {row['source']}</div>
             <div class="signal-note">{row['note']}</div>
             <div style="margin-top:0.5rem">{tags_html} &nbsp; {url_html}</div>
         </div>""", unsafe_allow_html=True)
 
-    st.markdown('<div class="section-header">Ajouter un signal</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header">Ajouter un signal manuel</div>', unsafe_allow_html=True)
     st.info("💡 Éditez `data/signaux_faibles.csv` dans GitHub pour ajouter un nouveau signal.", icon=None)
     with st.expander("Voir le modèle de ligne CSV"):
         st.code("DATE,TITRE,DOMAINE,TRL_ESTIME,INTENSITE,SOURCE,URL,TAGS,NOTE", language="text")
