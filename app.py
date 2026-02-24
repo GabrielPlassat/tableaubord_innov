@@ -456,13 +456,17 @@ with tabs[4]:
         return "\n".join(f"- [{r['date']}] {r['titre']} ({r['source']})" for _, r in df.iterrows())
 
     # ── Génération Gemini ─────────────────────────────────────────────────────
-    def appel_gemini(prompt):
-        try:
-            model = genai.GenerativeModel("gemini-1.5-flash")
-            response = model.generate_content(prompt)
-            return response.text.strip()
-        except Exception as e:
-            return f"Erreur Gemini : {e}"
+   def appel_gemini(prompt):
+    try:
+        from google import genai as genai_client
+        client = genai_client.Client(api_key=st.secrets["GEMINI_API_KEY"])
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=prompt
+        )
+        return response.text.strip()
+    except Exception as e:
+        return f"Erreur Gemini : {e}"
 
     THEMES = {
         "⚡ Énergie":   ["énergie", "energy", "solaire", "éolien", "nucléaire", "hydrogène", "batterie", "renouvelable", "électrique", "pétrole", "gaz"],
