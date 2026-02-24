@@ -1,0 +1,27 @@
+nom,url_flux,domaine,langue
+MIT Technology Review,https://www.technologyreview.com/feed/,Tech,EN
+TechCrunch,https://techcrunch.com/feed/,Tech,EN
+Wired,https://www.wired.com/feed/rss,Tech & Société,EN
+The Verge,https://www.theverge.com/rss/index.xml,Tech,EN
+Next INpact,https://next.ink/feed/,Tech,FR
+Usine Nouvelle,https://www.usinenouvelle.com/rss/all.xml,Industrie/Innovation,FR
+Techniques Ingénieur,https://www.techniques-ingenieur.fr/actualite/feed/,Innovation,FR
+PV Magazine,https://www.pv-magazine.fr/feed/,Énergie,FR
+Enerzine,https://www.enerzine.com/feed,Énergie,FR
+Décideurs Magazine,https://www.magazine-decideurs.com/feed,Économie/Business,FR
+Alternatives Économiques,https://www.alternatives-economiques.fr/rss.xml,Économie,FR
+The Batch (DeepLearning.AI),https://www.deeplearning.ai/the-batch/feed/,IA,EN
+VentureBeat AI,https://venturebeat.com/category/ai/feed/,IA,EN
+Nature News,https://www.nature.com/news.rss,Science,EN
+Commission EU - DAE Numérique & IA,https://ec.europa.eu/newsroom/dae/items/rss,Rapports & études,EN
+Commission EU - DG ENER Énergie,https://ec.europa.eu/newsroom/ener/items/rss,Rapports & études,EN
+Commission EU - DG MOVE Transport,https://ec.europa.eu/newsroom/move/items/rss,Rapports & études,EN
+Commission EU - DG CONNECT,https://ec.europa.eu/newsroom/cnect/items/rss,Rapports & études,EN
+JRC Science Hub actualités,https://joint-research-centre.ec.europa.eu/rss.xml,Rapports & études,EN
+Parlement EU - ITRE Industrie Énergie,https://www.europarl.europa.eu/rss/committee/itre/en.xml,Rapports & études,EN
+Parlement EU - TRAN Transport,https://www.europarl.europa.eu/rss/committee/tran/en.xml,Rapports & études,EN
+Parlement EU - Think Tank études,https://www.europarl.europa.eu/rss/doc/studies/en.xml,Rapports & études,EN
+Conseil UE - RSS actualités,https://www.consilium.europa.eu/en/about-site/rss/feed/?type=pressreleases,Rapports & études,EN
+EEA - Agence Européenne Environnement,https://www.eea.europa.eu/en/newsroom/rss-feeds/news.rss,Rapports & études,EN
+ENISA - Cybersécurité EU,https://www.enisa.europa.eu/news/enisa-news/RSS,Rapports & études,EN
+EUR-Lex - Nouvelles publications,https://eur-lex.europa.eu/rss/legal-content/EN/LSU/,Rapports & études,EN
