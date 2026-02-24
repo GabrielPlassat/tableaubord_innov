@@ -207,6 +207,74 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── TABS ──────────────────────────────────────────────────────────────────────
+@st.cache_data(ttl=3600)
+def fetch_personnes_rss(path):
+    import feedparser, datetime
+    sources = pd.read_csv(path)
+    items = []
+    for _, src in sources.iterrows():
+        try:
+            feed = feedparser.parse(
+                src["url_flux"],
+                agent="Mozilla/5.0 (compatible; RSSReader/1.0)"
+            )
+            for entry in feed.entries[:4]:
+                pub = entry.get("published_parsed") or entry.get("updated_parsed")
+                date_str = datetime.datetime(*pub[:6]).strftime("%Y-%m-%d") if pub else "—"
+                items.append({
+                    "date": date_str,
+                    "titre": entry.get("title", "Sans titre"),
+                    "nom": src["nom"],
+                    "courant": src["courant"],
+                    "domaine": src["domaine"],
+                    "url_profil": src["url_profil"],
+                    "url": entry.get("link", ""),
+                    "resume": entry.get("summary", "")[:220]
+                              .replace("<p>","").replace("</p>","")
+                              .replace("<br>","").replace("</br>","").strip() + "…",
+                })
+        except Exception:
+            pass
+    df = pd.DataFrame(items)
+    if not df.empty:
+        df = df.sort_values("date", ascending=False)
+    return df
+
+
+# ── FONCTION RSS THÉMATIQUES ──────────────────────────────────────────────────
+@st.cache_data(ttl=3600)
+def fetch_thematiques_rss(path):
+    import feedparser, datetime
+    sources = pd.read_csv(path)
+    items = []
+    for _, src in sources.iterrows():
+        try:
+            feed = feedparser.parse(
+                src["url_flux"],
+                agent="Mozilla/5.0 (compatible; RSSReader/1.0)"
+            )
+            for entry in feed.entries[:3]:
+                pub = entry.get("published_parsed") or entry.get("updated_parsed")
+                date_str = datetime.datetime(*pub[:6]).strftime("%Y-%m-%d") if pub else "—"
+                items.append({
+                    "date": date_str,
+                    "titre": entry.get("title", "Sans titre"),
+                    "source": src["nom"],
+                    "domaine": src["domaine"],
+                    "langue": src["langue"],
+                    "url": entry.get("link", ""),
+                    "resume": entry.get("summary", "")[:220]
+                              .replace("<p>","").replace("</p>","")
+                              .replace("<br>","").replace("</br>","").strip() + "…",
+                })
+        except Exception:
+            pass
+    df = pd.DataFrame(items)
+    if not df.empty:
+        df = df.sort_values("date", ascending=False)
+    return df
+
+
 tabs = st.tabs(["⚡ Énergie", "📈 Économie", "🔬 Projets & TRL", "👤 Veille Personnes", "📡 Signaux Faibles"])
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -436,134 +504,140 @@ with tabs[2]:
         </div>""", unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════════════════════
-# TAB 4 — PERSONNES RÉFÉRENTES
+# TAB 4 — PERSONNES RÉFÉRENTES  (remplace tout le bloc "with tabs[3]:" existant)
 # ══════════════════════════════════════════════════════════════════════════════
 with tabs[3]:
-    st.markdown('<div class="section-header">Personnes suivies</div>', unsafe_allow_html=True)
+    base = os.path.dirname(os.path.abspath(__file__))
+    pers_rss_path = os.path.join(base, "data", "personnes_rss.csv")
+    pers_rss_df   = pd.read_csv(pers_rss_path)
 
-    courants = ["Tous"] + sorted(personnes["courant"].unique().tolist())
-    filtre_courant = st.selectbox("Filtrer par courant de pensée", courants, label_visibility="visible")
+    # ── Filtres ────────────────────────────────────────────────────────────────
+    col_f1, col_f2 = st.columns([3, 1])
+    with col_f1:
+        courants = ["Tous"] + sorted(pers_rss_df["courant"].unique().tolist())
+        filtre_courant = st.selectbox("Filtrer par courant de pensée", courants)
+    with col_f2:
+        if st.button("🔄 Rafraîchir", key="refresh_pers", use_container_width=True):
+            st.cache_data.clear()
+            st.rerun()
+
+    # ── Profils ────────────────────────────────────────────────────────────────
+    st.markdown('<div class="section-header">Profils suivis</div>', unsafe_allow_html=True)
+
     df_p = personnes if filtre_courant == "Tous" else personnes[personnes["courant"] == filtre_courant]
-
     cols = st.columns(2)
     for i, (_, row) in enumerate(df_p.iterrows()):
         with cols[i % 2]:
-            url_html = f'<a class="person-link" href="{row["url_profil"]}" target="_blank">→ Profil</a>' if pd.notna(row["url_profil"]) else ""
-            rss_html = f'&nbsp;&nbsp;<a class="person-link" href="{row["url_flux"]}" target="_blank">RSS</a>' if pd.notna(row["url_flux"]) and row["url_flux"] else ""
-            dernier = f'<span style="font-family:Space Mono;font-size:0.6rem;color:#4a6a8a">Dernier signal : {row["derniere_publication"]}</span>' if pd.notna(row.get("derniere_publication", None)) and row.get("derniere_publication", None) else ""
+            url_html  = f'<a class="person-link" href="{row["url_profil"]}" target="_blank">→ Profil</a>' if pd.notna(row.get("url_profil","")) and row.get("url_profil","") else ""
+            rss_html  = f'&nbsp;&nbsp;<a class="person-link" href="{row["url_flux"]}" target="_blank">RSS</a>'  if pd.notna(row.get("url_flux",""))  and row.get("url_flux","")  else ""
             st.markdown(f"""
             <div class="person-card">
                 <div class="person-name">{row['nom']}</div>
                 <div class="person-courant">{row['courant']}</div>
                 <div class="person-focus">{row['focus']}</div>
                 <div class="person-note">{row['note']}</div>
-                <div style="margin-top:0.5rem; display:flex; align-items:center; gap: 1rem;">
-                    {url_html}{rss_html}&nbsp;&nbsp;{dernier}
-                </div>
+                <div style="margin-top:0.5rem">{url_html}{rss_html}</div>
             </div>""", unsafe_allow_html=True)
 
+    # ── Derniers articles RSS ──────────────────────────────────────────────────
+    st.markdown('<div class="section-header">📡 Derniers articles publiés</div>', unsafe_allow_html=True)
+
+    with st.spinner("Chargement des flux…"):
+        pers_articles = fetch_personnes_rss(pers_rss_path)
+
+    if pers_articles.empty:
+        st.warning("Aucun article chargé. Vérifiez les URLs dans data/personnes_rss.csv")
+    else:
+        df_articles = pers_articles.copy()
+        if filtre_courant != "Tous":
+            df_articles = df_articles[df_articles["courant"] == filtre_courant]
+
+        for _, row in df_articles.head(20).iterrows():
+            c = color_for(row["domaine"])
+            url_html = f'<a class="person-link" href="{row["url"]}" target="_blank">→ Lire</a>' if row["url"] else ""
+            st.markdown(f"""
+            <div class="signal-card" style="border-color: {c}">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px">
+                    <div class="signal-title">{row['titre']}</div>
+                    <span class="tag" style="white-space:nowrap; border-color:{c}44; color:{c}">{row['nom'].split('(')[0].strip()}</span>
+                </div>
+                <div class="signal-meta">{row['date']} · {row['courant']}</div>
+                <div class="signal-note">{row['resume']}</div>
+                <div style="margin-top:0.4rem">{url_html}</div>
+            </div>""", unsafe_allow_html=True)
+
+    # ── Ajouter une personne ───────────────────────────────────────────────────
     st.markdown('<div class="section-header">Ajouter une personne</div>', unsafe_allow_html=True)
-    st.info("💡 Pour ajouter une personne référente, éditez directement le fichier `data/personnes.csv` dans GitHub.", icon=None)
-    with st.expander("Voir le modèle de ligne CSV à copier-coller"):
-        st.code("NOM,COURANT,PLATEFORME,URL_PROFIL,URL_FLUX,FOCUS,DATE_MAJ,NOTE", language="text")
+    st.info("💡 Éditez `data/personnes.csv` (profil) et `data/personnes_rss.csv` (flux RSS) dans GitHub.")
+    with st.expander("Modèle de ligne — personnes_rss.csv"):
+        st.code("NOM,URL_FLUX,DOMAINE,COURANT,URL_PROFIL", language="text")
+
 
 # ══════════════════════════════════════════════════════════════════════════════
-# TAB 5 — SIGNAUX FAIBLES
+# TAB 5 — SIGNAUX FAIBLES  (remplace tout le bloc "with tabs[4]:" existant)
 # ══════════════════════════════════════════════════════════════════════════════
-@st.cache_data(ttl=3600)  # rafraîchit toutes les heures
-def fetch_rss_feeds(sources_path):
-    import feedparser, datetime, os
-    sources = pd.read_csv(sources_path)
-    items = []
-    for _, src in sources.iterrows():
-        try:
-            feed = feedparser.parse(
-                src["url_flux"],
-                agent="Mozilla/5.0 (compatible; RSSReader/1.0)"
-            )
-            for entry in feed.entries[:5]:  # 5 articles max par source
-                pub = entry.get("published_parsed") or entry.get("updated_parsed")
-                date_str = datetime.datetime(*pub[:6]).strftime("%Y-%m-%d") if pub else "—"
-                items.append({
-                    "date": date_str,
-                    "titre": entry.get("title", "Sans titre"),
-                    "source": src["nom"],
-                    "domaine": src["domaine"],
-                    "url": entry.get("link", ""),
-                    "resume": entry.get("summary", "")[:200].replace("<p>","").replace("</p>","").strip() + "…",
-                    "type": src["type"],
-                    "origine": "🔴 Live RSS",
-                })
-        except Exception:
-            pass  # si un flux échoue, on continue sans bloquer
-    df = pd.DataFrame(items)
-    if not df.empty:
-        df = df.sort_values("date", ascending=False)
-    return df
-
 with tabs[4]:
-    st.markdown('<div class="section-header">Signaux faibles — flux automatiques</div>', unsafe_allow_html=True)
-
     base = os.path.dirname(os.path.abspath(__file__))
-    sources_path = os.path.join(base, "data", "sources_rss.csv")
-    sources_df = pd.read_csv(sources_path)
+    thema_path = os.path.join(base, "data", "thematiques_rss.csv")
+    thema_df   = pd.read_csv(thema_path)
 
-    # ── Contrôles ─────────────────────────────────────────────────────────────
+    # ── Filtres ────────────────────────────────────────────────────────────────
     col1, col2, col3 = st.columns([2, 2, 1])
     with col1:
-        dom_opts = ["Tous"] + sorted(sources_df["domaine"].unique().tolist())
-        filtre_s_dom = st.selectbox("Domaine", dom_opts, key="sf_dom", label_visibility="collapsed")
+        dom_opts = ["Tous"] + sorted(thema_df["domaine"].unique().tolist())
+        filtre_t_dom = st.selectbox("Domaine", dom_opts, key="sf_dom")
     with col2:
-        type_opts = ["Tous"] + sorted(sources_df["type"].unique().tolist())
-        filtre_type = st.selectbox("Type de source", type_opts, key="sf_type", label_visibility="collapsed")
+        lang_opts = ["Toutes"] + sorted(thema_df["langue"].unique().tolist())
+        filtre_lang = st.selectbox("Langue", lang_opts, key="sf_lang")
     with col3:
-        if st.button("🔄 Rafraîchir", use_container_width=True):
+        if st.button("🔄 Rafraîchir", key="refresh_sf", use_container_width=True):
             st.cache_data.clear()
             st.rerun()
 
-    # ── Section RSS Live ───────────────────────────────────────────────────────
-    st.markdown('<div class="section-header">📡 Articles récents — RSS live</div>', unsafe_allow_html=True)
+    # ── Flux thématiques live ──────────────────────────────────────────────────
+    st.markdown('<div class="section-header">📡 Veille thématique — flux automatiques</div>', unsafe_allow_html=True)
 
-    with st.spinner("Chargement des flux RSS…"):
-        rss_df = fetch_rss_feeds(sources_path)
+    with st.spinner("Chargement des flux thématiques…"):
+        thema_articles = fetch_thematiques_rss(thema_path)
 
-    if rss_df.empty:
-        st.warning("Aucun flux RSS chargé. Vérifiez votre connexion ou les URLs dans sources_rss.csv")
+    if thema_articles.empty:
+        st.warning("Aucun article chargé.")
     else:
-        df_rss_f = rss_df.copy()
-        if filtre_s_dom != "Tous":
-            df_rss_f = df_rss_f[df_rss_f["domaine"] == filtre_s_dom]
-        if filtre_type != "Tous":
-            df_rss_f = df_rss_f[df_rss_f["type"] == filtre_type]
+        df_t = thema_articles.copy()
+        if filtre_t_dom != "Tous":
+            df_t = df_t[df_t["domaine"] == filtre_t_dom]
+        if filtre_lang != "Toutes":
+            df_t = df_t[df_t["langue"] == filtre_lang]
 
-        for _, row in df_rss_f.head(30).iterrows():
+        for _, row in df_t.head(40).iterrows():
             c = color_for(row["domaine"])
             url_html = f'<a class="person-link" href="{row["url"]}" target="_blank">→ Lire l\'article</a>' if row["url"] else ""
+            lang_badge = f'<span class="tag">{row["langue"]}</span>'
             st.markdown(f"""
             <div class="signal-card" style="border-color: {c}">
-                <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px">
                     <div class="signal-title">{row['titre']}</div>
-                    <span class="tag" style="white-space:nowrap; margin-left:8px">{row['origine']}</span>
+                    {lang_badge}
                 </div>
                 <div class="signal-meta">{row['date']} · {row['source']} · {row['domaine']}</div>
                 <div class="signal-note">{row['resume']}</div>
                 <div style="margin-top:0.4rem">{url_html}</div>
             </div>""", unsafe_allow_html=True)
 
-    # ── Section manuelle (CSV) ─────────────────────────────────────────────────
+    # ── Signaux manuels curatés ────────────────────────────────────────────────
     st.markdown('<div class="section-header">📋 Signaux curatés manuellement</div>', unsafe_allow_html=True)
 
-    trl_min, trl_max = st.slider("Filtrer par TRL estimé", 1, 9, (1, 9))
+    trl_min, trl_max = st.slider("TRL estimé", 1, 9, (1, 9))
     df_s = signaux.copy()
-    if filtre_s_dom != "Tous":
-        df_s = df_s[df_s["domaine"] == filtre_s_dom]
+    if filtre_t_dom != "Tous":
+        df_s = df_s[df_s["domaine"] == filtre_t_dom]
     df_s = df_s[(df_s["trl_estime"] >= trl_min) & (df_s["trl_estime"] <= trl_max)]
     df_s = df_s.sort_values("date", ascending=False)
 
     for _, row in df_s.iterrows():
         c = color_for(row["domaine"])
         tags_html = "".join([f'<span class="tag">{t.strip()}</span>' for t in str(row["tags"]).split(",")])
-        url_html = f'<a class="person-link" href="{row["url"]}" target="_blank">→ Source</a>' if pd.notna(row["url"]) else ""
+        url_html  = f'<a class="person-link" href="{row["url"]}" target="_blank">→ Source</a>' if pd.notna(row["url"]) else ""
         st.markdown(f"""
         <div class="signal-card" style="border-color: {c}">
             <div style="display:flex; justify-content:space-between">
@@ -575,8 +649,11 @@ with tabs[4]:
             <div style="margin-top:0.5rem">{tags_html} &nbsp; {url_html}</div>
         </div>""", unsafe_allow_html=True)
 
-    st.markdown('<div class="section-header">Ajouter un signal manuel</div>', unsafe_allow_html=True)
-    st.info("💡 Éditez `data/signaux_faibles.csv` dans GitHub pour ajouter un nouveau signal.", icon=None)
-    with st.expander("Voir le modèle de ligne CSV"):
+    st.markdown('<div class="section-header">Ajouter un signal</div>', unsafe_allow_html=True)
+    st.info("💡 Éditez `data/signaux_faibles.csv` dans GitHub pour ajouter un signal manuellement.")
+    with st.expander("Modèle de ligne — signaux_faibles.csv"):
         st.code("DATE,TITRE,DOMAINE,TRL_ESTIME,INTENSITE,SOURCE,URL,TAGS,NOTE", language="text")
+    with st.expander("Ajouter une source thématique RSS"):
+        st.info("Éditez `data/thematiques_rss.csv` dans GitHub.")
+        st.code("NOM,URL_FLUX,DOMAINE,LANGUE", language="text")
 
