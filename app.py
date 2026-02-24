@@ -384,7 +384,7 @@ with tabs[2]:
             ),
         ))
 
-gartner_layout = {k: v for k, v in PLOTLY_LAYOUT.items() if k not in ("xaxis", "yaxis")}
+    gartner_layout = {k: v for k, v in PLOTLY_LAYOUT.items() if k not in ("xaxis", "yaxis")}
     fig.update_layout(
         **gartner_layout,
         height=460,
