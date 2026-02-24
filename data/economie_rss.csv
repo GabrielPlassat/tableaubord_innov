@@ -1,0 +1,11 @@
+nom,url_flux,categorie,langue
+INSEE - Informations rapides,https://www.insee.fr/fr/statistiques/flux/informations-rapides,Conjoncture macro,FR
+INSEE - Communiqués de presse,https://www.insee.fr/fr/information/2117832?format=rss,Conjoncture macro,FR
+Banque de France - Publications,https://www.banque-france.fr/fr/rss/publications.xml,BCE & politique monétaire,FR
+BCE - Communiqués officiels,https://www.ecb.europa.eu/rss/press.html,BCE & politique monétaire,EN
+OCDE - Actualités,https://www.oecd.org/newsroom/rss.xml,Conjoncture macro,EN
+FMI - Actualités,https://www.imf.org/en/News/rss,Géopolitique économique,EN
+Le Grand Continent,https://legrandcontinent.eu/fr/feed/,Géopolitique économique,FR
+Alternatives Économiques,https://www.alternatives-economiques.fr/rss.xml,Conjoncture macro,FR
+La Tribune Économie,https://www.latribune.fr/rss/rubriques/economie.html,Conjoncture macro,FR
+Project Syndicate,https://www.project-syndicate.org/rss,Géopolitique économique,EN
