@@ -192,11 +192,12 @@ def load_data():
     energie  = pd.read_csv(os.path.join(base, "data", "energie.csv"))
     economie = pd.read_csv(os.path.join(base, "data", "economie.csv"))
     projets  = pd.read_csv(os.path.join(base, "data", "projets.csv"))
+    historique = pd.read_csv(os.path.join(base, "data", "projets_historique.csv"))
     personnes = pd.read_csv(os.path.join(base, "data", "personnes.csv"))
     signaux  = pd.read_csv(os.path.join(base, "data", "signaux_faibles.csv"))
     return energie, economie, projets, personnes, signaux
 
-energie, economie, projets, personnes, signaux = load_data()
+energie, economie, projets, historique, personnes, signaux = load_data()
 
 # ── HEADER ────────────────────────────────────────────────────────────────────
 st.markdown("""
@@ -274,6 +275,18 @@ def fetch_thematiques_rss(path):
         df = df.sort_values("date", ascending=False)
     return df
 
+if "session_start" not in st.session_state:
+   st.session_state.session_start = pd.Timestamp.now()
+
+nouveautes = projets[pd.to_datetime(projets["date_maj"]) >= pd.Timestamp.now() - pd.Timedelta(days=7)]
+if not nouveautes.empty:
+    noms = " · ".join(f"<b>{n}</b>" for n in nouveautes["nom"].tolist())
+    st.markdown(f"""
+    <div style="background:#0d2010; border:1px solid #00e5a044; border-radius:4px;
+                padding:0.6rem 1rem; margin-bottom:1rem; font-size:0.78rem; color:#00e5a0;
+                font-family:Space Mono,monospace;">
+        🟢 Mis à jour cette semaine : {noms}
+    </div>""", unsafe_allow_html=True)
 
 tabs = st.tabs(["⚡ Énergie", "📈 Économie", "🔬 Projets & TRL", "👤 Veille Personnes", "📡 Signaux Faibles"])
 
@@ -388,7 +401,11 @@ with tabs[2]:
     ]
     PHASE_X = {p: i for i, p in enumerate(GARTNER_PHASES)}
 
-    # Hype curve path
+    MOMENTUM_SYMBOL = {"↑": "▲", "→": "■", "↓": "▼"}
+    MOMENTUM_COLOR  = {"↑": "#00e5a0", "→": "#ffaa00", "↓": "#ff4d6d"}
+    MOMENTUM_LABEL  = {"↑": "Accélère", "→": "Plateau", "↓": "Décline"}
+
+    # ── Hype curve ─────────────────────────────────────────────────────────────
     x_curve = np.linspace(0, 4, 300)
     def hype(x):
         return (
@@ -398,95 +415,175 @@ with tabs[2]:
             + 0.3 * x * (x < 1)
         )
     y_curve = hype(x_curve)
-    # Normalize
     y_curve = (y_curve - y_curve.min()) / (y_curve.max() - y_curve.min())
 
+    # ── Filtres ─────────────────────────────────────────────────────────────────
+    col_f1, col_f2, col_f3 = st.columns([2, 2, 2])
+    with col_f1:
+        dom_opts = ["Tous"] + sorted(projets["domaine"].unique().tolist())
+        filtre_dom = st.selectbox("Domaine", dom_opts, key="g_dom")
+    with col_f2:
+        mom_opts = ["Tous", "↑ Accélère", "→ Plateau", "↓ Décline"]
+        filtre_mom = st.selectbox("Momentum", mom_opts, key="g_mom")
+    with col_f3:
+        phases_opts = ["Toutes"] + GARTNER_PHASES
+        filtre_phase = st.selectbox("Phase", phases_opts, key="g_phase")
+
+    df_g = projets.copy()
+    if filtre_dom != "Tous":
+        df_g = df_g[df_g["domaine"] == filtre_dom]
+    if filtre_mom != "Tous":
+        arrow = filtre_mom[0]
+        df_g = df_g[df_g["momentum"] == arrow]
+    if filtre_phase != "Toutes":
+        df_g = df_g[df_g["phase_gartner"] == filtre_phase]
+
+    # ── Courbe de Gartner interactive ──────────────────────────────────────────
     fig = go.Figure()
-    # Curve
     fig.add_trace(go.Scatter(
-        x=x_curve, y=y_curve,
-        mode="lines", line=dict(color="#1a3a5a", width=2), showlegend=False,
-        hoverinfo="skip",
+        x=x_curve, y=y_curve, mode="lines",
+        line=dict(color="#1a3a5a", width=2),
+        showlegend=False, hoverinfo="skip",
     ))
-    # Phase labels
     for p, xi in PHASE_X.items():
         fig.add_annotation(
-            x=xi, y=-0.12,
-            text=p, showarrow=False,
-            font=dict(size=8.5, color="#4a6a8a", family="Space Mono"),
-            xanchor="center",
+            x=xi, y=-0.14, text=p, showarrow=False,
+            font=dict(size=8, color="#4a6a8a", family="Space Mono"), xanchor="center",
         )
 
-    # Project dots
-    jitter = {"Innovation Trigger": 0, "Peak of Inflated Expectations": 0,
-               "Trough of Disillusionment": 0, "Slope of Enlightenment": 0,
-               "Plateau of Productivity": 0}
+    for _, row in df_g.iterrows():
+        xi   = PHASE_X.get(row["phase_gartner"], 0)
+        np.random.seed(hash(row["nom"]) % (2**31))
+        x_p  = np.clip(xi + np.random.uniform(-0.15, 0.15), 0, 4)
+        idx  = np.argmin(np.abs(x_curve - xi))
+        y_p  = np.clip(y_curve[idx] + np.random.uniform(-0.03, 0.03), 0.02, 0.98)
 
-    for _, row in projets.iterrows():
-        phase = row["phase_gartner"]
-        xi = PHASE_X.get(phase, 0)
-        x_proj = xi + np.random.uniform(-0.18, 0.18)
-        x_proj = max(0, min(4, x_proj))
-        # Find y on curve
-        idx = np.argmin(np.abs(x_curve - xi))
-        y_proj = y_curve[idx] + np.random.uniform(-0.04, 0.04)
-        y_proj = max(0.02, min(0.98, y_proj))
-
-        c = color_for(row["domaine"])
-        trl_size = 8 + row["trl"] * 1.8
+        c    = color_for(row["domaine"])
+        m    = row.get("momentum", "→")
+        mc   = MOMENTUM_COLOR.get(m, "#ffaa00")
+        size = 8 + row["trl"] * 1.8
 
         fig.add_trace(go.Scatter(
-            x=[x_proj], y=[y_proj],
+            x=[x_p], y=[y_p],
             mode="markers+text",
-            marker=dict(size=trl_size, color=c, opacity=0.85,
-                        line=dict(color="#080c14", width=1.5)),
-            text=[row["nom"]],
+            marker=dict(
+                size=size, color=c, opacity=0.85,
+                line=dict(color=mc, width=2.5),
+                symbol="circle",
+            ),
+            text=[f"{MOMENTUM_SYMBOL.get(m,'■')} {row['nom']}"],
             textposition="top center",
-            textfont=dict(size=8, color="#c8d8e8"),
+            textfont=dict(size=7.5, color="#c8d8e8"),
             name=row["nom"],
             hovertemplate=(
                 f"<b>{row['nom']}</b><br>"
-                f"Domaine: {row['domaine']}<br>"
-                f"TRL: {row['trl']}<br>"
-                f"Phase: {row['phase_gartner']}<br>"
-                f"Potentiel: {row['potentiel']}<br>"
+                f"Domaine : {row['domaine']}<br>"
+                f"TRL : {row['trl']}<br>"
+                f"Phase : {row['phase_gartner']}<br>"
+                f"Momentum : {MOMENTUM_LABEL.get(m, m)}<br>"
+                f"Potentiel : {row['potentiel']}<br>"
+                f"Maj : {row['date_maj']}<br>"
                 f"<extra></extra>"
             ),
         ))
 
-    gartner_layout = {k: v for k, v in PLOTLY_LAYOUT.items() if k not in ("xaxis", "yaxis")}
     fig.update_layout(
-        **gartner_layout,
-        height=460,
-        title=dict(text="Courbe de Gartner — positionnement des projets (taille = TRL)",
-                   font=dict(size=11, color="#4a6a8a")),
+        paper_bgcolor="#080c14", plot_bgcolor="#080c14",
+        font=dict(family="DM Sans", color="#8aaabb"),
+        margin=dict(l=10, r=10, t=40, b=10),
+        height=480,
+        title=dict(
+            text="Courbe de Gartner  ·  taille = TRL  ·  bordure = momentum  ·  cliquer pour détail",
+            font=dict(size=10, color="#4a6a8a")
+        ),
         showlegend=False,
-        xaxis=dict(visible=False, range=[-0.4, 4.4], gridcolor="#1a2a3a"),
-        yaxis=dict(visible=False, range=[-0.25, 1.1], gridcolor="#1a2a3a"),
+        xaxis=dict(visible=False, range=[-0.4, 4.4]),
+        yaxis=dict(visible=False, range=[-0.28, 1.12]),
     )
-    st.plotly_chart(fig, use_container_width=True)
 
-    # Filter
-    st.markdown('<div class="section-header">Détail des projets</div>', unsafe_allow_html=True)
-    col_f1, col_f2 = st.columns([1, 2])
-    with col_f1:
-        domaines = ["Tous"] + sorted(projets["domaine"].unique().tolist())
-        filtre_dom = st.selectbox("Domaine", domaines, label_visibility="collapsed")
-    with col_f2:
-        phases = ["Toutes les phases"] + GARTNER_PHASES
-        filtre_phase = st.selectbox("Phase Gartner", phases, label_visibility="collapsed")
+    # Légende momentum
+    for arrow, label in MOMENTUM_LABEL.items():
+        fig.add_annotation(
+            x=3.6 + list(MOMENTUM_LABEL.keys()).index(arrow) * 0.0,
+            y=1.08 - list(MOMENTUM_LABEL.keys()).index(arrow) * 0.07,
+            text=f"{MOMENTUM_SYMBOL[arrow]}  {label}",
+            showarrow=False,
+            font=dict(size=9, color=MOMENTUM_COLOR[arrow], family="Space Mono"),
+            xanchor="right", x=4.38,
+        )
 
-    df_f = projets.copy()
-    if filtre_dom != "Tous":
-        df_f = df_f[df_f["domaine"] == filtre_dom]
-    if filtre_phase != "Toutes les phases":
-        df_f = df_f[df_f["phase_gartner"] == filtre_phase]
+    # Clic sur un projet → fiche détail
+    selected = st.plotly_chart(fig, use_container_width=True, on_select="rerun", key="gartner_chart")
 
-    df_f = df_f.sort_values("trl", ascending=False)
+    # ── Fiche détail (si clic) ─────────────────────────────────────────────────
+    projet_selectionne = None
+    if selected and selected.get("selection") and selected["selection"].get("points"):
+        point = selected["selection"]["points"][0]
+        curve_index = point.get("curve_number", 0)
+        if curve_index > 0:  # index 0 = la courbe elle-même
+            projet_selectionne = df_g.iloc[curve_index - 1] if curve_index - 1 < len(df_g) else None
 
-    for _, row in df_f.iterrows():
-        c = color_for(row["domaine"])
-        url_html = f'<a class="person-link" href="{row["url"]}" target="_blank">→ Lien</a>' if pd.notna(row["url"]) and row["url"] else ""
+    if projet_selectionne is not None:
+        row = projet_selectionne
+        c   = color_for(row["domaine"])
+        m   = row.get("momentum", "→")
+        mc  = MOMENTUM_COLOR.get(m, "#ffaa00")
+        url_html = f'<a class="person-link" href="{row["url"]}" target="_blank">→ Lien externe</a>' if pd.notna(row.get("url","")) and row.get("url","") else ""
+        st.markdown(f"""
+        <div style="background:#0d1a28; border:1px solid {c}55; border-left: 3px solid {c};
+                    border-radius:4px; padding:1.2rem 1.4rem; margin: 0.5rem 0 1rem 0;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start">
+                <div>
+                    <span style="font-family:Space Mono; font-size:1rem; color:#e8f4ff; font-weight:700">{row['nom']}</span>
+                    &nbsp;<span class="tag" style="border-color:{c}44; color:{c}">{row['domaine']}</span>
+                    &nbsp;<span class="tag">TRL {row['trl']}</span>
+                </div>
+                <span style="font-family:Space Mono; font-size:0.9rem; color:{mc}">
+                    {MOMENTUM_SYMBOL.get(m,'■')} {MOMENTUM_LABEL.get(m,m)}
+                </span>
+            </div>
+            <div style="font-size:0.72rem; color:#4a6a8a; margin: 0.3rem 0;">{row['phase_gartner']} · Mis à jour : {row['date_maj']}</div>
+            <div style="font-size:0.85rem; color:#c8d8e8; margin: 0.6rem 0; line-height:1.5">{row['description']}</div>
+            <div style="font-size:0.72rem; color:#4a6a8a;">Acteurs clés : {row['acteurs_cles']}</div>
+            <div style="margin-top:0.6rem; font-family:Space Mono; font-size:1rem; color:{c}">{row['potentiel']}</div>
+            <div style="margin-top:0.4rem">{url_html}</div>
+        </div>""", unsafe_allow_html=True)
+
+        # TRL tracker pour ce projet
+        hist = historique[historique["nom"] == row["nom"]]
+        if not hist.empty:
+            st.markdown('<div class="section-header">📈 Évolution TRL</div>', unsafe_allow_html=True)
+            fig_trl = go.Figure()
+            fig_trl.add_trace(go.Scatter(
+                x=hist["date"], y=hist["trl"],
+                mode="lines+markers+text",
+                line=dict(color=c, width=2),
+                marker=dict(size=8, color=c),
+                text=hist["note"],
+                textposition="top center",
+                textfont=dict(size=8, color="#8aaabb"),
+                hovertemplate="<b>TRL %{y}</b><br>%{text}<extra></extra>",
+            ))
+            fig_trl.update_layout(
+                paper_bgcolor="#080c14", plot_bgcolor="#080c14",
+                font=dict(family="DM Sans", color="#8aaabb"),
+                margin=dict(l=10, r=10, t=20, b=10),
+                height=200,
+                xaxis=dict(gridcolor="#1a2a3a"),
+                yaxis=dict(gridcolor="#1a2a3a", range=[0, 10], dtick=1, title="TRL"),
+                showlegend=False,
+            )
+            st.plotly_chart(fig_trl, use_container_width=True)
+
+    # ── Liste des projets ───────────────────────────────────────────────────────
+    st.markdown('<div class="section-header">Tous les projets</div>', unsafe_allow_html=True)
+
+    df_g_sorted = df_g.sort_values("trl", ascending=False)
+    for _, row in df_g_sorted.iterrows():
+        c  = color_for(row["domaine"])
+        m  = row.get("momentum", "→")
+        mc = MOMENTUM_COLOR.get(m, "#ffaa00")
+        url_html = f'<a class="person-link" href="{row["url"]}" target="_blank">→ Lien</a>' if pd.notna(row.get("url","")) and row.get("url","") else ""
         st.markdown(f"""
         <div class="signal-card" style="border-color: {c}">
             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
@@ -495,13 +592,23 @@ with tabs[2]:
                     &nbsp;<span class="tag" style="border-color:{c}44; color:{c}">{row['domaine']}</span>
                     &nbsp;<span class="tag">TRL {row['trl']}</span>
                 </div>
-                <div style="font-family:Space Mono; font-size:0.75rem; color:{c}">{row['potentiel']}</div>
+                <div style="display:flex; gap:0.8rem; align-items:center">
+                    <span style="font-family:Space Mono; font-size:0.8rem; color:{mc}">{MOMENTUM_SYMBOL.get(m,'■')} {MOMENTUM_LABEL.get(m,m)}</span>
+                    <span style="font-family:Space Mono; font-size:0.75rem; color:{c}">{row['potentiel']}</span>
+                </div>
             </div>
-            <div style="font-size:0.72rem; color:#4a6a8a; margin:0.2rem 0;">{row['phase_gartner']}</div>
+            <div style="font-size:0.72rem; color:#4a6a8a; margin:0.2rem 0;">{row['phase_gartner']} · Maj : {row['date_maj']}</div>
             <div class="signal-note">{row['description']}</div>
             <div style="font-size:0.68rem; color:#344a5a; margin-top:0.3rem;">Acteurs : {row['acteurs_cles']}</div>
             {url_html}
         </div>""", unsafe_allow_html=True)
+
+    st.markdown('<div class="section-header">Ajouter / modifier un projet</div>', unsafe_allow_html=True)
+    st.info("💡 Éditez `data/projets.csv` dans GitHub. Momentum : ↑ accélère · → plateau · ↓ décline")
+    with st.expander("Modèle de ligne — projets.csv"):
+        st.code("NOM,DOMAINE,TRL,PHASE_GARTNER,POTENTIEL,DESCRIPTION,ACTEURS_CLES,DATE_MAJ,URL,MOMENTUM", language="text")
+    with st.expander("Modèle de ligne — projets_historique.csv"):
+        st.code("NOM,DATE,TRL,NOTE", language="text")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 4 — PERSONNES RÉFÉRENTES  (remplace tout le bloc "with tabs[3]:" existant)
