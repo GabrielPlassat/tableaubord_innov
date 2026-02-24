@@ -384,14 +384,15 @@ with tabs[2]:
             ),
         ))
 
+gartner_layout = {k: v for k, v in PLOTLY_LAYOUT.items() if k not in ("xaxis", "yaxis")}
     fig.update_layout(
-        **PLOTLY_LAYOUT,
+        **gartner_layout,
         height=460,
         title=dict(text="Courbe de Gartner — positionnement des projets (taille = TRL)",
                    font=dict(size=11, color="#4a6a8a")),
         showlegend=False,
-        xaxis=dict(visible=False, range=[-0.4, 4.4]),
-        yaxis=dict(visible=False, range=[-0.25, 1.1]),
+        xaxis=dict(visible=False, range=[-0.4, 4.4], gridcolor="#1a2a3a"),
+        yaxis=dict(visible=False, range=[-0.25, 1.1], gridcolor="#1a2a3a"),
     )
     st.plotly_chart(fig, use_container_width=True)
 
