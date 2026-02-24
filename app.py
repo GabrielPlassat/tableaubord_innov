@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import os
 import plotly.graph_objects as go
 import plotly.express as px
 import numpy as np
@@ -185,11 +186,12 @@ def stars(s):
 
 @st.cache_data
 def load_data():
-    energie  = pd.read_csv("data/energie.csv")
-    economie = pd.read_csv("data/economie.csv")
-    projets  = pd.read_csv("data/projets.csv")
-    personnes = pd.read_csv("data/personnes.csv")
-    signaux  = pd.read_csv("data/signaux_faibles.csv")
+    base = os.path.dirname(os.path.abspath(__file__))
+    energie  = pd.read_csv(os.path.join(base, "data", "energie.csv"))
+    economie = pd.read_csv(os.path.join(base, "data", "economie.csv"))
+    projets  = pd.read_csv(os.path.join(base, "data", "projets.csv"))
+    personnes = pd.read_csv(os.path.join(base, "data", "personnes.csv"))
+    signaux  = pd.read_csv(os.path.join(base, "data", "signaux_faibles.csv"))
     return energie, economie, projets, personnes, signaux
 
 energie, economie, projets, personnes, signaux = load_data()
