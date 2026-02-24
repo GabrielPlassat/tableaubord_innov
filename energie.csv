@@ -1,0 +1,13 @@
+date,source,prix_eur_mwh,production_twh,variation_pct,note
+2024-01,Éolien,48,32.1,4.2,Record de production en janvier
+2024-01,Solaire,42,8.3,-12.0,Hiver - faible ensoleillement
+2024-01,Nucléaire,55,38.7,2.1,Remontée progressive du parc
+2024-01,Gaz,98,18.2,-8.5,Réduction liée aux prix
+2024-02,Éolien,51,35.4,10.2,Fort vent sur Europe du Nord
+2024-02,Solaire,42,9.1,9.6,Légère amélioration
+2024-02,Nucléaire,55,39.2,1.3,Stabilité du parc
+2024-02,Gaz,92,16.8,-7.7,Baisse continue
+2024-03,Éolien,47,29.8,-15.8,Accalmie météo
+2024-03,Solaire,38,15.6,71.4,Printemps - nette hausse
+2024-03,Nucléaire,55,40.1,2.3,Bonne disponibilité
+2024-03,Gaz,88,14.2,-15.5,Stockages reconstitués
