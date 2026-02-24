@@ -1,0 +1,11 @@
+nom,domaine,trl,phase_gartner,potentiel,description,acteurs_cles,date_maj,url,momentum
+Fusion nucléaire compacte,Énergie,3,Innovation Trigger,★★★★★,Réacteurs de fusion de petite taille — Commonwealth Fusion / TAE Technologies avancent rapidement vers le seuil Q>1,Commonwealth Fusion / TAE / Helion,2024-03-15,https://cfs.energy,↑
+Pérovskite solaire,Énergie,5,Peak of Inflated Expectations,★★★★☆,Cellules solaires next-gen — rendement 29%+ en labo — durabilité encore insuffisante pour déploiement masse,Saule Tech / Oxford PV,2024-03-10,https://oxfordpv.com,→
+Hydrogène vert offshore,Énergie,4,Innovation Trigger,★★★★☆,Couplage éolien offshore + électrolyse directement en mer — premiers pilotes en mer du Nord,Lhyfe / HydrogenPro,2024-02-20,https://lhyfe.com,↑
+Batteries sodium-ion,Énergie,7,Slope of Enlightenment,★★★★☆,Alternative au lithium — CATL a lancé la production série — coût encore supérieur au Li-ion,CATL / HiNa Battery,2024-03-01,https://catl.com,↑
+IA pour découverte matériaux,Tech,4,Innovation Trigger,★★★★★,GNoME (DeepMind) a prédit 2.2M nouveaux matériaux stables — accélération massive des cycles R&D,DeepMind / Microsoft,2024-01-15,,↑
+Ordinateur quantique 1000+ qubits,Tech,5,Peak of Inflated Expectations,★★★★☆,IBM Condor à 1121 qubits — la correction d'erreurs reste le verrou principal avant usage pratique,IBM / Google / IonQ,2024-03-05,,→
+Agriculture cellulaire,Agri/Food,6,Trough of Disillusionment,★★★☆☆,Viande cultivée — Good Meat autorisé USA mais coûts encore 10x supérieurs à la viande conventionnelle,Good Meat / Upside Foods,2024-02-10,,↓
+Béton bas carbone,Construction,7,Slope of Enlightenment,★★★★☆,CarbonCure / Sublime Systems — béton avec CO2 capturé intégré — premières certifications en cours,CarbonCure / Sublime,2024-03-08,,↑
+Biocarburants SAF,Aviation,7,Slope of Enlightenment,★★★☆☆,Carburant aviation durable — obligations UE 2025 en approche — offre encore insuffisante,TotalEnergies / Neste,2024-03-12,,→
+Modèles IA multimodaux frugaux,Tech,8,Plateau of Productivity,★★★★★,Mistral / Gemma prouvent qu'on peut faire puissant avec peu de paramètres — adoption enterprise accélère,Mistral AI / Google,2024-03-14,,↑
