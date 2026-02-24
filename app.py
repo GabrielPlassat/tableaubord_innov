@@ -477,7 +477,10 @@ def fetch_rss_feeds(sources_path):
     items = []
     for _, src in sources.iterrows():
         try:
-            feed = feedparser.parse(src["url_flux"])
+            feed = feedparser.parse(
+                src["url_flux"],
+                agent="Mozilla/5.0 (compatible; RSSReader/1.0)"
+            )
             for entry in feed.entries[:5]:  # 5 articles max par source
                 pub = entry.get("published_parsed") or entry.get("updated_parsed")
                 date_str = datetime.datetime(*pub[:6]).strftime("%Y-%m-%d") if pub else "—"
