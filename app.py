@@ -195,7 +195,7 @@ def load_data():
     historique = pd.read_csv(os.path.join(base, "data", "projets_historique.csv"))
     personnes = pd.read_csv(os.path.join(base, "data", "personnes.csv"))
     signaux  = pd.read_csv(os.path.join(base, "data", "signaux_faibles.csv"))
-    return energie, economie, projets, personnes, signaux
+    return energie, economie, projets, historique, personnes, signaux
 
 energie, economie, projets, historique, personnes, signaux = load_data()
 
