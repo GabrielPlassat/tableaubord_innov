@@ -502,14 +502,14 @@ with tabs[2]:
     )
 
     # Légende momentum
-    for arrow, label in MOMENTUM_LABEL.items():
+    for i, (arrow, label) in enumerate(MOMENTUM_LABEL.items()):
         fig.add_annotation(
-            x=3.6 + list(MOMENTUM_LABEL.keys()).index(arrow) * 0.0,
-            y=1.08 - list(MOMENTUM_LABEL.keys()).index(arrow) * 0.07,
+            x=4.38,
+            y=1.08 - i * 0.07,
             text=f"{MOMENTUM_SYMBOL[arrow]}  {label}",
             showarrow=False,
             font=dict(size=9, color=MOMENTUM_COLOR[arrow], family="Space Mono"),
-            xanchor="right", x=4.38,
+            xanchor="right",
         )
 
     # Clic sur un projet → fiche détail
