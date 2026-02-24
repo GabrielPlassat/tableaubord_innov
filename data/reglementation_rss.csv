@@ -1,0 +1,17 @@
+nom,url_flux,domaine,zone,langue
+Parlement EU - Commission ITRE Energie,https://www.europarl.europa.eu/rss/committee/itre/en.xml,Énergie,Europe,EN
+Parlement EU - Commission TRAN Transport,https://www.europarl.europa.eu/rss/committee/tran/en.xml,Transport,Europe,EN
+Parlement EU - Actualités prioritaires,https://www.europarl.europa.eu/rss/doc/top-stories/fr.xml,Tous domaines,Europe,FR
+Parlement EU - Textes adoptés,https://www.europarl.europa.eu/rss/doc/texts-adopted/en.xml,Tous domaines,Europe,EN
+Parlement EU - Communiqués comités,https://www.europarl.europa.eu/rss/doc/press-releases-committees/en.xml,Tous domaines,Europe,EN
+EUR-Lex - Nouvelles publications EN,https://eur-lex.europa.eu/rss/legal-content/EN/LSU/,Tous domaines,Europe,EN
+EUR-Lex - Nouvelles publications FR,https://eur-lex.europa.eu/rss/legal-content/FR/LSU/,Tous domaines,Europe,FR
+AI Act Observatory,https://artificialintelligenceact.eu/feed/,IA,Europe,EN
+Federal Register - Toutes agences,https://www.federalregister.gov/documents/current.rss,Tous domaines,USA,EN
+Federal Register - Dept of Energy,https://www.federalregister.gov/documents.rss?conditions[agencies][]=department-of-energy,Énergie,USA,EN
+Federal Register - Dept of Transportation,https://www.federalregister.gov/documents.rss?conditions[agencies][]=department-of-transportation,Transport,USA,EN
+FTC - Communiqués officiels,https://www.ftc.gov/feeds/press-releases.xml,IA,USA,EN
+NIST - Actualités standards & tech,https://www.nist.gov/news-events/news/rss.xml,IA,USA,EN
+Tech Policy Press,https://techpolicy.press/feed/,IA,USA,EN
+Legifrance - Journal Officiel,https://www.legifrance.gouv.fr/atom/JO/jorf_cont.xml,Tous domaines,France,FR
+EEA - Agence Environnement EU,https://www.eea.europa.eu/en/newsroom/rss-feeds/news.rss,Énergie,Europe,EN
