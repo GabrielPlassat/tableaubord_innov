@@ -1062,7 +1062,7 @@ with tabs[6]:
 
         with st.spinner("Analyse globale…"):
             prompt_global = f"""Tu es un analyste senior en innovation et prospective technologique.
-Tu prépares une note de veille PERSONNALISÉE pour un veilleur qui suit spécifiquement ces personnes référentes :
+Tu prépares une note de veille ACTUALISEE et PERSONNALISÉE pour un veilleur qui suit spécifiquement ces personnes référentes :
 {focus_pers}
 
 Ses sources actives ce jour (incluant flux institutionnels INSEE, IEA, BCE, OCDE) : {sources_act}
@@ -1070,10 +1070,10 @@ Ses sources actives ce jour (incluant flux institutionnels INSEE, IEA, BCE, OCDE
 Articles récents issus de toutes ces sources :
 {titres_prompt(tous_articles, n=30)}
 
-En 5 à 7 phrases en français, rédige une synthèse de la situation globale de l'innovation
+En 5 à 7 phrases en français, rédige une synthèse actualisée de la situation globale de l'innovation
 TELLE QU'ELLE APPARAÎT À TRAVERS LE PRISME de ces personnes et de ces sources — pas un résumé générique.
 Mets en avant ce que ces voix signalent, les convergences ou divergences entre leurs angles,
-et les signaux forts qui émergent de cette veille particulière ce jour.
+et les signaux forts qui émergent de cette veille particulière avec les informations de ce jour.
 Intègre les données macro et énergie si elles ressortent des flux institutionnels."""
             st.session_state.syntheses["global"] = appel_gemini(prompt_global)
 
@@ -1095,10 +1095,10 @@ Articles récents filtrés sur ce thème, issus des sources surveillées
 (incluant flux institutionnels INSEE, IEA, BCE, OCDE si pertinents) :
 {titres_prompt(arts) if not arts.empty else "Peu d'articles détectés sur ce thème dans les sources suivies."}
 
-En 4 à 5 phrases en français, synthétise les tendances sur {theme}
+En 4 à 5 phrases en français, synthétise les tendances de ce jour sur {theme}
 TELLES QU'ELLES RESSORTENT de ces sources et de ces personnes spécifiquement.
 Cite si pertinent ce que signalent ces voix particulières.
-Intègre les chiffres ou décisions officielles récentes si présents dans les flux.
+Intègre les chiffres ou décisions officielles actualisées si présents dans les flux.
 Identifie ruptures et signaux à surveiller."""
                 st.session_state.syntheses[theme] = {
                     "texte":    appel_gemini(prompt),
