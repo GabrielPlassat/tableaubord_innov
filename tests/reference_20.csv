@@ -1,0 +1,21 @@
+num,url,titre_court,langue,pertinent,lentille_principale,lentille_secondaire,iceberg,aire_sujet,nature,axe,pole,precipitation,rebond
+1,https://lestari.kompas.com/read/2026/08/18/100300486/emisi-nox-industri-nikel-di-sulawesi-maluku-lampaui-sumber-polusi?page=2,Kompas - NOx du nickel,id,OUI,MIL,TEC,N3,ASE,FAIT,T01,LES_DEUX,AUCUN,TRA
+2,https://reporterre.net/C-est-une-aberration-pour-les-besoins-de-l-IA-les-data-centers-veulent-tourner-au-gaz,Reporterre - data centers au gaz,fr,OUI,INF,MIL,N2,EU,FAIT,T03,B,AUCUN,NON_MENTIONNE
+3,https://cj.sina.com.cn/articles/view/1651428902/626ece2601901l0t2,21shiji - Yadea et Spiro,zh,OUI,TEC,INF,N1,AF,FAIT,AUCUN,,CATALYSEUR,NON_MENTIONNE
+4,https://dabafinance.com/en/news/ethiopia-ev-import-ban-energy-sovereignty,Daba Finance - Ethiopie,en,OUI,SOL,TEC,N2,AF,FAIT,T04,B,CATALYSEUR,NON_MENTIONNE
+5,https://www.nippon.com/ja/japan-data/h02802/,nippon.com - naissances,ja,OUI,SOC,AUCUNE,N2,JK,FAIT,T14,LES_DEUX,AUCUN,NON_MENTIONNE
+6,https://www.band.com.br/economia/banco-central-estuda-interligar-pix-com-sistemas-de-outros-paises,Band - Pix international,pt,OUI,INF,MON,N1,LA,FAIT,T08,A,OFFRE,NON_MENTIONNE
+7,https://www.gartner.com/en/documents/8163629,Gartner - Hype Cycle 2026,en,NON,,,,,,,,,
+8,https://www.aajtak.in/uttar-pradesh/story/pm-kusum-scheme-up-solar-pump-subsidy-farmers-ntcpsc-utrath-dskc-2640018-2026-09-10,Aaj Tak - pompes solaires,hi,OUI,SOL,MIL,N2,IN,FAIT,AUCUN,,AUCUN,NON_MENTIONNE
+9,https://cepr.org/voxeu/columns/how-data-centres-affect-electricity-prices-and-whom,VoxEU - data centers et prix,en,OUI,INF,SOC,N3,US,ANALYSE,T01,B,AUCUN,TRA
+10,https://www.guancha.cn/chenghongwei/2026_09_28_901171.shtml,Guancha - motos a Lagos,zh,OUI,TEC,SOC,N3,AF,OPINION,T01,B,BESOIN,SYS
+11,https://www.alestiklal.net/ar/article/30-mlyar-dwlar-lmatha-trahn-alsawdyh-ala-alsyn-lhmayh-amnha-almaey,Alestiklal - eau saoudienne,ar,OUI,PUI,MIL,N3,GO,ANALYSE,T07,B,AUCUN,NON_MENTIONNE
+12,https://es.mongabay.com/2026/05/litio-empresas-chinas-consolidan-latinoamerica-sin-transparencia-ni-estudios-ambientales-completos/,Mongabay - lithium chinois,es,OUI,PUI,MIL,N3,LA,ANALYSE,T01,LES_DEUX,AUCUN,TRA
+13,https://leclaireur.fnac.com/article/694980-homo-occidentalis-jerome-fourquet-analyse-lhomme-moderne/,Fnac - Homo Occidentalis,fr,OUI,SOC,AUCUNE,N4,EU,COMMUNICATION,T09,LES_DEUX,AUCUN,NON_MENTIONNE
+14,https://en.fnnews.com/news/202607231106360763,Financial News - jeunes chomeurs,en,OUI,SOC,AUCUNE,N2,JK,FAIT,T13,B,AUCUN,NON_MENTIONNE
+15,https://www.cnfin.com/yw-lb/detail/20260826/4460667_1.html,Xinhua Caijing - echange de batteries,zh,OUI,TEC,PUI,N2,AF,ANALYSE,AUCUN,,OFFRE,NON_MENTIONNE
+16,https://www.dawn.com/news/1997750,Dawn - solaire pakistanais,en,OUI,TEC,SOC,N3,IN,ANALYSE,T08,B,CATALYSEUR,SYS
+17,https://tirto.id/menimbang-ulang-pembiayaan-nikel-berbasis-batu-bara-hzHo,Tirto - financement du nickel,id,OUI,MON,PUI,N3,ASE,ANALYSE,T08,A,AUCUN,NON_MENTIONNE
+18,https://www.jechange.fr/energie/electricite/news/facture-electricite-ia-data-centers-cout-cache,JeChange - data centers en France,fr,OUI,INF,MON,N3,EU,ANALYSE,T01,B,AUCUN,TRA
+19,https://citizen.digital/article/electric-boda-bodas-gaining-ground-in-kenya-as-some-riders-refuse-to-ditch-fuel-n391432,Citizen Digital - motos-taxis,en,OUI,SOC,TEC,N2,AF,FAIT,AUCUN,,BESOIN,NON_MENTIONNE
+20,https://www.centralbanking.com/central-banks/economics/data/7977210/dollars-share-of-foreign-reserves-fell-slightly-in-q2-imf,Central Banking - dollar,en,OUI,MON,AUCUNE,N2,GLO,FAIT,T08,B,AUCUN,NON_MENTIONNE

@@ -1,0 +1,74 @@
+pays,nom_pays,zone
+EU,Institutions de l'Union europeenne,EU
+FR,France,EU
+DE,Allemagne,EU
+PL,Pologne,EU
+ES,Espagne,EU
+IT,Italie,EU
+NL,Pays-Bas,EU
+BE,Belgique,EU
+SE,Suede,EU
+FI,Finlande,EU
+CZ,Tchequie,EU
+GB,Royaume-Uni,EU
+CH,Suisse,EU
+NO,Norvege,EU
+UA,Ukraine,EU
+LV,Lettonie,EU
+US,Etats-Unis,US
+CA,Canada,US
+CN,Chine,CN
+HK,Hong Kong,CN
+JP,Japon,JK
+KR,Coree du Sud,JK
+TW,Taiwan,JK
+IN,Inde,IN
+PK,Pakistan,IN
+BD,Bangladesh,IN
+LK,Sri Lanka,IN
+NP,Nepal,IN
+ID,Indonesie,ASE
+VN,Vietnam,ASE
+PH,Philippines,ASE
+TH,Thailande,ASE
+MY,Malaisie,ASE
+SG,Singapour,ASE
+RU,Russie,RU
+BY,Bielorussie,RU
+KZ,Kazakhstan,RU
+UZ,Ouzbekistan,RU
+SA,Arabie saoudite,GO
+AE,Emirats arabes unis,GO
+QA,Qatar,GO
+KW,Koweit,GO
+OM,Oman,GO
+BH,Bahrein,GO
+TR,Turquie,MO
+IR,Iran,MO
+EG,Egypte,MO
+MA,Maroc,MO
+DZ,Algerie,MO
+TN,Tunisie,MO
+IL,Israel,MO
+LB,Liban,MO
+JO,Jordanie,MO
+NG,Nigeria,AF
+KE,Kenya,AF
+ET,Ethiopie,AF
+ZA,Afrique du Sud,AF
+GH,Ghana,AF
+SN,Senegal,AF
+CM,Cameroun,AF
+RW,Rwanda,AF
+CD,Republique democratique du Congo,AF
+CI,Cote d'Ivoire,AF
+BR,Bresil,LA
+MX,Mexique,LA
+AR,Argentine,LA
+CL,Chili,LA
+CO,Colombie,LA
+PE,Perou,LA
+BO,Bolivie,LA
+EC,Equateur,LA
+AU,Australie,OC
+NZ,Nouvelle-Zelande,OC

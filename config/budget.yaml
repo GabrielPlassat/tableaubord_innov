@@ -1,0 +1,6 @@
+# Budget mensuel de l'API Claude (decisions-sprint0.md). En dollars US.
+alerte_dollars: 50     # au-dela : un ticket GitHub est ouvert (vous recevez un courriel)
+arret_dollars: 60      # au-dela : seuls la synthese hebdomadaire et le curateur continuent
+# Rappel : fixez aussi un plafond de 60 $ par mois dans la console Anthropic. C'est le seul vrai verrou.
+assistant_questions_max_mois: 150
+dossiers_max_mois: 2

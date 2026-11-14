@@ -1,0 +1,34 @@
+# Teste tous les flux du registre et enregistre le resultat dans journal/audit_sources.csv.
+# Lancement manuel : onglet Actions > "Audit des sources" > Run workflow.
+name: Audit des sources
+
+on:
+  workflow_dispatch:
+  push:                    # se relance quand le registre ou le script change
+    paths:
+      - config/sources.csv
+      - scripts/audit_sources.py
+  schedule:
+    - cron: "17 4 * * 1"   # chaque lundi a 4 h 17 UTC
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install feedparser requests
+      - run: python scripts/audit_sources.py
+      - name: Enregistrer le resultat
+        run: |
+          git config user.name "innovation-radar-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add journal/audit_sources.csv config/sources.csv
+          git diff --cached --quiet || git commit -m "Audit des sources du $(date +%F)"
+          git push

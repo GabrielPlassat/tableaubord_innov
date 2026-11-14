@@ -1,5 +1,17 @@
 # ◈ Innovation Radar
 
+> **Version 2 en construction** (branche `v2-sprint1`). La v1 ci-dessous continue de fonctionner sans changement.
+>
+> | Où | Quoi |
+> |---|---|
+> | `config/sources.csv` | Le registre unique des sources (remplace les fichiers `data/*_rss.csv` pour la v2). Modifiable ici, depuis GitHub. |
+> | `config/*.yaml` | Seuils, budget, modèles. Chaque ligne est commentée. |
+> | `v2/` | L'application v2. Sur Streamlit Cloud : **Main file path** = `v2/Accueil.py`. |
+> | `notebooks/sprint1_test_albert.ipynb` | Test d'Albert sur 20 articles, à ouvrir dans Colab. |
+> | Onglet **Actions** > « Audit des sources » | Teste tous les flux ; résultat dans `journal/audit_sources.csv`. |
+> | `docs/` | Vérifications, journal des sprints, documents de conception. |
+
+
 Tableau de bord prospectif — Sprints 1 & 2
 
 ## Déploiement en 5 minutes sur Streamlit Cloud

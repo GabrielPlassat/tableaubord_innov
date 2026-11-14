@@ -1,0 +1,12 @@
+# Quel modele pour quelle tache. Les identifiants Albert changent : verifiez-les
+# avec le carnet notebooks/sprint1_test_albert.ipynb (liste GET /v1/models).
+albert:
+  adresse: https://albert.api.etalab.gouv.fr/v1
+  classement: A_CHOISIR_AU_SPRINT_3   # modele de generation retenu apres le test
+  vecteurs: A_CHOISIR_AU_SPRINT_3     # modele d'embeddings
+claude:
+  secours_classement: claude-haiku-5-5
+  synthese_hebdo: claude-opus-5-5
+  agents_mensuels: claude-fable-5-2   # en traitement differe (Batch)
+  assistant: claude-sonnet-5-5
+  dossiers: claude-fable-5-2
