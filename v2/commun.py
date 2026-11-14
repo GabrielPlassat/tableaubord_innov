@@ -73,3 +73,48 @@ def regles_diversite(df, seuils):
         lignes.append((f"Sources non occidentales en langue d'origine : au moins {d['part_min_langue_origine']:.0%}",
                        f"{hors_en_fr:.0%}", hors_en_fr >= d["part_min_langue_origine"]))
     return lignes
+
+
+# ---------------------------------------------------------------- Sprint 2 : collecte
+
+@st.cache_data(ttl=600)
+def charger_executions():
+    chemin = RACINE / "journal" / "executions.csv"
+    if not chemin.exists():
+        return None
+    return pd.read_csv(chemin, dtype=str).fillna("")
+
+
+@st.cache_data(ttl=600)
+def charger_suivi_sources():
+    chemin = RACINE / "journal" / "collecte_sources.csv"
+    if not chemin.exists():
+        return None
+    return pd.read_csv(chemin, dtype=str).fillna("")
+
+
+def _jeton_hf():
+    try:
+        return st.secrets.get("HF_TOKEN", "")
+    except Exception:  # pas de fichier de secrets
+        return ""
+
+
+@st.cache_data(ttl=1800, show_spinner="Lecture des fiches sur Hugging Face…")
+def charger_fiches(mois: str):
+    """Fiches d'un mois (AAAA-MM). Renvoie (tableau ou None, message)."""
+    jeton = _jeton_hf()
+    if not jeton:
+        locale = RACINE / "donnees_locales" / "fiches" / f"{mois}.parquet"
+        if locale.exists():
+            return pd.read_parquet(locale), "local"
+        return None, "Secret HF_TOKEN absent des réglages de l'application Streamlit."
+    from huggingface_hub import HfApi, hf_hub_download
+    with open(RACINE / "config" / "stockage.yaml", encoding="utf-8") as f:
+        conf = yaml.safe_load(f)
+    try:
+        depot = conf.get("depot_hf") or f'{HfApi(token=jeton).whoami()["name"]}/{conf["nom_par_defaut"]}'
+        fichier = hf_hub_download(depot, f"fiches/{mois}.parquet", repo_type="dataset", token=jeton)
+    except Exception as e:  # noqa: BLE001
+        return None, f"Pas de fiches pour {mois} ({type(e).__name__})."
+    return pd.read_parquet(fichier), depot

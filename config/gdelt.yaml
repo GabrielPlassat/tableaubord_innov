@@ -1,0 +1,21 @@
+# Requetes GDELT pour renforcer les aires peu couvertes par les flux RSS (Sprint 2).
+# GDELT traduit les articles en anglais : les mots-cles sont donc en anglais,
+# mais les articles trouves sont dans leur langue d'origine.
+# Citation obligatoire dans l'application : "The GDELT Project" (gdeltproject.org).
+# Pour ajouter une requete : copier une ligne et changer le pays (nom anglais sans espace).
+actif: oui
+pause_s: 6            # GDELT tolere environ une requete toutes les 5 secondes
+periode: 6h           # aligne sur le rythme de la collecte
+max_articles: 75      # par requete (250 au plus)
+mots: '(technology OR innovation OR energy OR battery OR semiconductor OR "electric vehicle" OR infrastructure OR currency OR climate OR mining)'
+requetes:
+  - {aire: CN, pays: china}
+  - {aire: CN, pays: hongkong}
+  - {aire: JK, pays: japan}
+  - {aire: JK, pays: southkorea}
+  - {aire: JK, pays: taiwan}
+  - {aire: GO, pays: saudiarabia}
+  - {aire: GO, pays: unitedarabemirates}
+  - {aire: MO, pays: iran}
+  - {aire: MO, pays: turkey}
+  - {aire: MO, pays: egypt}

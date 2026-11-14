@@ -2,10 +2,7 @@
 
 ## Les documents de conception
 
-Ils sont dans le projet claude.ai « Netvibes de l'innovation ». Pour que Claude Code les retrouve à chaque sprint, ajoutez-les dans ce dossier :
-
-1. Dans claude.ai, ouvrez chaque document et téléchargez-le en Markdown (`.md`).
-2. Sur GitHub, ouvrez ce dossier `docs/`, cliquez sur **Add file > Upload files**, glissez les fichiers, puis **Commit changes**.
+Ils sont dans ce dossier (copie du projet claude.ai « Netvibes de l'innovation » au 14 novembre 2026). En cas de modification, mettez à jour les deux. Les consignes de classement de L2 et les 20 exemples de référence sont dans `config/consignes/` et `tests/`.
 
 | Fichier | Contenu |
 |---|---|
@@ -20,3 +17,18 @@ Ils sont dans le projet claude.ai « Netvibes de l'innovation ». Pour que Claud
 
 - `verifications.md` : les quatre vérifications préalables.
 - `journal-sprint1.md` : les choix faits pendant le sprint et le constat principal.
+
+## Mise en route du Sprint 2 (collecte automatique)
+
+1. **Fusionner** les demandes `v2-sprint1` puis `v2-sprint2` dans `main` (les tâches planifiées ne tournent que depuis `main`).
+2. **Hugging Face** : créer un compte sur huggingface.co (gratuit). Menu de votre profil > Settings > Access Tokens > « Create new token », type **Write**, nom `innovation-radar`. Copier le jeton (il commence par `hf_`).
+3. **GitHub** : dépôt > Settings > Secrets and variables > Actions > « New repository secret ». Nom : `HF_TOKEN`, valeur : le jeton.
+4. **Premier passage** : onglet Actions > « Collecte » > Run workflow. Durée : 5 à 15 minutes. Le jeu de données privé `<votre-identifiant>/innovation-radar-fiches` est créé tout seul.
+5. **Streamlit** : à la création de l'application (fichier principal `v2/Accueil.py`), ou plus tard dans Settings > Secrets, coller :
+   ```
+   HF_TOKEN = "hf_..."
+   ```
+   Un second jeton en lecture seule (type **Read**) suffit ici et limite les risques.
+6. Ouvrir la page **État du système**.
+
+Ne jamais coller un jeton dans la conversation avec Claude, dans un fichier du dépôt ou dans un carnet Colab partagé.

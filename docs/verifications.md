@@ -6,15 +6,32 @@
 
 - Les limites exactes d'un compte se lisent dans l'objet `limits` renvoyé par `GET /v1/me/info` ; la page publique « Tarifs et limites » ne donne qu'une vue indicative par famille de modèles (requêtes et tokens par minute et par jour, modes expérimentation et production). Source : [guide Albert API, prise en main](https://guides.ia.numerique.gouv.fr/albert-api/prise-en-main/readme.md).
 - Les identifiants de modèles changent (alias `openweight-…` depuis début 2026) : ne jamais les écrire en dur, toujours les lire par `GET /v1/models`.
-- **À faire par Gabriel** : exécuter les deux premières cellules du carnet `notebooks/sprint1_test_albert.ipynb`, et noter ici les limites par minute et par jour du modèle retenu.
 - **Calcul à faire ensuite** : 8 000 à 10 000 fiches par mois = 2 appels par article (passes 1 et 2), soit environ 600 appels par jour. Si le quota quotidien est inférieur, il faudra baisser le volume ou passer davantage par Haiku.
 
-| Limite | Valeur dans votre compte |
-|---|---|
-| Requêtes par minute | à compléter |
-| Requêtes par jour | à compléter |
-| Tokens par minute | à compléter |
-| Tokens par jour | à compléter |
+Relevé du 14 novembre 2026 (`GET /v1/me/info`). Albert donne les limites par « routeur » (un routeur par modèle), sans dire quel routeur correspond à quel modèle.
+
+| Routeurs | Requêtes par minute | Requêtes par jour | Tokens par minute | Tokens par jour | Interprétation probable |
+|---|---|---|---|---|---|
+| 342, 343 | 500 | 50 000 | illimité | illimité | Vecteurs et reclassement (bge-m3, bge-reranker) |
+| 1090 | 50 | illimité | 246 000 | illimité | À identifier |
+| 338, 339, 420, 1086 | 50 | 1 000 | 128 000 | 2 460 000 | Modèles de génération (la plupart) |
+| 337 | 10 | 1 000 | 128 000 | 1 280 000 | Un modèle plus lourd |
+| 1085, 1092 | 50 | 1 000 | illimité | illimité | À identifier (audio, OCR ?) |
+| 1094 | 25 | 500 | 128 000 | 2 460 000 | À identifier |
+
+**Ce que cela permet, par modèle de génération : environ 1 000 requêtes et 2,5 millions de tokens par jour.**
+
+Besoin estimé : environ 1 000 articles collectés par jour, dont un tiers retenu.
+- Passe 1 (tri) : 1 000 requêtes d'environ 800 tokens, soit 0,8 M de tokens par jour.
+- Passe 2 (fiche) : environ 330 requêtes d'environ 5 000 tokens (consigne, liste des technologies, texte, réponse), soit 1,65 M.
+- Total : environ 1 330 requêtes et 2,45 M de tokens par jour. **Cela dépasse la limite de requêtes d'un seul modèle, et frôle sa limite de tokens.**
+
+**Décision proposée** : répartir les passes sur deux modèles, chacun ayant son propre quota.
+- Passe 1 sur le plus petit modèle (Ministral 8B), puisque le tri est une tâche simple.
+- Passe 2 sur le modèle retenu au Sprint 3.
+- Les vecteurs ne posent aucun problème (50 000 requêtes par jour).
+- En secours : Haiku pour l'excédent, environ 4 à 5 $ par mois à plein volume.
+- Si cela ne suffit pas : un pré-tri sans modèle (mots-clés, sources très pertinentes) pour réduire le nombre d'articles soumis à la passe 1.
 
 ## 2. Streamlit Community Cloud — une seule application privée
 
@@ -44,4 +61,3 @@
 ## Ce qui n'a pas pu être vérifié dans cette session
 
 - **Le fonctionnement réel des flux** : l'environnement de développement n'accède pas aux sites d'actualité. L'audit tourne donc dans GitHub Actions (tâche « Audit des sources »).
-- **Les quotas Albert de votre compte** : il faut votre clé, voir le point 1.

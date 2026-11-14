@@ -35,3 +35,14 @@ objets:                        # L1, section 10.1
 sources:                       # L5, section 5
   jours_avant_signalement: 7   # une source en echec 7 jours de suite est signalee
   jours_avant_desactivation: 30
+
+collecte:                      # L5, sections 3.4 et 3.5 (Sprint 2)
+  plafond_par_aire_jour:       # articles retenus au plus, par aire de source et par jour
+    defaut: 150
+    EU: 120
+    US: 100
+  titre_jours_doublon: 3       # deux titres quasi identiques a moins de 3 jours = une seule fiche
+  titre_similarite_min: 0.8    # part de mots communs (0 a 1) pour juger deux titres identiques
+  texte_min_flux: 500          # en dessous (caracteres), on tente de lire la page pour mesurer le texte
+  pages_max_par_passage: 300   # nombre de pages lues au plus a chaque collecte
+  extrait_max: 280             # caracteres du chapeau du flux conserves (pas de texte complet)
