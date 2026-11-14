@@ -4,7 +4,8 @@
 # Citation obligatoire dans l'application : "The GDELT Project" (gdeltproject.org).
 # Pour ajouter une requete : copier une ligne et changer le pays (nom anglais sans espace).
 actif: oui
-pause_s: 6            # GDELT tolere environ une requete toutes les 5 secondes
+pause_s: 10           # GDELT tolere environ une requete toutes les 5 secondes
+pause_refus_s: 30     # attente apres un refus (30 s, puis 60 s)
 periode: 6h           # aligne sur le rythme de la collecte
 max_articles: 75      # par requete (250 au plus)
 mots: '(technology OR innovation OR energy OR battery OR semiconductor OR "electric vehicle" OR infrastructure OR currency OR climate OR mining)'

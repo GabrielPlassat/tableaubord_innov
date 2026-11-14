@@ -41,6 +41,7 @@ collecte:                      # L5, sections 3.4 et 3.5 (Sprint 2)
     defaut: 150
     EU: 120
     US: 100
+  age_max_jours: 7            # on ignore les articles publies il y a plus de 7 jours
   titre_jours_doublon: 3       # deux titres quasi identiques a moins de 3 jours = une seule fiche
   titre_similarite_min: 0.8    # part de mots communs (0 a 1) pour juger deux titres identiques
   texte_min_flux: 500          # en dessous (caracteres), on tente de lire la page pour mesurer le texte
