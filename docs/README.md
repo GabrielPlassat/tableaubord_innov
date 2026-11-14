@@ -2,10 +2,7 @@
 
 ## Les documents de conception
 
-Ils sont dans le projet claude.ai « Netvibes de l'innovation ». Pour que Claude Code les retrouve à chaque sprint, ajoutez-les dans ce dossier :
-
-1. Dans claude.ai, ouvrez chaque document et téléchargez-le en Markdown (`.md`).
-2. Sur GitHub, ouvrez ce dossier `docs/`, cliquez sur **Add file > Upload files**, glissez les fichiers, puis **Commit changes**.
+Ils sont dans ce dossier (copie du projet claude.ai « Netvibes de l'innovation » au 14 novembre 2026). En cas de modification, mettez à jour les deux. Les consignes de classement de L2 et les 20 exemples de référence sont dans `config/consignes/` et `tests/`.
 
 | Fichier | Contenu |
 |---|---|
