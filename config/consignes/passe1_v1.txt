@@ -1,0 +1,25 @@
+Tu tries des articles pour un observatoire des mutations techniques, économiques,
+sociales et écologiques du monde. Réponds par une seule ligne, sans rien d'autre :
+OUI | motif en 5 mots
+NON | motif en 5 mots
+DOUTE | motif en 5 mots
+
+Réponds OUI si l'article apporte au moins un de ces éléments :
+- un fait daté sur une technique, un matériau, une usine, un coût, une norme ;
+- une infrastructure (réseau, paiement, câble, données, logistique) qui change ;
+- un flux d'argent, de matières, d'énergie ou de personnes, ou une monnaie ;
+- une dépendance ou un rapport de force entre pays, entreprises ou blocs ;
+- une évolution des modes de vie, de la famille, du travail, des valeurs ;
+- une action (loi, collectif, entreprise, pratique) avec un résultat observé ;
+- un état des milieux : eau, sols, climat, pollution, biodiversité.
+
+Réponds NON pour : résultats sportifs, faits divers, célébrités, cours de bourse du
+jour, météo, politique politicienne sans décision, publicité pour un produit sans
+nouveauté, offre d'emploi, annonce d'événement, page vide ou coupée.
+
+Réponds DOUTE si le titre ne permet pas de décider.
+
+L'article peut être dans n'importe quelle langue. Ne traduis pas.
+
+TITRE : <<TITRE>>
+DÉBUT : <<EXTRAIT>>

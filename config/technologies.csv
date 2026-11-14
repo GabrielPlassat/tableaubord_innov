@@ -1,0 +1,54 @@
+nom,famille,classe_lenteur,variantes
+solaire photovoltaique,Energie,C3,PV;solar PV;光伏;panel surya
+perovskite,Energie,C3,perovskite solar;钙钛矿
+eolien en mer,Energie,C4,offshore wind;海上风电
+batterie LFP,Energie,C3,LFP;lithium fer phosphate;磷酸铁锂
+batterie sodium-ion,Energie,C3,sodium-ion;钠离子电池
+batterie solide,Energie,C3,solid-state battery;固态电池
+stockage stationnaire,Energie,C4,BESS;battery storage;储能
+hydrogene par electrolyse,Energie,C4,green hydrogen;electrolyser;绿氢
+petit reacteur modulaire,Energie,C4,SMR
+fusion,Energie,C4,fusion energy;核聚变
+pompe a chaleur,Energie,C2,heat pump;热泵
+reseau electrique intelligent,Energie,C4,smart grid
+dessalement par osmose inverse,Energie,C4,desalination;تحلية المياه
+geothermie profonde,Energie,C4,geothermal
+voiture electrique,Mobilite,C2,EV;electric vehicle;新能源汽车
+deux-roues electrique a batterie echangeable,Mobilite,C2,battery swapping;换电;e-boda
+vehicule intermediaire,Mobilite,C2,veli;light electric vehicle;L-category
+bus electrique,Mobilite,C2,e-bus
+conduite autonome,Mobilite,C3,autonomous driving;robotaxi;自动驾驶
+retrofit electrique,Mobilite,C2,retrofit
+train a grande vitesse,Mobilite,C4,high-speed rail;高铁
+carburant d'aviation durable,Mobilite,C4,SAF
+grand modele de langage,Numerique,C1,LLM;大模型
+agent d'IA,Numerique,C1,AI agent;智能体
+modele ouvert,Numerique,C1,open-weight model;开源模型
+puce d'IA,Numerique,C3,GPU;AI chip;芯片
+lithographie avancee,Numerique,C3,EUV;光刻
+calcul quantique,Numerique,C3,quantum computing
+paiement instantane,Numerique,C1,instant payment;Pix;UPI
+monnaie numerique de banque centrale,Numerique,C5,CBDC;数字人民币;e-CNY
+stablecoin,Numerique,C1,stablecoin
+identite numerique,Numerique,C5,digital ID;Aadhaar
+constellation de satellites,Numerique,C4,satellite internet;Starlink
+cable sous-marin,Numerique,C4,submarine cable
+robot humanoide,Numerique,C3,humanoid robot;人形机器人
+centre de donnees,Numerique,C4,data center;数据中心
+raffinage du nickel,Materiaux,C3,nickel smelter;hilirisasi nikel;RKEF;HPAL
+raffinage des terres rares,Materiaux,C3,rare earth refining;稀土
+aimant permanent,Materiaux,C3,permanent magnet
+acier a hydrogene,Materiaux,C4,green steel;DRI
+ciment bas carbone,Materiaux,C4,low-carbon cement
+recyclage des batteries,Materiaux,C3,battery recycling
+impression 3D industrielle,Materiaux,C3,additive manufacturing
+chimie biosourcee,Materiaux,C3,bio-based chemicals
+fermentation de precision,Vivant,C3,precision fermentation
+edition genomique,Vivant,C3,CRISPR;gene editing
+agroecologie,Vivant,C5,agroecology
+irrigation solaire,Vivant,C2,solar pump;PM-KUSUM;सोलर पंप
+capture du carbone,Vivant,C4,CCS;CCUS;direct air capture
+biochar,Vivant,C3,biochar
+viande cultivee,Vivant,C3,cultivated meat
+medicaments GLP-1,Vivant,C2,GLP-1;semaglutide
+vaccin a ARN messager,Vivant,C3,mRNA vaccine

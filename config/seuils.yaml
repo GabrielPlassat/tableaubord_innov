@@ -1,0 +1,37 @@
+# Seuils de l'observatoire (grille L1). Modifiable depuis GitHub.
+# Chaque valeur est commentee. Les pourcentages sont des fractions (0.30 = 30 %).
+
+diversite:                     # L1, section 9.3 (mesuree sur les articles classes, mois glissant)
+  part_max_une_aire: 0.30      # aucune aire ne doit depasser 30 %
+  part_max_eu_us_oc: 0.45      # EU + US + OC ensemble : 45 % au plus
+  part_min_aires_cibles: 0.05  # chacune des aires ci-dessous : 5 % au moins
+  aires_cibles: [CN, IN, ASE, JK, AF, LA, MO_GO]   # MO_GO = MO et GO additionnes
+  part_min_langue_origine: 0.50   # articles non occidentaux lus dans leur langue
+  part_min_ancrage_local: 0.50    # pour les sujets AF, LA, ASE, IN, MO
+  seuil_aire_visible: 0.05     # une aire "compte" dans l'indicateur si elle depasse 5 %
+
+tensions:                      # L1, section 4.3
+  fenetre_semaines: 4
+  min_articles: 15
+  min_sources: 8
+  min_aires: 3
+  min_aires_hors_eu_us: 1
+  min_langues: 2
+  part_max_axe_existant: 0.60  # au-dessus : nouveau marqueur d'un axe existant
+  candidates_par_semaine: 3
+
+precipitations:                # L1, section 5.5
+  lointaine_somme_max: 4       # O + B inferieur a 5
+  approche_somme: [5, 6]
+  imminente_min_chaque: 3
+  imminente_somme_min: 7
+
+objets:                        # L1, section 10.1
+  tendance_min_fiches: 10
+  tendance_min_sources: 5
+  tendance_min_semaines: 4
+  acteur_min_citations: 3
+
+sources:                       # L5, section 5
+  jours_avant_signalement: 7   # une source en echec 7 jours de suite est signalee
+  jours_avant_desactivation: 30
