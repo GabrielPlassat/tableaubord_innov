@@ -55,3 +55,27 @@ Sur 20 articles, 8 n'ont pas pu être lus (sites qui bloquent Colab). Sur les 11
 Biais du modèle : BESOIN presque partout ; presque jamais d'axe ; SOL et PUI employés trop largement ; jamais de rebond ; un code d'aire inventé (« AS »).
 Réponse : consigne `passe2_v2.txt` (définitions resserrées, trois exemples, rappel des codes).
 Enseignement pour le Sprint 2 : environ 40 % des sites refusent la lecture automatique ; la collecte doit d'abord utiliser le texte du flux RSS.
+
+## Comparaison de 7 modèles (consigne v1, 17 articles lus dont 6 en PDF, 14 novembre 2026)
+
+| Champ (seuil) | Mistral Small | Gemma 4 | DeepSeek | gpt-oss | Ministral | Haiku 5.5 | Opus 5.5 |
+|---|---|---|---|---|---|---|---|
+| Tri (95 %) | 90 | 90 | 90 | 90 | 90 | 90 | 85 |
+| JSON valide (98 %) | 100 | 100 | 100 | 100 | 100 | **60** | 95 |
+| Lentille (80 %) | **82** | 65 | 53 | 53 | **82** | 41 | 71 |
+| Iceberg (65 %) | 65 | 71 | 65 | 71 | 41 | 35 | 65 |
+| Aire (90 %) | 53 | 47 | 59 | 76 | 71 | 47 | **94** |
+| Nature (80 %) | 65 | 71 | 71 | **82** | 47 | 41 | 65 |
+| Axe (70 %) | 18 | 29 | 29 | 29 | 12 | 6 | 35 |
+| Pôle (70 %) | 24 | 35 | 41 | 29 | 35 | 12 | 35 |
+| Précipitation (70 %) | 29 | 24 | 24 | 24 | 24 | 12 | 24 |
+| Rebond (70 %) | 59 | 65 | 53 | 65 | 59 | 47 | 59 |
+| Codes d'aire inventés | 0 | 0 | 8 | 0 | 3 | 8 | 1 |
+| Secondes / article | 9,9 | 16,6 | 5,8 | 64,6 | 3,7 | 16,3 | 21,2 |
+
+Constats :
+- Aucun modèle n'atteint les seuils sur axe, pôle et précipitation, Opus compris : le problème vient de la grille ou de la référence (une seule réponse « juste » pour des champs où plusieurs sont défendables), pas du modèle.
+- Le tri plafonne à 90 % pour tous : probablement les mêmes 2 articles, à revérifier dans la référence.
+- Haiku est pénalisé par 40 % de JSON invalides (réponse coupée ou entourée de balises) : scores non interprétables en l'état.
+- Opus est le seul à atteindre le seuil sur l'aire.
+Décisions proposées : Mistral Small pour la fiche de base (lentille, iceberg, nature), Ministral pour le tri ; axe, pôle, précipitation et rebond retirés du classement automatique et confiés aux agents (Opus, par lots), ou évalués en accord large sur le jeu de 100 articles.
