@@ -86,9 +86,9 @@ GitHub Actions (planifié)                      Hugging Face Datasets (privé)
 
 | Tâche | Rythme | Contenu | Modèle |
 |---|---|---|---|
-| `collecte` | Toutes les 6 heures | Flux RSS, pages, extraction du texte, dédoublonnage, passe 1, passe 2, vecteurs | Albert ; Haiku si échec |
+| `collecte` | Toutes les 6 heures | Flux RSS (texte du flux d'abord), dédoublonnage, passe 1 (Ministral), passe 2 (Mistral Small), vecteurs | Albert ; modèle de secours Albert, puis Haiku si échec |
 | `quotidien` | Chaque jour | Volumes GDELT par marqueur de tension et par technologie ; publications OpenAlex ; contrôles de qualité ; indicateurs du Miroir | Aucun |
-| `hebdo` | Lundi | Regroupement des sujets ; tensions libres ; calcul du baromètre ; agents A1, A2, A10 | Opus |
+| `hebdo` | Lundi | Regroupement des sujets ; étiquetage par lots des axes, pôles, précipitations et rebonds sur les groupes de fiches ; tensions libres ; calcul du baromètre ; agents A1, A2, A10 | Opus (Batch) |
 | `mensuel` | Le 1er | Séries lentes ; agents A3, A4, A5, A6, A8, A9, A10 ; photographie des objets | Opus, Fable (Batch) |
 | `trimestriel` | 1er janvier, avril, juillet, octobre | Agent A7 | Fable (Batch) |
 | `annotations` | Chaque nuit | Applique les annotations de la veille aux objets | Aucun |
@@ -133,7 +133,8 @@ Pour respecter la règle des 30 % de L1 (section 9.3) sur les articles, la colle
 |---|---|
 | `id` (forme `F-AAAAMMJJ-NNNN`), `url`, `titre_original`, `langue`, `date_publication`, `date_collecte` | Collecte |
 | `source_id`, `aire_source`, `ancrage`, `lien_pouvoir` | Registre des sources |
-| Tous les champs de la passe 2 (`config/consignes/passe2_v1.txt`) | Classement |
+| Champs de la passe 2 fiables chez Albert : lentilles, iceberg, nature, aire du sujet, résumé, technologies | Classement (Albert) |
+| `axe`, `pole`, `precipitation`, `rebond` : vides à la collecte, remplis par lots | Agents (Opus, traitement différé) |
 | `modele`, `version_consigne` | Classement |
 | `groupe_sujet`, `reprises` | Regroupement, dédoublonnage |
 | `corrige_par_humain` (oui, non), `etiquettes_avant_correction` | Annotations |
@@ -386,3 +387,8 @@ Tout se fait depuis le site de GitHub, sans rien installer.
 3. L'écriture d'une annotation depuis l'application vers GitHub, de bout en bout.
 4. L'alerte de budget : la déclencher volontairement avec un seuil à 1 $.
 5. La restauration d'un fichier d'objets après une erreur volontaire.
+
+
+## Décision du 14 novembre 2026 (test de 7 modèles sur 17 articles)
+
+Voir `docs/journal-sprint1.md`. Albert fait le tri (Ministral) et la fiche de base (Mistral Small) ; aucun modèle, Opus compris, n'est fiable article par article sur l'axe, le pôle, la précipitation et le rebond : ces champs sont confiés aux agents, sur des groupes de fiches. Le choix des modèles est dans `config/modeles.yaml` ; le changer revient à modifier une ligne, sans toucher au code. À revérifier sur le jeu de 100 articles (Sprint 3).
