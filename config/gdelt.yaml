@@ -2,21 +2,21 @@
 # GDELT traduit les articles en anglais : les mots-cles sont donc en anglais,
 # mais les articles trouves sont dans leur langue d'origine.
 # Citation obligatoire dans l'application : "The GDELT Project" (gdeltproject.org).
-# Pour ajouter une requete : copier une ligne et changer le pays (nom anglais sans espace).
+# GDELT limite a une requete toutes les 5 secondes et refuse souvent les adresses
+# partagees de GitHub : on fait donc peu de requetes, chacune sur plusieurs pays.
+# Pour ajouter un pays : l'ajouter a un groupe (nom anglais en minuscules, sans espace : aire).
 actif: oui
-pause_s: 10           # GDELT tolere environ une requete toutes les 5 secondes
-pause_refus_s: 30     # attente apres un refus (30 s, puis 60 s)
+pause_s: 10           # entre deux requetes
+pause_refus_s: 20     # apres un refus : 20 s, puis 40 s
+essais: 3
+duree_max_s: 300      # GDELT ne doit pas retarder la collecte de plus de 5 minutes
 periode: 6h           # aligne sur le rythme de la collecte
-max_articles: 75      # par requete (250 au plus)
+max_articles: 250     # par requete (250 au plus)
 mots: '(technology OR innovation OR energy OR battery OR semiconductor OR "electric vehicle" OR infrastructure OR currency OR climate OR mining)'
 requetes:
-  - {aire: CN, pays: china}
-  - {aire: CN, pays: hongkong}
-  - {aire: JK, pays: japan}
-  - {aire: JK, pays: southkorea}
-  - {aire: JK, pays: taiwan}
-  - {aire: GO, pays: saudiarabia}
-  - {aire: GO, pays: unitedarabemirates}
-  - {aire: MO, pays: iran}
-  - {aire: MO, pays: turkey}
-  - {aire: MO, pays: egypt}
+  - nom: chine
+    pays: {china: CN, hongkong: CN}
+  - nom: japon-coree-taiwan
+    pays: {japan: JK, southkorea: JK, taiwan: JK}
+  - nom: golfe-moyen-orient
+    pays: {saudiarabia: GO, unitedarabemirates: GO, qatar: GO, iran: MO, turkey: MO, egypt: MO}

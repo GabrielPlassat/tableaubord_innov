@@ -131,34 +131,41 @@ def lire_flux(src: dict) -> tuple[str, list[dict], str]:
 
 
 def lire_gdelt(conf: dict) -> tuple[list[dict], int, list[str]]:
+    """Quelques requetes groupees (plusieurs pays chacune), duree totale plafonnee."""
     if str(conf.get("actif", "oui")).lower() != "oui":
         return [], 0, []
     articles, erreurs, n = [], [], 0
+    fin_au_plus_tard = time.time() + conf.get("duree_max_s", 300)
+    tous_pays = {p: aire for req in conf.get("requetes", []) for p, aire in req["pays"].items()}
     for i, req in enumerate(conf.get("requetes", [])):
-        if i:
-            time.sleep(conf.get("pause_s", 6))
-        q = f'{conf["mots"]} sourcecountry:{req["pays"]}'
-        params = {"query": q, "mode": "artlist", "format": "json", "sort": "datedesc",
-                  "maxrecords": conf.get("max_articles", 75), "timespan": conf.get("periode", "6h")}
-        n += 1
-        donnees, r = None, None
-        for essai in range(3):          # GDELT refuse souvent les adresses partagees de GitHub
+        pays = req["pays"]                      # {nom gdelt : aire}
+        if len(pays) > 1:
+            filtre = "(" + " OR ".join(f"sourcecountry:{p}" for p in pays) + ")"
+        else:
+            filtre = f"sourcecountry:{next(iter(pays))}"
+        params = {"query": f'{conf["mots"]} {filtre}', "mode": "artlist", "format": "json",
+                  "sort": "datedesc", "maxrecords": conf.get("max_articles", 250),
+                  "timespan": conf.get("periode", "6h")}
+        donnees = None
+        for essai in range(conf.get("essais", 3)):  # GDELT refuse souvent les adresses partagees de GitHub
+            if time.time() > fin_au_plus_tard:
+                break
+            if i or essai:
+                time.sleep(conf.get("pause_s", 10) if not essai else conf.get("pause_refus_s", 20) * essai)
+            n += 1
             try:
                 r = requests.get("https://api.gdeltproject.org/api/v2/doc/doc", params=params,
                                  headers=ENTETES, timeout=40)
             except Exception as e:  # noqa: BLE001
-                r = None
-                erreurs.append(f"gdelt {req['pays']} : {type(e).__name__}")
+                erreurs.append(f"gdelt {req['nom']} : {type(e).__name__}")
                 break
             if r.text.strip().startswith("{"):
                 donnees = json.loads(r.text)
                 break
-            time.sleep(conf.get("pause_refus_s", 30) * (essai + 1))
-        if r is None:
-            continue
         if donnees is None:
-            erreurs.append(f"gdelt {req['pays']} : refus apres 3 essais")
+            erreurs.append(f"gdelt {req['nom']} : refus")
             continue
+        aire_defaut = next(iter(pays.values()))
         for a in donnees.get("articles", []):
             seen = a.get("seendate", "")
             try:
@@ -166,12 +173,14 @@ def lire_gdelt(conf: dict) -> tuple[list[dict], int, list[str]]:
             except ValueError:
                 dpub = ""
             dom = a.get("domain", "inconnu")
+            nom_pays = re.sub(r"\s+", "", (a.get("sourcecountry") or "").lower())
             articles.append({
                 "url": a.get("url", ""), "titre_original": (a.get("title") or "")[:500],
                 "date_publication": dpub,
                 "langue": LANGUES_GDELT.get(a.get("language", ""), a.get("language", "")[:2].lower()),
                 "source_id": f"gdelt-{dom}", "source_nom": f"{dom} (via GDELT)", "type_source": "GDELT",
-                "aire_source": req["aire"], "ancrage": "LOCAL", "lien_pouvoir": "INCONNU", "_texte": "",
+                "aire_source": tous_pays.get(nom_pays, aire_defaut), "ancrage": "LOCAL",
+                "lien_pouvoir": "INCONNU", "_texte": "",
             })
     return [a for a in articles if a["url"].startswith("http") and a["titre_original"]], n, erreurs
 
