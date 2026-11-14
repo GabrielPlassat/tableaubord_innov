@@ -1,0 +1,5 @@
+# Ou sont stockees les fiches. Le jeu de donnees Hugging Face est cree automatiquement
+# (en prive) au premier passage, avec le jeton HF_TOKEN des secrets GitHub.
+# Laisser depot_hf vide : le nom sera <votre-identifiant-hf>/innovation-radar-fiches.
+depot_hf: ""
+nom_par_defaut: innovation-radar-fiches

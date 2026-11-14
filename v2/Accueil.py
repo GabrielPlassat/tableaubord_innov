@@ -15,11 +15,12 @@ st.caption(f"Diversité des sources actives : {texte}")
 
 st.markdown(
     """
-Version 2 en construction. **Sprint 1 : le registre des sources.**
+Version 2 en construction. **Sprint 2 : la collecte automatique.**
 
 - **Miroir** (menu de gauche) : d'où viennent les sources, dans quelles langues, avec quel lien au pouvoir.
 - Le registre se modifie dans `config/sources.csv`, depuis le site de GitHub.
-- L'état des flux est mis à jour chaque lundi par la tâche « Audit des sources » (onglet Actions du dépôt).
+- **État du système** : les collectes (toutes les 6 heures), les sources en échec, les fiches du mois.
+- L'état des flux est aussi vérifié chaque lundi par la tâche « Audit des sources ».
 
 Les autres écrans arrivent aux sprints suivants (voir `docs/`).
 """
