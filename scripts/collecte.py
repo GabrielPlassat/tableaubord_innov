@@ -32,6 +32,7 @@ JOURNAL = RACINE / "journal"
 LOCAL = RACINE / "donnees_locales"
 MAINTENANT = datetime.now(timezone.utc)
 ENTETES = {"User-Agent": "InnovationRadar/2.0 (+https://github.com/GabrielPlassat/tableaubord_innov)"}
+AGE_MAX_JOURS = 7     # remplace par seuils.yaml > collecte > age_max_jours
 RANG_ANCRAGE = {"LOCAL": 0, "DIASPORA": 1, "CORRESPONDANT": 2, "INTERNATIONAL": 3}
 COLONNES = [
     "id", "url", "url_canonique", "titre_original", "langue", "date_publication", "date_collecte",
@@ -104,24 +105,28 @@ def lire_flux(src: dict) -> tuple[str, list[dict], str]:
     except Exception as e:  # noqa: BLE001
         return src["id"], [], type(e).__name__
     articles = []
+    limite = (MAINTENANT - timedelta(days=AGE_MAX_JOURS)).isoformat()
     for e in flux.entries[:100]:
         lien = e.get("link") or ""
         titre = sans_html(e.get("title") or "")
         if not lien.startswith("http") or not titre:
+            continue
+        dpub = date_iso(e)
+        if dpub and dpub < limite:      # article trop ancien (archives du flux)
             continue
         contenu = ""
         if e.get("content"):
             contenu = " ".join(c.get("value", "") for c in e["content"])
         texte = sans_html(contenu or e.get("summary") or e.get("description") or "")
         articles.append({
-            "url": lien, "titre_original": titre[:500], "date_publication": date_iso(e),
+            "url": lien, "titre_original": titre[:500], "date_publication": dpub,
             "langue": src.get("langue", ""), "source_id": src["id"], "source_nom": src["nom"],
             "type_source": src["type"], "aire_source": src["aire_source"],
             "ancrage": src["ancrage"], "lien_pouvoir": src["lien_pouvoir"],
             "_texte": texte,
         })
     if not articles:
-        return src["id"], [], "Aucun article lisible"
+        return src["id"], [], ("" if flux.entries else "Aucun article lisible")
     return src["id"], articles, ""
 
 
@@ -136,15 +141,23 @@ def lire_gdelt(conf: dict) -> tuple[list[dict], int, list[str]]:
         params = {"query": q, "mode": "artlist", "format": "json", "sort": "datedesc",
                   "maxrecords": conf.get("max_articles", 75), "timespan": conf.get("periode", "6h")}
         n += 1
-        try:
-            r = requests.get("https://api.gdeltproject.org/api/v2/doc/doc", params=params,
-                             headers=ENTETES, timeout=40)
-            donnees = json.loads(r.text) if r.text.strip().startswith("{") else None
-        except Exception as e:  # noqa: BLE001
-            erreurs.append(f"gdelt {req['pays']} : {type(e).__name__}")
+        donnees, r = None, None
+        for essai in range(3):          # GDELT refuse souvent les adresses partagees de GitHub
+            try:
+                r = requests.get("https://api.gdeltproject.org/api/v2/doc/doc", params=params,
+                                 headers=ENTETES, timeout=40)
+            except Exception as e:  # noqa: BLE001
+                r = None
+                erreurs.append(f"gdelt {req['pays']} : {type(e).__name__}")
+                break
+            if r.text.strip().startswith("{"):
+                donnees = json.loads(r.text)
+                break
+            time.sleep(conf.get("pause_refus_s", 30) * (essai + 1))
+        if r is None:
             continue
         if donnees is None:
-            erreurs.append(f"gdelt {req['pays']} : {r.text[:80]!r}")
+            erreurs.append(f"gdelt {req['pays']} : refus apres 3 essais")
             continue
         for a in donnees.get("articles", []):
             seen = a.get("seendate", "")
@@ -373,6 +386,8 @@ def main():
     JOURNAL.mkdir(exist_ok=True)
     seuils = lire_yaml("seuils.yaml")
     sc = seuils.get("collecte", {})
+    global AGE_MAX_JOURS
+    AGE_MAX_JOURS = sc.get("age_max_jours", 7)
     sources = pd.read_csv(CONFIG / "sources.csv", dtype=str).fillna("")
     actives = sources[(sources["actif"] == "oui") & sources["type"].isin(["RSS", "PERSONNE"])]
     journal = {"tache": "collecte", "debut": MAINTENANT.isoformat(timespec="seconds"), "erreurs": ""}
