@@ -21,3 +21,17 @@ Même avec 47 sources non occidentales ajoutées, **l'Europe pèse 36 % des sour
 2. **plafonner à la collecte** (Sprint 2) le nombre d'articles retenus par aire et par jour, ce qui respecte la règle sur les articles sans toucher au registre.
 
 La solution 2 est prévue de toute façon ; la 1 accélère et allège la collecte.
+
+## Résultat du premier audit (14 novembre 2026, GitHub Actions)
+
+| Statut | Sources | Dont ajouts Sprint 1 |
+|---|---|---|
+| OK | 67 | 33 |
+| ERREUR (page introuvable, accès refusé, délai) | 46 | 5 |
+| VIDE (la page n'est pas un flux lisible) | 17 | 3 |
+| ENDORMI (rien depuis 90 jours) | 8 | 3 |
+
+- **Près de la moitié des flux hérités de la v1 ne fonctionnent plus** : tous les flux de la Commission européenne, du Parlement européen et d'EUR-Lex, ceux de l'AIE, du FMI, de l'OCDE, de l'INSEE, et 13 des 25 personnes suivies. Cela explique en partie la pauvreté de la synthèse v1.
+- Sur les **seuls flux qui fonctionnent**, aucune aire ne dépasse 30 % : US 27 %, EU 22 %, AF 9 %, ASE 7 %, LA 7 %, IN 6 %. La règle est respectée sur ce périmètre.
+- **Aires encore faibles** : CN (1 %), JK (3 %), MO (3 %). La Chine est la priorité du prochain lot de sources : peu de médias chinois publient un flux lisible, il faudra sans doute passer par GDELT (Sprint 2) ou par des pages.
+- Certaines erreurs 403 et 429 viennent de sites qui bloquent les robots ; d'autres flux ont simplement changé d'adresse. Le détail est dans `journal/audit_sources.csv` et dans la page Miroir.
