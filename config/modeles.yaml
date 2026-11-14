@@ -2,8 +2,8 @@
 # avec le carnet notebooks/sprint1_test_albert.ipynb (liste GET /v1/models).
 albert:
   adresse: https://albert.api.etalab.gouv.fr/v1
-  classement: A_CHOISIR_AU_SPRINT_3   # modele de generation retenu apres le test
-  vecteurs: A_CHOISIR_AU_SPRINT_3     # modele d'embeddings
+  classement: A_CHOISIR_AU_SPRINT_3   # candidats : mistral-small-3-2-24b-instruct-2506, gemma-4-31b-it, deepseek-v4-flash-0731, gpt-oss-120b
+  vecteurs: bge-m3                     # embeddings multilingues disponibles sur Albert (a confirmer au Sprint 3)
 claude:
   secours_classement: claude-haiku-5-5
   synthese_hebdo: claude-opus-5-5
