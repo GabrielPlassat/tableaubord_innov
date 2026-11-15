@@ -83,7 +83,7 @@ def worldbank(code, pays):
     lignes = []
     for i in range(0, len(pays), 8):          # par paquets : l'API refuse parfois les longues listes
         r = get(f"https://api.worldbank.org/v2/country/{';'.join(pays[i:i + 8])}/indicator/{code}",
-                params={"format": "json", "per_page": 5000, "date": f"{DEPUIS[:4]}:2030"})
+                essais=2, timeout=30, params={"format": "json", "per_page": 5000, "date": f"{DEPUIS[:4]}:2030"})
         donnees = r.json()
         if len(donnees) < 2 or not donnees[1]:
             continue
@@ -142,9 +142,13 @@ def main():
     series = series[series["actif"] == "oui"]
     pays = list(yaml.safe_load(open(CONFIG / "series_pays.yaml", encoding="utf-8"))["pays"])
     tout, etat = [], []
+    limite = time.time() + 12 * 60            # le tout doit tenir en 12 minutes
     for s in series.to_dict("records"):
         debut = time.time()
+        print(s["id"], "...", flush=True)
         try:
+            if debut > limite:
+                raise RuntimeError("temps total depasse, serie reportee au prochain passage")
             df = SOURCES[s["source"]](s["code"], pays)
             df["valeur"] = pd.to_numeric(df["valeur"], errors="coerce")
             df = df.dropna(subset=["valeur"])

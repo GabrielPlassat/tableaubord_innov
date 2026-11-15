@@ -36,7 +36,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           STOOQ_API_KEY: ${{ secrets.STOOQ_API_KEY }}
-        run: python scripts/series.py
+        run: python -u scripts/series.py
       - name: Enregistrer l'etat des series
         if: always()
         run: |
