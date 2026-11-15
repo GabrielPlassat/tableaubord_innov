@@ -129,7 +129,7 @@ LANGUES_ISO3 = {
     "zho": "zh", "jpn": "ja", "kor": "ko", "ara": "ar", "fas": "fa", "tur": "tr", "rus": "ru",
     "hin": "hi", "ben": "bn", "urd": "ur", "tam": "ta", "ind": "id", "msa": "ms", "vie": "vi",
     "tha": "th", "spa": "es", "por": "pt", "swa": "sw", "amh": "am", "hau": "ha", "fra": "fr",
-    "deu": "de", "ita": "it", "heb": "he", "ukr": "uk", "pol": "pl", "nld": "nl", "eng": "en",
+    "deu": "de", "mon": "mn", "ita": "it", "heb": "he", "ukr": "uk", "pol": "pl", "nld": "nl", "eng": "en",
 }
 URL_GDELT = "http://data.gdeltproject.org/gdeltv2/"
 ETAT_GDELT = JOURNAL / "gdelt_dernier_fichier.txt"
@@ -178,6 +178,8 @@ def lire_un_fichier_gkg(nom: str, conf: dict, pays_zone: dict) -> tuple[list[dic
     except Exception as e:  # noqa: BLE001
         return [], f"{nom} : {type(e).__name__}"
     themes_ok = tuple(conf.get("themes", []))
+    forts = tuple(conf.get("themes_forts", []))
+    exclus = [m.lower() for m in conf.get("exclure_si_url_contient", [])]
     cibles = set(conf.get("aires_cibles", []))
     sortie = []
     for ligne in brut.split("\n"):
@@ -187,6 +189,11 @@ def lire_un_fichier_gkg(nom: str, conf: dict, pays_zone: dict) -> tuple[list[dic
         themes = [t for t in c[7].split(";") if t]
         utiles = [t for t in themes if t.startswith(themes_ok)]
         if len(utiles) < conf.get("themes_min", 2):
+            continue
+        if forts and not any(t.startswith(forts) for t in themes):
+            continue
+        url_min = c[4].lower()
+        if exclus and any(m in url_min for m in exclus):
             continue
         titre = re.search(r"<PAGE_TITLE>(.*?)</PAGE_TITLE>", c[26], re.S)
         if not titre:

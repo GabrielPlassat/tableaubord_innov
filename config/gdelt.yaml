@@ -13,10 +13,37 @@ aires_cibles: [CN, JK, IN, ASE, RU, GO, MO, AF, LA]
 # Themes GDELT utiles (prefixes) : environnement et energie, economie et monnaie,
 # technologie et science, themes de la Banque mondiale (developpement, infrastructures...)
 themes: [ENV_, ECON_, TECH_, SCIENCE, WB_, AGRICULTURE, FOOD_SECURITY, WATER_SECURITY, CYBER_, TAX_FNCACT_ENGINEER]
+# ... dont au moins un de ces themes "forts" (les themes WB_ seuls sont trop larges)
+themes_forts: [ENV_, ECON_, TECH_, SCIENCE, AGRICULTURE, FOOD_SECURITY, WATER_SECURITY, CYBER_]
+
+# Rubriques hors champ, reconnues dans l'adresse de l'article
+exclure_si_url_contient: [horoscope, goroskop, rashifal, /astro, /sport, /lifestyle, /variety, /show, celebrit, entertainment, /culture/art, /recipe, /fashion]
 
 # L'aire de la source se deduit : 1) de cette liste de sites connus,
 # 2) de l'extension nationale du site (.cn, .ng, .br...), 3) de la langue d'origine.
 domaines:
+  # sites dont l'extension ou la langue tromperait
+  storm.mg: JK              # Taiwan (extension de Madagascar)
+  ltn.com.tw: JK
+  emaratalyoum.com: GO
+  alriyadh.com: GO
+  okaz.com.sa: GO
+  ntdtv.com: CN             # chaine de la diaspora chinoise, basee aux Etats-Unis
+  # presse europeenne en langue non europeenne ou en espagnol : exclue (aire EU)
+  elpais.com: EU
+  elconfidencial.com: EU
+  lavanguardia.com: EU
+  libertaddigital.com: EU
+  elcorreo.com: EU
+  granadahoy.com: EU
+  elmundo.es: EU
+  dw.com: EU
+  bbc.com: EU
+  bbc.co.uk: EU
+  rfi.fr: EU
+  france24.com: EU
+  euronews.com: EU
+  # presse non occidentale en .com
   scmp.com: CN
   globaltimes.cn: CN
   caixinglobal.com: CN
