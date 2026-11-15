@@ -190,8 +190,7 @@ def lire_un_fichier_gkg(nom: str, conf: dict, pays_zone: dict) -> tuple[list[dic
         utiles = [t for t in themes if t.startswith(themes_ok)]
         if len(utiles) < conf.get("themes_min", 2):
             continue
-        if forts and not any(t.startswith(forts) for t in themes):
-            continue
+        fort = (not forts) or any(t.startswith(forts) for t in themes)
         url_min = c[4].lower()
         if exclus and any(m in url_min for m in exclus):
             continue
@@ -211,7 +210,7 @@ def lire_un_fichier_gkg(nom: str, conf: dict, pays_zone: dict) -> tuple[list[dic
             "url": c[4], "titre_original": sans_html(titre.group(1))[:500], "date_publication": dpub,
             "langue": langue, "source_id": f"gdelt-{c[3]}", "source_nom": f"{c[3]} (via GDELT)",
             "type_source": "GDELT", "aire_source": aire, "ancrage": "LOCAL", "lien_pouvoir": "INCONNU",
-            "_texte": "", "_score": len(utiles),
+            "_texte": "", "_score": len(utiles), "_fort": fort,
         })
     return sortie, ""
 
@@ -241,13 +240,22 @@ def lire_gdelt(conf: dict) -> tuple[list[dict], int, list[str]]:
         if a["url"] not in vus:
             vus.add(a["url"])
             uniques.append(a)
-    par_aire: dict[str, int] = {}
+    # Par aire : une part "dans le champ" (themes forts, les plus riches d'abord) et une part
+    # "libre", tiree au hasard, pour garder les evolutions de societe et les projets locaux.
+    import random
+    maxi = conf.get("max_par_aire", 40)
+    part_libre = conf.get("part_libre", 0.25)
     gardes = []
-    for a in uniques:
-        if par_aire.get(a["aire_source"], 0) < conf.get("max_par_aire", 60):
-            par_aire[a["aire_source"]] = par_aire.get(a["aire_source"], 0) + 1
-            del a["_score"]
-            gardes.append(a)
+    for aire in {a["aire_source"] for a in uniques}:
+        dans_aire = [a for a in uniques if a["aire_source"] == aire]
+        forts_a = [a for a in dans_aire if a["_fort"]]
+        libres_a = [a for a in dans_aire if not a["_fort"]]
+        n_libre = min(len(libres_a), round(maxi * part_libre))
+        choix = forts_a[: maxi - n_libre]
+        choix += random.sample(libres_a, min(len(libres_a), maxi - len(choix)))
+        gardes += choix
+    for a in gardes:
+        del a["_score"], a["_fort"]
     if len(erreurs) < len(noms):
         ETAT_GDELT.write_text(stamps[-1])
     return gardes, len(noms), erreurs[:5]

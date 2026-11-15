@@ -13,11 +13,16 @@ aires_cibles: [CN, JK, IN, ASE, RU, GO, MO, AF, LA]
 # Themes GDELT utiles (prefixes) : environnement et energie, economie et monnaie,
 # technologie et science, themes de la Banque mondiale (developpement, infrastructures...)
 themes: [ENV_, ECON_, TECH_, SCIENCE, WB_, AGRICULTURE, FOOD_SECURITY, WATER_SECURITY, CYBER_, TAX_FNCACT_ENGINEER]
-# ... dont au moins un de ces themes "forts" (les themes WB_ seuls sont trop larges)
-themes_forts: [ENV_, ECON_, TECH_, SCIENCE, AGRICULTURE, FOOD_SECURITY, WATER_SECURITY, CYBER_]
+# Themes "forts" : un article qui en porte au moins un est dans le champ, et prioritaire.
+# On y met aussi les evolutions de societe (Fourquet, Todd) : education, travail, famille, ville...
+themes_forts: [ENV_, ECON_, TECH_, SCIENCE, AGRICULTURE, FOOD_SECURITY, WATER_SECURITY, CYBER_,
+               EDUCATION, UNEMPLOYMENT, POVERTY, IMMIGRATION, MIGRATION, URBAN, RURAL, HOUSING,
+               SOC_, LABOR, UNION, WOMEN, AGING, YOUTH, RELIGION, HEALTH_, MEDICAL, WELFARE, TAX_DISEASE]
+part_libre: 0.25        # un quart des articles de chaque aire est tire au hasard parmi les autres :
+                        # "un peu de bruit", pour ne pas filtrer ce qu'on n'attendait pas
 
 # Rubriques hors champ, reconnues dans l'adresse de l'article
-exclure_si_url_contient: [horoscope, goroskop, rashifal, /astro, /sport, /lifestyle, /variety, /show, celebrit, entertainment, /culture/art, /recipe, /fashion]
+exclure_si_url_contient: [horoscope, goroskop, rashifal, /astro, /sport, celebrit]   # le reste peut passer dans la part libre
 
 # L'aire de la source se deduit : 1) de cette liste de sites connus,
 # 2) de l'extension nationale du site (.cn, .ng, .br...), 3) de la langue d'origine.
