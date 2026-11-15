@@ -526,7 +526,17 @@ def main():
     if len(ajout) or modifie_prec:
         stock.ecrire(sorties, f"Collecte du {MAINTENANT:%Y-%m-%d %H:%M} : {len(ajout)} fiches")
 
-    # 7. Journal
+    # 7. Bilan du stock du mois (lisible sans acces a Hugging Face)
+    stock_mois = sorties.get(mois, existant[existant["_mois"] == mois])
+    if len(stock_mois):
+        bilan = (stock_mois.assign(origine=stock_mois["type_source"].where(stock_mois["type_source"] == "GDELT", "RSS"))
+                 .groupby(["origine", "aire_source"]).size().rename("fiches").reset_index())
+        bilan.insert(0, "mois", mois)
+        bilan.to_csv(JOURNAL / "stock_du_mois.csv", index=False)
+    gd_ajout = ajout[ajout["type_source"] == "GDELT"] if len(ajout) else ajout
+    journal["gdelt_enregistres"] = len(gd_ajout)
+
+    # 8. Journal
     desactivees = maj_suivi_sources(resultats, sources, seuils.get("sources", {}))
     journal.update({
         "fin": datetime.now(timezone.utc).isoformat(timespec="seconds"),
