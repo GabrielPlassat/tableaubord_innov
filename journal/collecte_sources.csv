@@ -1,17 +1,17 @@
 id,dernier_succes,premier_echec,derniere_erreur,articles_dernier_passage,statut
-insee-informations-rapides,,2026-11-14,HTTP 500,0,ECHEC
-insee-communiques-de-presse,,2026-11-14,Aucun article lisible,0,ECHEC
+insee-informations-rapides,2026-11-15,,,4,OK
+insee-communiques-de-presse,2026-11-15,,,2,OK
 banque-de-france-publications,,2026-11-14,HTTP 404,0,ECHEC
 bce-communiques-officiels,2026-11-15,,,3,OK
 ocde-actualites,,2026-11-14,HTTP 403,0,ECHEC
 fmi-actualites,,2026-11-14,HTTP 404,0,ECHEC
 le-grand-continent,2026-11-15,,,10,OK
 alternatives-economiques,2026-11-15,,,10,OK
-la-tribune-economie,,2026-11-14,HTTP 404,0,ECHEC
+la-tribune-economie,2026-11-15,,,20,OK
 project-syndicate,2026-11-15,,,20,OK
 aie-actualites,,2026-11-14,HTTP 403,0,ECHEC
 rte-eco2mix-actualites,,2026-11-14,Aucun article lisible,0,ECHEC
-connaissance-des-energies,,2026-11-14,HTTP 404,0,ECHEC
+connaissance-des-energies,2026-11-15,,,3,OK
 actu-environnement,,2026-11-14,HTTP 404,0,ECHEC
 revolution-energetique,2026-11-15,,,10,OK
 pv-magazine-france,2026-11-15,,,10,OK
@@ -23,14 +23,14 @@ investing-com-petrole-commodites,2026-11-15,,,10,OK
 energytrend-prix-solaire,,2026-11-14,HTTP 404,0,ECHEC
 bloombergnef-batteries-energie,2026-11-15,,,4,OK
 fxstreet-devises-crypto,,2026-11-14,HTTP 403,0,ECHEC
-cointelegraph-bitcoin-crypto,2026-11-15,,,26,OK
+cointelegraph-bitcoin-crypto,2026-11-15,,,27,OK
 xinhua-economie-yuan-chine,,2026-11-14,ConnectionError,0,ECHEC
 epoch-ai-performances-llm,,2026-11-14,HTTP 404,0,ECHEC
-github-trending-tous-langages,2026-11-15,,,12,OK
-github-trending-python,2026-11-15,,,16,OK
-github-trending-javascript,2026-11-15,,,10,OK
+github-trending-tous-langages,2026-11-15,,,15,OK
+github-trending-python,2026-11-15,,,17,OK
+github-trending-javascript,2026-11-15,,,8,OK
 changelog-nightly,,2026-11-14,HTTP 404,0,ECHEC
-hugging-face-daily-papers,2026-11-15,,,47,OK
+hugging-face-daily-papers,2026-11-15,,,44,OK
 hugging-face-blog-officiel,2026-11-15,,,10,OK
 hf-leaderboard-chatbot-arena,,2026-11-14,HTTP 401,0,ECHEC
 benedict-evans,2026-11-15,,,0,OK
@@ -53,7 +53,7 @@ andile-masuku,,2026-11-14,Aucun article lisible,0,ECHEC
 rebecca-enonchong,,2026-11-14,HTTP 404,0,ECHEC
 marten-mickos,,2026-11-14,ConnectionError,0,ECHEC
 niklas-zennstrom,,2026-11-14,HTTP 429,0,ECHEC
-cecilia-skingsley,,2026-11-14,HTTP 404,0,ECHEC
+cecilia-skingsley,2026-11-15,,,29,OK
 marta-belcher,,2026-11-14,HTTP 404,0,ECHEC
 ronaldo-lemos,2026-11-15,,,0,OK
 cristina-junqueira,,2026-11-14,HTTP 404,0,ECHEC
@@ -66,14 +66,14 @@ parlement-eu-communiques-comites,,2026-11-14,HTTP 403,0,ECHEC
 eur-lex-nouvelles-publications-en,,2026-11-14,Aucun article lisible,0,ECHEC
 eur-lex-nouvelles-publications-fr,,2026-11-14,Aucun article lisible,0,ECHEC
 ai-act-observatory,2026-11-15,,,1,OK
-federal-register-toutes-agences,,2026-11-14,Aucun article lisible,0,ECHEC
-federal-register-dept-of-energy,,2026-11-14,Aucun article lisible,0,ECHEC
-federal-register-dept-of-transportation,,2026-11-14,Aucun article lisible,0,ECHEC
+federal-register-toutes-agences,2026-11-15,,,5,OK
+federal-register-dept-of-energy,2026-11-15,,,36,OK
+federal-register-dept-of-transportation,2026-11-15,,,58,OK
 ftc-communiques-officiels,,2026-11-14,HTTP 403,0,ECHEC
 nist-actualites-standards-tech,2026-11-15,,,0,OK
 tech-policy-press,,2026-11-14,Aucun article lisible,0,ECHEC
 legifrance-journal-officiel,,2026-11-14,HTTP 403,0,ECHEC
-eea-agence-environnement-eu,,2026-11-14,HTTP 404,0,ECHEC
+eea-agence-environnement-eu,2026-11-15,,,3,OK
 mit-technology-review,2026-11-15,,,10,OK
 techcrunch,2026-11-15,,,20,OK
 wired,2026-11-15,,,50,OK
@@ -84,9 +84,9 @@ techniques-ingenieur,,2026-11-14,Aucun article lisible,0,ECHEC
 decideurs-magazine,,2026-11-14,HTTP 404,0,ECHEC
 the-batch-deeplearning-ai,,2026-11-14,HTTP 403,0,ECHEC
 venturebeat-ai,,2026-11-14,HTTP 429,0,ECHEC
-nature-news,,2026-11-14,HTTP 404,0,ECHEC
-commission-eu-dae-numerique-ia,,2026-11-14,HTTP 404,0,ECHEC
-commission-eu-dg-ener-energie,,2026-11-14,HTTP 404,0,ECHEC
+nature-news,2026-11-15,,,75,OK
+commission-eu-dae-numerique-ia,2026-11-15,,,30,OK
+commission-eu-dg-ener-energie,,2026-11-14,HTTP 429,0,ECHEC
 commission-eu-dg-move-transport,,2026-11-14,HTTP 404,0,ECHEC
 commission-eu-dg-connect,,2026-11-14,HTTP 404,0,ECHEC
 jrc-science-hub-actualites,,2026-11-14,HTTP 429,0,ECHEC
@@ -101,7 +101,7 @@ nhk-economie,2026-11-15,,,0,OK
 yonhap,2026-11-15,,,100,OK
 hankyoreh-english,2026-11-15,,,30,OK
 the-hindu,2026-11-15,,,60,OK
-scroll-in,,2026-11-14,Aucun article lisible,0,ECHEC
+scroll-in,2026-11-15,,,100,OK
 the-wire,,2026-11-14,Aucun article lisible,0,ECHEC
 mongabay-india,2026-11-15,,,10,OK
 amar-ujala,2026-11-15,,,11,OK
@@ -109,14 +109,14 @@ dawn,2026-11-15,,,29,OK
 the-daily-star-bangladesh,2026-11-15,,,0,OK
 mongabay-indonesia,2026-11-15,,,20,OK
 cnn-indonesia,2026-11-15,,,10,OK
-vnexpress,2026-11-15,,,52,OK
+vnexpress,2026-11-15,2026-11-15,ReadTimeout,0,ECHEC
 rappler,2026-11-15,,,10,OK
 cna-channel-newsasia,2026-11-15,,,20,OK
 allafrica-derniers-titres,2026-11-15,,,32,OK
 premium-times,2026-11-15,,,15,OK
 techcabal,2026-11-15,,,10,OK
-daily-maverick,2026-11-15,,,45,OK
-the-conversation-africa,2026-11-15,,,17,OK
+daily-maverick,2026-11-15,,,50,OK
+the-conversation-africa,2026-11-15,,,18,OK
 jeune-afrique,2026-11-15,,,30,OK
 addis-standard,,2026-11-14,HTTP 403,0,ECHEC
 mongabay-latam,2026-11-15,,,30,OK
@@ -127,10 +127,10 @@ el-desconcierto,,2026-11-14,HTTP 404,0,ECHEC
 animal-politico,,2026-11-14,HTTP 504,0,ECHEC
 attaqa,2026-11-15,,,10,OK
 al-jazeera-english,2026-11-15,,,25,OK
-the-national-eau,2026-11-15,,,100,OK
+the-national-eau,2026-11-15,,,81,OK
 arab-news,2026-11-14,2026-11-14,HTTP 403,0,ECHEC
 mada-masr,2026-11-15,,,0,OK
-tass,2026-11-15,,,40,OK
+tass,2026-11-15,,,49,OK
 kommersant,2026-11-15,,,100,OK
 meduza,2026-11-15,,,30,OK
 global-voices,2026-11-15,,,15,OK
