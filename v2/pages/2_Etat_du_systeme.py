@@ -65,7 +65,10 @@ if suivi is not None:
 
 # ------------------------------------------------------------ fiches du mois
 st.subheader("Fiches collectées")
-mois = st.text_input("Mois (AAAA-MM)", datetime.now(timezone.utc).strftime("%Y-%m"))
+m1, m2 = st.columns([3, 1])
+mois = m1.text_input("Mois (AAAA-MM)", datetime.now(timezone.utc).strftime("%Y-%m"))
+if m2.button("Recharger les fiches"):
+    charger_fiches.clear()
 fiches, info = charger_fiches(mois)
 if fiches is None:
     st.warning(info)
@@ -85,9 +88,22 @@ reprises = fiches[fiches["reprises"].astype(int) > 0].sort_values("reprises", as
 st.dataframe(reprises[["titre_original", "source_nom", "reprises", "sources_reprises", "url"]].head(50),
              width="stretch", hide_index=True, column_config={"url": st.column_config.LinkColumn("Lien")})
 
-st.markdown("**Rechercher dans les titres**")
-q = st.text_input("Mot à chercher", "")
-liste = fiches if not q else fiches[fiches["titre_original"].str.contains(q, case=False, na=False)]
+st.markdown("**Parcourir les fiches**")
+f1, f2, f3 = st.columns([1, 1, 2])
+origine = f1.selectbox("Origine", ["Toutes", "Flux RSS", "GDELT"])
+aire = f2.selectbox("Aire de la source", ["Toutes"] + [a for a in ORDRE_AIRES if a in set(fiches["aire_source"])])
+q = f3.text_input("Mot à chercher (titre ou nom de la source)", "")
+liste = fiches
+if origine == "GDELT":
+    liste = liste[liste["type_source"] == "GDELT"]
+elif origine == "Flux RSS":
+    liste = liste[liste["type_source"] != "GDELT"]
+if aire != "Toutes":
+    liste = liste[liste["aire_source"] == aire]
+if q:
+    texte = liste["titre_original"].fillna("") + " " + liste["source_nom"].fillna("")
+    liste = liste[texte.str.contains(q, case=False, regex=False)]
+st.caption(f"{len(liste)} fiches correspondent (300 premières affichées).")
 st.dataframe(liste.sort_values("date_collecte", ascending=False)[
     ["date_collecte", "titre_original", "langue", "aire_source", "source_nom", "texte_source", "longueur_texte", "url"]
 ].head(300), width="stretch", hide_index=True, column_config={"url": st.column_config.LinkColumn("Lien")})
