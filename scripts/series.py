@@ -80,14 +80,17 @@ def imf(code, _pays):
 
 
 def worldbank(code, pays):
-    liste = ";".join(pays)
-    r = get(f"https://api.worldbank.org/v2/country/{liste}/indicator/{code}",
-            params={"format": "json", "per_page": 20000, "date": f"{DEPUIS[:4]}:2030"})
-    donnees = r.json()
-    if len(donnees) < 2 or not donnees[1]:
-        raise RuntimeError(f"aucune donnee : {str(donnees)[:120]}")
-    lignes = [(d["countryiso3code"] or d["country"]["id"], d["date"], d["value"])
-              for d in donnees[1] if d["value"] is not None]
+    lignes = []
+    for i in range(0, len(pays), 8):          # par paquets : l'API refuse parfois les longues listes
+        r = get(f"https://api.worldbank.org/v2/country/{';'.join(pays[i:i + 8])}/indicator/{code}",
+                params={"format": "json", "per_page": 5000, "date": f"{DEPUIS[:4]}:2030"})
+        donnees = r.json()
+        if len(donnees) < 2 or not donnees[1]:
+            continue
+        lignes += [(d["countryiso3code"] or d["country"]["id"], d["date"], d["value"])
+                   for d in donnees[1] if d["value"] is not None]
+    if not lignes:
+        raise RuntimeError("aucune donnee")
     return pd.DataFrame(lignes, columns=["pays", "date", "valeur"])
 
 

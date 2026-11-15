@@ -118,3 +118,26 @@ def charger_fiches(mois: str):
     except Exception as e:  # noqa: BLE001
         return None, f"Pas de fiches pour {mois} ({type(e).__name__})."
     return pd.read_parquet(fichier), depot
+
+
+# ---------------------------------------------------------------- Sprint 2 bis : series
+
+@st.cache_data(ttl=3600, show_spinner="Lecture des séries…")
+def charger_series():
+    """Series chiffrees (format long) et leur description. Renvoie (donnees ou None, catalogue, message)."""
+    catalogue = pd.read_csv(RACINE / "config" / "series.csv", dtype=str).fillna("")
+    jeton = _jeton_hf()
+    if not jeton:
+        locale = RACINE / "donnees_locales" / "series" / "donnees.parquet"
+        if locale.exists():
+            return pd.read_parquet(locale), catalogue, "local"
+        return None, catalogue, "Secret HF_TOKEN absent des réglages de l'application Streamlit."
+    from huggingface_hub import HfApi, hf_hub_download
+    with open(RACINE / "config" / "stockage.yaml", encoding="utf-8") as f:
+        conf = yaml.safe_load(f)
+    try:
+        depot = conf.get("depot_hf") or f'{HfApi(token=jeton).whoami()["name"]}/{conf["nom_par_defaut"]}'
+        fichier = hf_hub_download(depot, "series/donnees.parquet", repo_type="dataset", token=jeton)
+    except Exception as e:  # noqa: BLE001
+        return None, catalogue, f"Pas encore de séries ({type(e).__name__})."
+    return pd.read_parquet(fichier), catalogue, depot
