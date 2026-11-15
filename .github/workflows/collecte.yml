@@ -36,7 +36,7 @@ jobs:
         run: |
           git config user.name "innovation-radar-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add journal/executions.csv journal/collecte_sources.csv config/sources.csv 2>/dev/null || true
+          git add journal/executions.csv journal/collecte_sources.csv journal/gdelt_dernier_fichier.txt config/sources.csv 2>/dev/null || true
           git diff --cached --quiet && exit 0
           git commit -m "Collecte du $(date -u +'%F %H:%M') UTC"
           for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done

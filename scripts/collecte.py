@@ -39,11 +39,6 @@ COLONNES = [
     "source_id", "source_nom", "type_source", "aire_source", "ancrage", "lien_pouvoir",
     "extrait", "longueur_texte", "texte_source", "reprises", "sources_reprises", "urls_reprises", "classe",
 ]
-LANGUES_GDELT = {
-    "English": "en", "Chinese": "zh", "Japanese": "ja", "Korean": "ko", "Arabic": "ar",
-    "Persian": "fa", "Turkish": "tr", "French": "fr", "Spanish": "es", "Portuguese": "pt",
-    "Russian": "ru", "Hindi": "hi", "Indonesian": "id", "Vietnamese": "vi", "Thai": "th",
-}
 
 
 def lire_yaml(nom):
@@ -130,59 +125,125 @@ def lire_flux(src: dict) -> tuple[str, list[dict], str]:
     return src["id"], articles, ""
 
 
+LANGUES_ISO3 = {
+    "zho": "zh", "jpn": "ja", "kor": "ko", "ara": "ar", "fas": "fa", "tur": "tr", "rus": "ru",
+    "hin": "hi", "ben": "bn", "urd": "ur", "tam": "ta", "ind": "id", "msa": "ms", "vie": "vi",
+    "tha": "th", "spa": "es", "por": "pt", "swa": "sw", "amh": "am", "hau": "ha", "fra": "fr",
+    "deu": "de", "ita": "it", "heb": "he", "ukr": "uk", "pol": "pl", "nld": "nl", "eng": "en",
+}
+URL_GDELT = "http://data.gdeltproject.org/gdeltv2/"
+ETAT_GDELT = JOURNAL / "gdelt_dernier_fichier.txt"
+
+
+def aire_du_domaine(domaine: str, langue: str, conf: dict, pays_zone: dict) -> str:
+    """Aire de la source : liste de domaines connus, puis extension nationale, puis langue."""
+    d = domaine.lower().removeprefix("www.")
+    for connu, aire in (conf.get("domaines") or {}).items():
+        if d == connu or d.endswith("." + connu):
+            return aire
+    tld = d.rsplit(".", 1)[-1]
+    tld = {"uk": "GB"}.get(tld, tld.upper())
+    if tld not in set(conf.get("extensions_ignorees", [])) and tld in pays_zone:
+        return pays_zone[tld]
+    return (conf.get("langue_vers_aire") or {}).get(langue, "")
+
+
+def horodatages(dernier: str, nb_max: int) -> list[str]:
+    """Fichiers de 15 minutes a lire, du plus ancien au plus recent."""
+    try:
+        r = requests.get(URL_GDELT + "lastupdate.txt", timeout=30)
+        recent = re.search(r"/(\d{14})\.", r.text).group(1)
+    except Exception:  # noqa: BLE001
+        return []
+    t = datetime.strptime(recent, "%Y%m%d%H%M%S")
+    debut = datetime.strptime(dernier, "%Y%m%d%H%M%S") + timedelta(minutes=15) if dernier else t - timedelta(hours=6)
+    debut = max(debut, t - timedelta(minutes=15 * (nb_max - 1)))
+    liste = []
+    while debut <= t:
+        liste.append(debut.strftime("%Y%m%d%H%M%S"))
+        debut += timedelta(minutes=15)
+    return liste
+
+
+def lire_un_fichier_gkg(nom: str, conf: dict, pays_zone: dict) -> tuple[list[dict], str]:
+    import io
+    import zipfile
+    try:
+        r = requests.get(URL_GDELT + nom, timeout=120)
+        if r.status_code == 404:
+            return [], ""                       # fichier pas encore publie ou absent : normal
+        r.raise_for_status()
+        zf = zipfile.ZipFile(io.BytesIO(r.content))
+        brut = zf.read(zf.namelist()[0]).decode("utf-8", errors="replace")
+    except Exception as e:  # noqa: BLE001
+        return [], f"{nom} : {type(e).__name__}"
+    themes_ok = tuple(conf.get("themes", []))
+    cibles = set(conf.get("aires_cibles", []))
+    sortie = []
+    for ligne in brut.split("\n"):
+        c = ligne.split("\t")
+        if len(c) < 27 or c[2] != "1":          # 1 = article web
+            continue
+        themes = [t for t in c[7].split(";") if t]
+        utiles = [t for t in themes if t.startswith(themes_ok)]
+        if len(utiles) < conf.get("themes_min", 2):
+            continue
+        titre = re.search(r"<PAGE_TITLE>(.*?)</PAGE_TITLE>", c[26], re.S)
+        if not titre:
+            continue
+        m = re.search(r"srclc:(\w{3})", c[25])
+        langue = LANGUES_ISO3.get(m.group(1), m.group(1)[:2]) if m else "en"
+        aire = aire_du_domaine(c[3], langue, conf, pays_zone)
+        if aire not in cibles:
+            continue
+        try:
+            dpub = datetime.strptime(c[1][:14], "%Y%m%d%H%M%S").replace(tzinfo=timezone.utc).isoformat()
+        except ValueError:
+            dpub = ""
+        sortie.append({
+            "url": c[4], "titre_original": sans_html(titre.group(1))[:500], "date_publication": dpub,
+            "langue": langue, "source_id": f"gdelt-{c[3]}", "source_nom": f"{c[3]} (via GDELT)",
+            "type_source": "GDELT", "aire_source": aire, "ancrage": "LOCAL", "lien_pouvoir": "INCONNU",
+            "_texte": "", "_score": len(utiles),
+        })
+    return sortie, ""
+
+
 def lire_gdelt(conf: dict) -> tuple[list[dict], int, list[str]]:
-    """Quelques requetes groupees (plusieurs pays chacune), duree totale plafonnee."""
+    """Fichiers bruts GDELT (GKG 2.1, anglais et traduits), publies toutes les 15 minutes.
+
+    Pas de limite de requetes. On garde les articles des aires cibles qui portent assez de
+    themes utiles, au plus `max_par_aire` par passage (les plus riches en themes d'abord).
+    """
     if str(conf.get("actif", "oui")).lower() != "oui":
         return [], 0, []
-    articles, erreurs, n = [], [], 0
-    fin_au_plus_tard = time.time() + conf.get("duree_max_s", 300)
-    tous_pays = {p: aire for req in conf.get("requetes", []) for p, aire in req["pays"].items()}
-    for i, req in enumerate(conf.get("requetes", [])):
-        pays = req["pays"]                      # {nom gdelt : aire}
-        if len(pays) > 1:
-            filtre = "(" + " OR ".join(f"sourcecountry:{p}" for p in pays) + ")"
-        else:
-            filtre = f"sourcecountry:{next(iter(pays))}"
-        params = {"query": f'{conf["mots"]} {filtre}', "mode": "artlist", "format": "json",
-                  "sort": "datedesc", "maxrecords": conf.get("max_articles", 250),
-                  "timespan": conf.get("periode", "6h")}
-        donnees = None
-        for essai in range(conf.get("essais", 3)):  # GDELT refuse souvent les adresses partagees de GitHub
-            if time.time() > fin_au_plus_tard:
-                break
-            if i or essai:
-                time.sleep(conf.get("pause_s", 10) if not essai else conf.get("pause_refus_s", 20) * essai)
-            n += 1
-            try:
-                r = requests.get("https://api.gdeltproject.org/api/v2/doc/doc", params=params,
-                                 headers=ENTETES, timeout=40)
-            except Exception as e:  # noqa: BLE001
-                erreurs.append(f"gdelt {req['nom']} : {type(e).__name__}")
-                break
-            if r.text.strip().startswith("{"):
-                donnees = json.loads(r.text)
-                break
-        if donnees is None:
-            erreurs.append(f"gdelt {req['nom']} : refus")
-            continue
-        aire_defaut = next(iter(pays.values()))
-        for a in donnees.get("articles", []):
-            seen = a.get("seendate", "")
-            try:
-                dpub = datetime.strptime(seen, "%Y%m%dT%H%M%SZ").replace(tzinfo=timezone.utc).isoformat()
-            except ValueError:
-                dpub = ""
-            dom = a.get("domain", "inconnu")
-            nom_pays = re.sub(r"\s+", "", (a.get("sourcecountry") or "").lower())
-            articles.append({
-                "url": a.get("url", ""), "titre_original": (a.get("title") or "")[:500],
-                "date_publication": dpub,
-                "langue": LANGUES_GDELT.get(a.get("language", ""), a.get("language", "")[:2].lower()),
-                "source_id": f"gdelt-{dom}", "source_nom": f"{dom} (via GDELT)", "type_source": "GDELT",
-                "aire_source": tous_pays.get(nom_pays, aire_defaut), "ancrage": "LOCAL",
-                "lien_pouvoir": "INCONNU", "_texte": "",
-            })
-    return [a for a in articles if a["url"].startswith("http") and a["titre_original"]], n, erreurs
+    zones = pd.read_csv(CONFIG / "zones_pays.csv", dtype=str, keep_default_na=False)
+    pays_zone = dict(zip(zones["pays"], zones["zone"]))
+    dernier = ETAT_GDELT.read_text().strip() if ETAT_GDELT.exists() else ""
+    stamps = horodatages(dernier, conf.get("fichiers_max", 28))
+    if not stamps:
+        return [], 0, ["gdelt : liste des fichiers inaccessible"]
+    noms = [f"{t}.gkg.csv.zip" for t in stamps] + [f"{t}.translation.gkg.csv.zip" for t in stamps]
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        res = list(ex.map(lambda n: lire_un_fichier_gkg(n, conf, pays_zone), noms))
+    articles, erreurs = [], [e for _, e in res if e]
+    for arts, _ in res:
+        articles += arts
+    vus, uniques = set(), []
+    for a in sorted(articles, key=lambda a: -a["_score"]):
+        if a["url"] not in vus:
+            vus.add(a["url"])
+            uniques.append(a)
+    par_aire: dict[str, int] = {}
+    gardes = []
+    for a in uniques:
+        if par_aire.get(a["aire_source"], 0) < conf.get("max_par_aire", 60):
+            par_aire[a["aire_source"]] = par_aire.get(a["aire_source"], 0) + 1
+            del a["_score"]
+            gardes.append(a)
+    if len(erreurs) < len(noms):
+        ETAT_GDELT.write_text(stamps[-1])
+    return gardes, len(noms), erreurs[:5]
 
 
 def mesurer_page(url: str) -> int:

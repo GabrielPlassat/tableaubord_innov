@@ -30,3 +30,17 @@ Essai hors ligne (flux simulés, 138 sources, deux passages) : 390 fiches au pre
 ## À faire par Gabriel
 
 Voir `docs/README.md`, section « Mise en route du Sprint 2 ».
+
+## 15 novembre : GDELT passe aux fichiers bruts
+
+Bilan des trois premiers passages réels :
+
+| Passage (UTC) | Durée | Vus | Nouvelles fiches | GDELT |
+|---|---|---|---|---|
+| 14/11 20 h 49 (manuel) | 3 min 38 | 2 171 | 1 347 | 11 articles, 10 requêtes refusées sur 10 |
+| 14/11 21 h 15 (manuel) | 27 min | 1 457 | 28 | 24 articles, 7 refus |
+| 15/11 6 h 51 (planifié) | 4 min 39 | 1 515 | 685 | 0 article (requêtes groupées : réponses vides ou refus) |
+
+Constats : l'API de GDELT refuse les adresses partagées de GitHub ; les requêtes groupées par pays ne renvoient rien. La collecte planifiée de 0 h 23 n'a pas eu lieu : GitHub retarde ou saute parfois les tâches planifiées aux heures chargées (celle de 6 h 23 est partie à 6 h 51). 74 sources sur 138 répondent.
+
+Décision : lecture des **fichiers bruts GKG 2.1** (`data.gdeltproject.org/gdeltv2/`), en anglais et traduits, toutes les tranches de 15 minutes depuis le dernier passage (`journal/gdelt_dernier_fichier.txt`). On garde les articles des aires non occidentales qui portent au moins 3 thèmes utiles (énergie, économie, technologie, Banque mondiale…), 40 au plus par aire et par passage. L'aire se déduit d'une liste de sites connus, puis de l'extension nationale, puis de la langue d'origine (`config/gdelt.yaml`). `zones_pays.csv` est complété de 67 pays.
