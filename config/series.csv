@@ -1,23 +1,25 @@
 id,nom,source,code,zone,lentille,frequence,unite,actif,remarque
-bourse-us-sp500,S&P 500 (États-Unis),stooq,^spx,US,MON,jour,points,oui,
-bourse-us-nasdaq,Nasdaq 100 (États-Unis),stooq,^ndx,US,MON,jour,points,oui,
-bourse-eu-dax,DAX (Allemagne),stooq,^dax,EU,MON,jour,points,oui,
-bourse-eu-cac,CAC 40 (France),stooq,^cac,EU,MON,jour,points,oui,
-bourse-cn-shanghai,SSE Composite (Shanghai),stooq,^shc,CN,MON,jour,points,oui,
-bourse-cn-hangseng,Hang Seng (Hong Kong),stooq,^hsi,CN,MON,jour,points,oui,
-bourse-jk-nikkei,Nikkei 225 (Japon),stooq,^nkx,JK,MON,jour,points,oui,
-bourse-jk-kospi,KOSPI (Corée du Sud),stooq,^kospi,JK,MON,jour,points,oui,
-bourse-jk-taiex,TAIEX (Taïwan),stooq,^twse,JK,MON,jour,points,oui,
-bourse-in-sensex,BSE Sensex (Inde),stooq,^snx,IN,MON,jour,points,oui,
-bourse-ase-jakarta,IDX Composite (Indonésie),stooq,^jci,ASE,MON,jour,points,oui,symbole à vérifier
-bourse-la-bovespa,Bovespa (Brésil),stooq,^bvp,LA,MON,jour,points,oui,
-bourse-la-mexique,IPC (Mexique),stooq,^ipc,LA,MON,jour,points,oui,
-bourse-mo-istanbul,BIST 100 (Turquie),stooq,^xu100,MO,MON,jour,points,oui,symbole à vérifier
-bourse-af-jse,JSE Top 40 (Afrique du Sud),stooq,^jt40,AF,MON,jour,points,oui,symbole à vérifier
-bourse-ru-moex,MOEX (Russie),stooq,^moex,RU,MON,jour,points,oui,symbole à vérifier
-matiere-or,Or (dollars l'once),stooq,xauusd,GLO,MON,jour,USD/oz,oui,
-matiere-petrole-brent,Pétrole Brent,stooq,cb.f,GLO,MON,jour,USD/baril,oui,
-matiere-cuivre,Cuivre,stooq,hg.f,GLO,TEC,jour,USD/livre,oui,
+bourse-us-sp500,S&P 500 (États-Unis),yahoo,^GSPC,US,MON,jour,points,oui,
+bourse-us-nasdaq,Nasdaq 100 (États-Unis),yahoo,^NDX,US,MON,jour,points,oui,
+bourse-eu-dax,DAX (Allemagne),yahoo,^GDAXI,EU,MON,jour,points,oui,
+bourse-eu-cac,CAC 40 (France),yahoo,^FCHI,EU,MON,jour,points,oui,
+bourse-cn-shanghai,SSE Composite (Shanghai),yahoo,000001.SS,CN,MON,jour,points,oui,
+bourse-cn-hangseng,Hang Seng (Hong Kong),yahoo,^HSI,CN,MON,jour,points,oui,
+bourse-jk-nikkei,Nikkei 225 (Japon),yahoo,^N225,JK,MON,jour,points,oui,
+bourse-jk-kospi,KOSPI (Corée du Sud),yahoo,^KS11,JK,MON,jour,points,oui,
+bourse-jk-taiex,TAIEX (Taïwan),yahoo,^TWII,JK,MON,jour,points,oui,
+bourse-in-sensex,BSE Sensex (Inde),yahoo,^BSESN,IN,MON,jour,points,oui,
+bourse-ase-jakarta,IDX Composite (Indonésie),yahoo,^JKSE,ASE,MON,jour,points,oui,
+bourse-la-bovespa,Bovespa (Brésil),yahoo,^BVSP,LA,MON,jour,points,oui,
+bourse-la-mexique,IPC (Mexique),yahoo,^MXX,LA,MON,jour,points,oui,
+bourse-mo-istanbul,BIST 100 (Turquie),yahoo,XU100.IS,MO,MON,jour,points,oui,
+bourse-af-jse,JSE Top 40 (Afrique du Sud),yahoo,^J200.JO,AF,MON,jour,points,oui,
+bourse-go-tadawul,Tadawul (Arabie saoudite),yahoo,^TASI.SR,GO,MON,jour,points,oui,historique court chez Yahoo : la série se construit au fil des jours
+bourse-mo-egx30,EGX 30 (Égypte),yahoo,^CASE30,MO,MON,jour,points,oui,historique court chez Yahoo : la série se construit au fil des jours
+bourse-ru-moex,MOEX (Russie),yahoo,IMOEX.ME,RU,MON,jour,points,non,absent de Yahoo depuis les sanctions : chercher une autre source
+matiere-or,Or (dollars l'once),yahoo,GC=F,GLO,MON,jour,USD/oz,oui,contrat à terme le plus proche
+matiere-petrole-brent,Pétrole Brent,yahoo,BZ=F,GLO,MON,jour,USD/baril,oui,contrat à terme le plus proche
+matiere-cuivre,Cuivre,yahoo,HG=F,GLO,TEC,jour,USD/livre,oui,contrat à terme le plus proche
 change-usd-eur,Dollar en euros,ecb,USD,EU,MON,jour,USD pour 1 EUR,oui,
 change-cny-eur,Yuan en euros,ecb,CNY,CN,MON,jour,CNY pour 1 EUR,oui,
 change-jpy-eur,Yen en euros,ecb,JPY,JK,MON,jour,JPY pour 1 EUR,oui,

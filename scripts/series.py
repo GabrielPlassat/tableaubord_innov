@@ -1,4 +1,4 @@
-"""Series chiffrees : bourses, changes, reserves, demographie, energie (Sprint 2 bis).
+"""Series chiffrees : bourses (Yahoo Finance), changes, reserves, demographie, energie (Sprint 2 bis).
 
 Lit config/series.csv et config/series_pays.yaml, interroge les API ouvertes
 (Stooq, BCE, FMI, Banque mondiale, Our World in Data, INSEE), et range tout dans
@@ -114,20 +114,43 @@ def insee(code, _pays):
     return pd.DataFrame({"pays": "", "date": [o[0] for o in obs], "valeur": [o[1] for o in obs]})
 
 
-SOURCES = {"stooq": stooq, "ecb": ecb, "imf": imf, "worldbank": worldbank, "owid": owid, "insee": insee}
+def yahoo(code, _pays):
+    """Cours de cloture quotidiens via Yahoo Finance (bibliotheque yfinance, sans cle)."""
+    import yfinance as yf
+    df = yf.download(code, start=DEPUIS, progress=False, auto_adjust=False, threads=False)
+    if df is None or df.empty:
+        raise RuntimeError("aucune donnee renvoyee par Yahoo")
+    cloture = df["Close"]
+    if isinstance(cloture, pd.DataFrame):      # colonnes a deux niveaux selon les versions
+        cloture = cloture.iloc[:, 0]
+    cloture = cloture.dropna()
+    return pd.DataFrame({"pays": "", "date": cloture.index.strftime("%Y-%m-%d"), "valeur": cloture.values})
+
+
+SOURCES = {"yahoo": yahoo, "stooq": stooq, "ecb": ecb, "imf": imf, "worldbank": worldbank, "owid": owid, "insee": insee}
 
 
 # ---------------------------------------------------------------- stockage
 
+def fusionner(nouveau: pd.DataFrame, ancien: pd.DataFrame) -> pd.DataFrame:
+    """Ajoute les nouvelles valeurs a l'historique : une source qui ne renvoie que les derniers
+    jours, ou qui est en panne ce jour-la, ne fait rien perdre. A date egale, la valeur du jour l'emporte."""
+    ancien = ancien[ancien["serie_id"].isin(SERIES_CONNUES)] if SERIES_CONNUES else ancien
+    tout = pd.concat([nouveau, ancien], ignore_index=True)
+    return tout.drop_duplicates(subset=["serie_id", "pays", "date"], keep="first")
+
+
+SERIES_CONNUES: set[str] = set()
+
+
 def ecrire(df: pd.DataFrame, en_echec: list[str]):
-    """Ecrit les series lues ; garde les valeurs deja stockees des series en echec ce jour."""
+    """Ecrit les series lues, fusionnees avec l'historique deja stocke."""
     jeton = os.environ.get("HF_TOKEN", "").strip()
     if not jeton:
         LOCAL.mkdir(parents=True, exist_ok=True)
         ancien = LOCAL / "donnees.parquet"
         if ancien.exists():
-            vieux = pd.read_parquet(ancien)
-            df = pd.concat([df, vieux[vieux["serie_id"].isin(en_echec)]], ignore_index=True)
+            df = fusionner(df, pd.read_parquet(ancien))
         df.to_parquet(ancien, index=False)
         return "local"
     from huggingface_hub import HfApi, hf_hub_download
@@ -136,8 +159,8 @@ def ecrire(df: pd.DataFrame, en_echec: list[str]):
     depot = conf.get("depot_hf") or f'{api.whoami()["name"]}/{conf["nom_par_defaut"]}'
     api.create_repo(depot, repo_type="dataset", private=True, exist_ok=True)
     try:
-        vieux = pd.read_parquet(hf_hub_download(depot, "series/donnees.parquet", repo_type="dataset", token=jeton))
-        df = pd.concat([df, vieux[vieux["serie_id"].isin(en_echec)]], ignore_index=True)
+        df = fusionner(df, pd.read_parquet(hf_hub_download(depot, "series/donnees.parquet",
+                                                            repo_type="dataset", token=jeton)))
     except Exception:  # noqa: BLE001 : premier passage
         pass
     tmp = Path("/tmp/series_donnees.parquet")
@@ -149,6 +172,7 @@ def ecrire(df: pd.DataFrame, en_echec: list[str]):
 
 def main():
     series = pd.read_csv(CONFIG / "series.csv", dtype=str).fillna("")
+    SERIES_CONNUES.update(series["id"])      # une serie retiree du fichier disparait du stockage
     series = series[series["actif"] == "oui"]
     pays = list(yaml.safe_load(open(CONFIG / "series_pays.yaml", encoding="utf-8"))["pays"])
     tout, etat = [], []
@@ -173,7 +197,7 @@ def main():
         except Exception as e:  # noqa: BLE001 : une serie en panne ne bloque pas les autres
             etat.append({"id": s["id"], "statut": "ERREUR", "points": 0, "derniere_date": "", "derniere_valeur": "",
                          "message": f"{type(e).__name__} : {e}"[:200], "duree_s": round(time.time() - debut, 1)})
-        if s["source"] == "stooq":
+        if s["source"] in ("stooq", "yahoo"):
             time.sleep(1)
     JOURNAL.mkdir(exist_ok=True)
     etat = pd.DataFrame(etat)

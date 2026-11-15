@@ -39,10 +39,4 @@ La tâche « Series » tourne chaque soir (21 h 37 UTC). Elle lit les séries li
 
 Sources sans clé : Banque centrale européenne (changes), FMI (réserves de change, COFER), Banque mondiale, Our World in Data, INSEE.
 
-**Bourses et matières premières (Stooq) : une clé gratuite à demander une fois.**
-1. Ouvrir https://stooq.com/q/d/?s=spy.us&get_apikey et recopier le code de l'image (captcha).
-2. En bas de la page, le lien « Download data in .csv file » contient `apikey=…` : copier la valeur après le signe égal.
-3. GitHub : Settings > Secrets and variables > Actions > New repository secret. Nom : `STOOQ_API_KEY`.
-4. Onglet Actions > « Series » > Run workflow.
-
-Stooq est gratuit pour un usage non commercial. Certains symboles de bourses (Jakarta, Istanbul, Johannesburg, Moscou) sont à vérifier : l'état des séries le dira au premier passage, et je les corrigerai.
+**Bourses et matières premières : Yahoo Finance**, via la bibliothèque `yfinance`, sans clé. Stooq a été abandonné (clé obligatoire depuis 2026, impossible à obtenir de façon fiable). La bourse de Moscou n'est plus diffusée par Yahoo depuis les sanctions ; Tadawul et l'EGX 30 n'y ont qu'un historique court, qui se construit au fil des jours.
