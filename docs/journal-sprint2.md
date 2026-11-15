@@ -58,3 +58,5 @@ Leçon pour le tri : sur les 31 cas limites, Gabriel en a tranché 20, dont 14 e
 Essai réel dans GitHub : 22 séries lues sur 22 hors Stooq (changes BCE, réserves COFER du FMI, 8 indicateurs Banque mondiale, 2 d'Our World in Data, inflation INSEE). La Banque mondiale renvoie souvent des erreurs 503 ou des délais dépassés : requêtes par paquets de 8 pays, deux essais, et une série en échec garde ses valeurs de la veille. Durée totale plafonnée à 12 minutes.
 
 Stooq exige depuis début 2026 une clé gratuite obtenue par captcha : secret `STOOQ_API_KEY` à créer par Gabriel (voir `docs/README.md`).
+
+Bourses : Stooq abandonné (clé par captcha introuvable chez Gabriel), remplacé par Yahoo Finance (`yfinance`, sans clé). Essai : 17 indices et 3 matières premières lus, MOEX désactivé (absent depuis les sanctions), Tadawul et EGX 30 ajoutés avec un historique court. Les séries sont désormais fusionnées avec l'historique stocké : 42 séries lues sur 42 actives. Réserve : Yahoo n'offre pas d'API officielle ; si la bibliothèque cesse de fonctionner, la page l'indiquera et une autre source sera branchée.
