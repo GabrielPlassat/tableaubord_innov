@@ -14,7 +14,9 @@ bourse-la-bovespa,Bovespa (Brésil),yahoo,^BVSP,LA,MON,jour,points,oui,
 bourse-la-mexique,IPC (Mexique),yahoo,^MXX,LA,MON,jour,points,oui,
 bourse-mo-istanbul,BIST 100 (Turquie),yahoo,XU100.IS,MO,MON,jour,points,oui,
 bourse-af-jse,JSE Top 40 (Afrique du Sud),yahoo,^J200.JO,AF,MON,jour,points,oui,
-bourse-ru-moex,MOEX (Russie),yahoo,IMOEX.ME,RU,MON,jour,points,oui,peut manquer (sanctions)
+bourse-go-tadawul,Tadawul (Arabie saoudite),yahoo,^TASI.SR,GO,MON,jour,points,oui,
+bourse-mo-egx30,EGX 30 (Égypte),yahoo,^CASE30,MO,MON,jour,points,oui,
+bourse-ru-moex,MOEX (Russie),yahoo,IMOEX.ME,RU,MON,jour,points,non,absent de Yahoo depuis les sanctions : chercher une autre source
 matiere-or,Or (dollars l'once),yahoo,GC=F,GLO,MON,jour,USD/oz,oui,contrat à terme le plus proche
 matiere-petrole-brent,Pétrole Brent,yahoo,BZ=F,GLO,MON,jour,USD/baril,oui,contrat à terme le plus proche
 matiere-cuivre,Cuivre,yahoo,HG=F,GLO,TEC,jour,USD/livre,oui,contrat à terme le plus proche
