@@ -74,6 +74,9 @@ if fiches is None:
     st.warning(info)
     st.stop()
 st.caption(f"{len(fiches)} fiches · stockage : {info}")
+st.download_button("Télécharger toutes les fiches du mois (CSV)",
+                   fiches.drop(columns=["urls_reprises"], errors="ignore").to_csv(index=False).encode("utf-8"),
+                   file_name=f"fiches_{mois}.csv", mime="text/csv")
 
 parts = fiches["aire_source"].value_counts(normalize=True).reindex(ORDRE_AIRES, fill_value=0)
 fig = px.bar(x=[NOMS_AIRES[a] for a in parts.index], y=parts.values, labels={"x": "", "y": "Part des fiches"})
