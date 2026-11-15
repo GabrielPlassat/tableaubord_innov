@@ -1,0 +1,42 @@
+id,date_controle,statut,points,derniere_date,derniere_valeur,message,duree_s
+bourse-us-sp500,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-us-nasdaq,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-eu-dax,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-eu-cac,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-cn-shanghai,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-cn-hangseng,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-jk-nikkei,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-jk-kospi,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-jk-taiex,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-in-sensex,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-ase-jakarta,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-la-bovespa,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-la-mexique,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-mo-istanbul,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-af-jse,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+bourse-ru-moex,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+matiere-or,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+matiere-petrole-brent,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+matiere-cuivre,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
+change-usd-eur,2026-11-15,OK,3039,2026-11-13,1.1052,,1.6
+change-cny-eur,2026-11-15,OK,3039,2026-11-13,7.3738,,1.1
+change-jpy-eur,2026-11-15,OK,3039,2026-11-13,176.83,,1.4
+change-inr-eur,2026-11-15,OK,3039,2026-11-13,104.1575,,1.1
+change-brl-eur,2026-11-15,OK,3039,2026-11-13,6.2595,,1.3
+change-zar-eur,2026-11-15,OK,3039,2026-11-13,18.7481,,1.7
+change-try-eur,2026-11-15,OK,3039,2026-11-13,55.6667,,1.5
+change-idr-eur,2026-11-15,OK,3039,2026-11-13,20163.71,,1.5
+reserves-usd,2026-11-15,OK,110,2026-Q2,56.704761505127,,0.7
+reserves-eur,2026-11-15,OK,110,2026-Q2,20.6017665863037,,0.5
+reserves-cny,2026-11-15,OK,39,2026-Q2,2.113844871521,,0.5
+pib-ppa,2026-11-15,ERREUR,0,,,HTTPError : 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/WLD;USA;EUU;FRA;CHN;JPN;KOR;IND;BGD;PAK;IDN;VNM;PHL;RUS;KAZ;SAU;ARE;TUR;EGY;IRN;NGA;ETH;KEN;ZAF;BRA;MEX;,0.2
+population,2026-11-15,OK,308,2025,64747319,,4.8
+fecondite,2026-11-15,OK,280,2024,2.205,,3.4
+urbanisation,2026-11-15,ERREUR,0,,,HTTPError : 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/WLD;USA;EUU;FRA;CHN;JPN;KOR;IND;BGD;PAK;IDN;VNM;PHL;RUS;KAZ;SAU;ARE;TUR;EGY;IRN;NGA;ETH;KEN;ZAF;BRA;MEX;,0.2
+transferts-migrants,2026-11-15,OK,274,2025,1004741847.38267,,1.4
+transferts-migrants-pib,2026-11-15,OK,274,2025,0.235201009549448,,1.9
+internet,2026-11-15,ERREUR,0,,,HTTPError : 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/WLD;USA;EUU;FRA;CHN;JPN;KOR;IND;BGD;PAK;IDN;VNM;PHL;RUS;KAZ;SAU;ARE;TUR;EGY;IRN;NGA;ETH;KEN;ZAF;BRA;MEX;,0.3
+electricite-acces,2026-11-15,ERREUR,0,,,HTTPError : 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/WLD;USA;EUU;FRA;CHN;JPN;KOR;IND;BGD;PAK;IDN;VNM;PHL;RUS;KAZ;SAU;ARE;TUR;EGY;IRN;NGA;ETH;KEN;ZAF;BRA;MEX;,0.3
+electricite-renouvelable,2026-11-15,ERREUR,0,,,KeyError : 'Code',1.2
+co2-par-habitant,2026-11-15,ERREUR,0,,,KeyError : 'Code',0.1
+fr-inflation,2026-11-15,OK,132,2025-12,0.8,,1.1
