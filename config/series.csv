@@ -1,0 +1,42 @@
+id,nom,source,code,zone,lentille,frequence,unite,actif,remarque
+bourse-us-sp500,S&P 500 (États-Unis),stooq,^spx,US,MON,jour,points,oui,
+bourse-us-nasdaq,Nasdaq 100 (États-Unis),stooq,^ndx,US,MON,jour,points,oui,
+bourse-eu-dax,DAX (Allemagne),stooq,^dax,EU,MON,jour,points,oui,
+bourse-eu-cac,CAC 40 (France),stooq,^cac,EU,MON,jour,points,oui,
+bourse-cn-shanghai,SSE Composite (Shanghai),stooq,^shc,CN,MON,jour,points,oui,
+bourse-cn-hangseng,Hang Seng (Hong Kong),stooq,^hsi,CN,MON,jour,points,oui,
+bourse-jk-nikkei,Nikkei 225 (Japon),stooq,^nkx,JK,MON,jour,points,oui,
+bourse-jk-kospi,KOSPI (Corée du Sud),stooq,^kospi,JK,MON,jour,points,oui,
+bourse-jk-taiex,TAIEX (Taïwan),stooq,^twse,JK,MON,jour,points,oui,
+bourse-in-sensex,BSE Sensex (Inde),stooq,^snx,IN,MON,jour,points,oui,
+bourse-ase-jakarta,IDX Composite (Indonésie),stooq,^jci,ASE,MON,jour,points,oui,symbole à vérifier
+bourse-la-bovespa,Bovespa (Brésil),stooq,^bvp,LA,MON,jour,points,oui,
+bourse-la-mexique,IPC (Mexique),stooq,^ipc,LA,MON,jour,points,oui,
+bourse-mo-istanbul,BIST 100 (Turquie),stooq,^xu100,MO,MON,jour,points,oui,symbole à vérifier
+bourse-af-jse,JSE Top 40 (Afrique du Sud),stooq,^jt40,AF,MON,jour,points,oui,symbole à vérifier
+bourse-ru-moex,MOEX (Russie),stooq,^moex,RU,MON,jour,points,oui,symbole à vérifier
+matiere-or,Or (dollars l'once),stooq,xauusd,GLO,MON,jour,USD/oz,oui,
+matiere-petrole-brent,Pétrole Brent,stooq,cb.f,GLO,MON,jour,USD/baril,oui,
+matiere-cuivre,Cuivre,stooq,hg.f,GLO,TEC,jour,USD/livre,oui,
+change-usd-eur,Dollar en euros,ecb,USD,EU,MON,jour,USD pour 1 EUR,oui,
+change-cny-eur,Yuan en euros,ecb,CNY,CN,MON,jour,CNY pour 1 EUR,oui,
+change-jpy-eur,Yen en euros,ecb,JPY,JK,MON,jour,JPY pour 1 EUR,oui,
+change-inr-eur,Roupie indienne en euros,ecb,INR,IN,MON,jour,INR pour 1 EUR,oui,
+change-brl-eur,Real brésilien en euros,ecb,BRL,LA,MON,jour,BRL pour 1 EUR,oui,
+change-zar-eur,Rand sud-africain en euros,ecb,ZAR,AF,MON,jour,ZAR pour 1 EUR,oui,
+change-try-eur,Livre turque en euros,ecb,TRY,MO,MON,jour,TRY pour 1 EUR,oui,
+change-idr-eur,Roupie indonésienne en euros,ecb,IDR,ASE,MON,jour,IDR pour 1 EUR,oui,
+reserves-usd,Part du dollar dans les réserves de change mondiales,imf,COFER/G001.AFXRA.CI_USD.SHRO_PT.Q,GLO,MON,trimestre,%,oui,Baverez : la monnaie comme puissance
+reserves-eur,Part de l'euro dans les réserves de change mondiales,imf,COFER/G001.AFXRA.CI_EUR.SHRO_PT.Q,GLO,MON,trimestre,%,oui,
+reserves-cny,Part du yuan dans les réserves de change mondiales,imf,COFER/G001.AFXRA.CI_CNY.SHRO_PT.Q,GLO,MON,trimestre,%,oui,
+pib-ppa,PIB en parité de pouvoir d'achat,worldbank,NY.GDP.MKTP.PP.CD,PAYS,PUI,an,dollars internationaux courants,oui,
+population,Population,worldbank,SP.POP.TOTL,PAYS,SOC,an,habitants,oui,
+fecondite,Indice de fécondité,worldbank,SP.DYN.TFRT.IN,PAYS,SOC,an,enfants par femme,oui,Todd : démographie et structures familiales
+urbanisation,Part de la population urbaine,worldbank,SP.URB.TOTL.IN.ZS,PAYS,SOC,an,%,oui,
+transferts-migrants,Transferts de fonds des travailleurs émigrés reçus,worldbank,BX.TRF.PWKR.CD.DT,PAYS,MON,an,dollars courants,oui,Flux de richesses peu visibles
+transferts-migrants-pib,Transferts de fonds reçus en part du PIB,worldbank,BX.TRF.PWKR.DT.GD.ZS,PAYS,MON,an,% du PIB,oui,
+internet,Part de la population utilisant Internet,worldbank,IT.NET.USER.ZS,PAYS,INF,an,%,oui,
+electricite-acces,Accès à l'électricité,worldbank,EG.ELC.ACCS.ZS,PAYS,INF,an,% de la population,oui,
+electricite-renouvelable,Part des renouvelables dans l'électricité,owid,share-electricity-renewables,PAYS,MIL,an,%,oui,Our World in Data
+co2-par-habitant,Émissions de CO2 par habitant,owid,co-emissions-per-capita,PAYS,MIL,an,t par habitant,oui,Our World in Data
+fr-inflation,Inflation en France (glissement annuel),insee,001761313,EU,MON,mois,%,oui,INSEE BDM

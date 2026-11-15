@@ -1,0 +1,48 @@
+# Series chiffrees (bourses, changes, reserves, demographie, energie) : chaque jour.
+# Lancement manuel : onglet Actions > "Series" > Run workflow.
+# Secrets : HF_TOKEN (stockage), STOOQ_API_KEY (bourses et matieres premieres).
+name: Series
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "37 21 * * *"   # chaque soir a 21 h 37 UTC, apres la cloture des marches americains
+  push:                      # se relance quand la liste des series ou le script change
+    paths:
+      - config/series.csv
+      - config/series_pays.yaml
+      - scripts/series.py
+
+permissions:
+  contents: write
+
+concurrency:
+  group: series
+  cancel-in-progress: false
+
+jobs:
+  series:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: scripts/requirements-collecte.txt
+      - run: pip install -r scripts/requirements-collecte.txt
+      - name: Lire les series
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          STOOQ_API_KEY: ${{ secrets.STOOQ_API_KEY }}
+        run: python scripts/series.py
+      - name: Enregistrer l'etat des series
+        if: always()
+        run: |
+          git config user.name "innovation-radar-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add journal/series_etat.csv 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -m "Series du $(date -u +%F)"
+          for i in 1 2 3; do git pull --rebase -q origin "$GITHUB_REF_NAME" && git push -q origin "HEAD:$GITHUB_REF_NAME" && break; sleep 5; done

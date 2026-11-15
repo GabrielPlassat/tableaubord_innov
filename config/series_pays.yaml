@@ -1,0 +1,31 @@
+# Pays suivis pour les series "PAYS" (Banque mondiale, Our World in Data).
+# Codes ISO a 3 lettres ; WLD = monde. L'aire est donnee pour l'affichage.
+pays:
+  WLD: GLO
+  USA: US
+  EUU: EU
+  FRA: EU
+  CHN: CN
+  JPN: JK
+  KOR: JK
+  IND: IN
+  BGD: IN
+  PAK: IN
+  IDN: ASE
+  VNM: ASE
+  PHL: ASE
+  RUS: RU
+  KAZ: RU
+  SAU: GO
+  ARE: GO
+  TUR: MO
+  EGY: MO
+  IRN: MO
+  NGA: AF
+  ETH: AF
+  KEN: AF
+  ZAF: AF
+  BRA: LA
+  MEX: LA
+  ARG: LA
+  AUS: OC
