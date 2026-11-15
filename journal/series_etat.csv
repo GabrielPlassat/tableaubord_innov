@@ -18,25 +18,25 @@ bourse-ru-moex,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,
 matiere-or,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
 matiere-petrole-brent,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
 matiere-cuivre,2026-11-15,ERREUR,0,,,RuntimeError : secret STOOQ_API_KEY absent,0.0
-change-usd-eur,2026-11-15,OK,3039,2026-11-13,1.1052,,0.6
-change-cny-eur,2026-11-15,OK,3039,2026-11-13,7.3738,,0.9
+change-usd-eur,2026-11-15,OK,3039,2026-11-13,1.1052,,1.2
+change-cny-eur,2026-11-15,OK,3039,2026-11-13,7.3738,,1.2
 change-jpy-eur,2026-11-15,OK,3039,2026-11-13,176.83,,0.9
-change-inr-eur,2026-11-15,OK,3039,2026-11-13,104.1575,,1.3
-change-brl-eur,2026-11-15,OK,3039,2026-11-13,6.2595,,0.9
-change-zar-eur,2026-11-15,OK,3039,2026-11-13,18.7481,,0.8
-change-try-eur,2026-11-15,OK,3039,2026-11-13,55.6667,,1.3
-change-idr-eur,2026-11-15,OK,3039,2026-11-13,20163.71,,1.7
-reserves-usd,2026-11-15,OK,110,2026-Q2,56.704761505127,,0.3
-reserves-eur,2026-11-15,OK,110,2026-Q2,20.6017665863037,,0.4
-reserves-cny,2026-11-15,OK,39,2026-Q2,2.113844871521,,0.3
-pib-ppa,2026-11-15,ERREUR,0,,,HTTPError : 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/WLD;USA;EUU;FRA;CHN;JPN;KOR;IND;BGD;PAK;IDN;VNM;PHL;RUS;KAZ;SAU;ARE;TUR;EGY;IRN;NGA;ETH;KEN;ZAF;BRA;MEX;,120.7
-population,2026-11-15,OK,308,2025,64747319,,0.1
-fecondite,2026-11-15,OK,280,2024,2.205,,0.1
-urbanisation,2026-11-15,OK,308,2025,63.8154011002522,,95.8
-transferts-migrants,2026-11-15,OK,274,2025,1004741847.38267,,0.1
-transferts-migrants-pib,2026-11-15,OK,274,2025,0.235201009549448,,0.1
-internet,2026-11-15,OK,271,2025,73.6,,3.3
-electricite-acces,2026-11-15,OK,280,2024,90.2,,6.0
-electricite-renouvelable,2026-11-15,OK,294,2025,33.760456,,0.7
-co2-par-habitant,2026-11-15,OK,297,2025,4.737237,,0.1
-fr-inflation,2026-11-15,OK,132,2025-12,0.8,,0.6
+change-inr-eur,2026-11-15,OK,3039,2026-11-13,104.1575,,1.2
+change-brl-eur,2026-11-15,OK,3039,2026-11-13,6.2595,,0.8
+change-zar-eur,2026-11-15,OK,3039,2026-11-13,18.7481,,0.7
+change-try-eur,2026-11-15,OK,3039,2026-11-13,55.6667,,1.0
+change-idr-eur,2026-11-15,OK,3039,2026-11-13,20163.71,,1.0
+reserves-usd,2026-11-15,OK,110,2026-Q2,56.704761505127,,0.6
+reserves-eur,2026-11-15,OK,110,2026-Q2,20.6017665863037,,0.5
+reserves-cny,2026-11-15,OK,39,2026-Q2,2.113844871521,,0.6
+pib-ppa,2026-11-15,OK,307,2025,3413265579050.57,,111.1
+population,2026-11-15,OK,308,2025,131946900,,0.7
+fecondite,2026-11-15,OK,280,2024,1.892,,1.1
+urbanisation,2026-11-15,OK,308,2025,80.0408930629723,,63.1
+transferts-migrants,2026-11-15,ERREUR,0,,,"ReadTimeout : HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=30)",72.3
+transferts-migrants-pib,2026-11-15,ERREUR,0,,,"ReadTimeout : HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=30)",70.1
+internet,2026-11-15,OK,271,2025,89.77024003,,3.8
+electricite-acces,2026-11-15,OK,280,2024,99.8,,41.7
+electricite-renouvelable,2026-11-15,OK,294,2025,33.760456,,1.0
+co2-par-habitant,2026-11-15,OK,297,2025,4.737237,,1.3
+fr-inflation,2026-11-15,OK,132,2025-12,0.8,,0.9
