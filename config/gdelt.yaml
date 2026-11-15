@@ -13,8 +13,8 @@ aires_cibles: [CN, JK, IN, ASE, RU, GO, MO, AF, LA]
 # Themes GDELT utiles (prefixes) : environnement et energie, economie et monnaie,
 # technologie et science, themes de la Banque mondiale (developpement, infrastructures...)
 themes: [ENV_, ECON_, TECH_, SCIENCE, WB_, AGRICULTURE, FOOD_SECURITY, WATER_SECURITY, CYBER_, TAX_FNCACT_ENGINEER]
-# Themes "forts" : un article qui en porte au moins un est dans le champ, et prioritaire.
-# On y met aussi les evolutions de societe (Fourquet, Todd) : education, travail, famille, ville...
+# Themes "dans le champ" : techniques ET societaux, a importance egale (les deux vont ensemble :
+# Fourquet, Todd, Meadows). Un article qui en porte au moins un est garde en priorite.
 themes_forts: [ENV_, ECON_, TECH_, SCIENCE, AGRICULTURE, FOOD_SECURITY, WATER_SECURITY, CYBER_,
                EDUCATION, UNEMPLOYMENT, POVERTY, IMMIGRATION, MIGRATION, URBAN, RURAL, HOUSING,
                SOC_, LABOR, UNION, WOMEN, AGING, YOUTH, RELIGION, HEALTH_, MEDICAL, WELFARE, TAX_DISEASE]
