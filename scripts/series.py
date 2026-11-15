@@ -30,12 +30,22 @@ DEPUIS = "2015-01-01"
 OWID_CODES = {"WLD": "OWID_WRL"}
 
 
-def get(url, **kw):
+def get(url, essais=4, **kw):
+    """GET avec nouvel essai sur les erreurs passageres (503, coupure)."""
     kw.setdefault("timeout", 60)
     kw.setdefault("headers", ENTETES)
-    r = requests.get(url, **kw)
-    r.raise_for_status()
-    return r
+    for i in range(essais):
+        try:
+            r = requests.get(url, **kw)
+            if r.status_code in (429, 500, 502, 503, 504) and i < essais - 1:
+                time.sleep(10 * (i + 1))
+                continue
+            r.raise_for_status()
+            return r
+        except (requests.ConnectionError, requests.Timeout):
+            if i == essais - 1:
+                raise
+            time.sleep(10 * (i + 1))
 
 
 # ---------------------------------------------------------------- une fonction par source
@@ -84,10 +94,11 @@ def worldbank(code, pays):
 def owid(code, pays):
     r = get(f"https://ourworldindata.org/grapher/{code}.csv", params={"v": 1, "csvType": "full", "useColumnShortNames": "true"})
     df = pd.read_csv(io.StringIO(r.text))
-    col = [c for c in df.columns if c not in ("Entity", "Code", "Year", "entity", "code", "year")][0]
+    df.columns = [c.lower() for c in df.columns]
+    col = [c for c in df.columns if c not in ("entity", "code", "year")][0]
     codes = {OWID_CODES.get(p, p): p for p in pays}
-    df = df[df["Code"].isin(codes) & (df["Year"] >= int(DEPUIS[:4]))]
-    return pd.DataFrame({"pays": df["Code"].map(codes), "date": df["Year"].astype(str), "valeur": df[col]})
+    df = df[df["code"].isin(codes) & (df["year"] >= int(DEPUIS[:4]))]
+    return pd.DataFrame({"pays": df["code"].map(codes), "date": df["year"].astype(str), "valeur": df[col]})
 
 
 def insee(code, _pays):
