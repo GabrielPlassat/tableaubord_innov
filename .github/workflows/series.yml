@@ -1,6 +1,6 @@
 # Series chiffrees (bourses, changes, reserves, demographie, energie) : chaque jour.
 # Lancement manuel : onglet Actions > "Series" > Run workflow.
-# Secrets : HF_TOKEN (stockage), STOOQ_API_KEY (bourses et matieres premieres).
+# Secret : HF_TOKEN (stockage). Les bourses viennent de Yahoo Finance, sans cle.
 name: Series
 
 on:

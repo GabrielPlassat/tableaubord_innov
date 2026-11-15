@@ -1,4 +1,4 @@
-"""Series chiffrees : bourses, changes, reserves, demographie, energie (Sprint 2 bis).
+"""Series chiffrees : bourses (Yahoo Finance), changes, reserves, demographie, energie (Sprint 2 bis).
 
 Lit config/series.csv et config/series_pays.yaml, interroge les API ouvertes
 (Stooq, BCE, FMI, Banque mondiale, Our World in Data, INSEE), et range tout dans
@@ -114,7 +114,20 @@ def insee(code, _pays):
     return pd.DataFrame({"pays": "", "date": [o[0] for o in obs], "valeur": [o[1] for o in obs]})
 
 
-SOURCES = {"stooq": stooq, "ecb": ecb, "imf": imf, "worldbank": worldbank, "owid": owid, "insee": insee}
+def yahoo(code, _pays):
+    """Cours de cloture quotidiens via Yahoo Finance (bibliotheque yfinance, sans cle)."""
+    import yfinance as yf
+    df = yf.download(code, start=DEPUIS, progress=False, auto_adjust=False, threads=False)
+    if df is None or df.empty:
+        raise RuntimeError("aucune donnee renvoyee par Yahoo")
+    cloture = df["Close"]
+    if isinstance(cloture, pd.DataFrame):      # colonnes a deux niveaux selon les versions
+        cloture = cloture.iloc[:, 0]
+    cloture = cloture.dropna()
+    return pd.DataFrame({"pays": "", "date": cloture.index.strftime("%Y-%m-%d"), "valeur": cloture.values})
+
+
+SOURCES = {"yahoo": yahoo, "stooq": stooq, "ecb": ecb, "imf": imf, "worldbank": worldbank, "owid": owid, "insee": insee}
 
 
 # ---------------------------------------------------------------- stockage
@@ -173,7 +186,7 @@ def main():
         except Exception as e:  # noqa: BLE001 : une serie en panne ne bloque pas les autres
             etat.append({"id": s["id"], "statut": "ERREUR", "points": 0, "derniere_date": "", "derniere_valeur": "",
                          "message": f"{type(e).__name__} : {e}"[:200], "duree_s": round(time.time() - debut, 1)})
-        if s["source"] == "stooq":
+        if s["source"] in ("stooq", "yahoo"):
             time.sleep(1)
     JOURNAL.mkdir(exist_ok=True)
     etat = pd.DataFrame(etat)
