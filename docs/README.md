@@ -32,3 +32,17 @@ Ils sont dans ce dossier (copie du projet claude.ai « Netvibes de l'innovation 
 6. Ouvrir la page **État du système**.
 
 Ne jamais coller un jeton dans la conversation avec Claude, dans un fichier du dépôt ou dans un carnet Colab partagé.
+
+## Séries chiffrées (Sprint 2 bis)
+
+La tâche « Series » tourne chaque soir (21 h 37 UTC). Elle lit les séries listées dans `config/series.csv` (une ligne par série) pour les pays de `config/series_pays.yaml`, et les range dans le stockage Hugging Face (`series/donnees.parquet`). La page « Marchés et séries » de l'application les affiche ; l'état de chaque série est dans `journal/series_etat.csv`.
+
+Sources sans clé : Banque centrale européenne (changes), FMI (réserves de change, COFER), Banque mondiale, Our World in Data, INSEE.
+
+**Bourses et matières premières (Stooq) : une clé gratuite à demander une fois.**
+1. Ouvrir https://stooq.com/q/d/?s=spy.us&get_apikey et recopier le code de l'image (captcha).
+2. En bas de la page, le lien « Download data in .csv file » contient `apikey=…` : copier la valeur après le signe égal.
+3. GitHub : Settings > Secrets and variables > Actions > New repository secret. Nom : `STOOQ_API_KEY`.
+4. Onglet Actions > « Series » > Run workflow.
+
+Stooq est gratuit pour un usage non commercial. Certains symboles de bourses (Jakarta, Istanbul, Johannesburg, Moscou) sont à vérifier : l'état des séries le dira au premier passage, et je les corrigerai.

@@ -50,3 +50,11 @@ Décision : lecture des **fichiers bruts GKG 2.1** (`data.gdeltproject.org/gdelt
 `tests/reference_100.csv` : 100 articles tirés du stock réel (6 à 11 par aire, 15 langues, un tiers GDELT), pré-étiquetés par Claude, relus et validés par Gabriel (23 corrections). Champs : pertinent, lentille principale, iceberg, aire du sujet, nature ; plusieurs réponses acceptables séparées par `|`. Résultat : 67 OUI, 22 NON, 11 cas laissés ouverts.
 
 Leçon pour le tri : sur les 31 cas limites, Gabriel en a tranché 20, dont 14 en OUI. Il garde tout ce qui touche au pouvoir, aux institutions et aux règles, même sans décision (registre électoral, débat, propagande, répression, sanction, sport comme terrain géopolitique, programme d'aide publique), ainsi que les recherches techniques pointues. Il écarte l'anecdote sans enjeu (protocole, incident de conférence de presse, curiosité naturaliste, commémoration, promotion de produit). D'où `config/consignes/passe1_v2.txt`, plus inclusive que la v1, à comparer au Sprint 3.
+
+## 15 novembre : Sprint 2 bis, séries chiffrées
+
+`scripts/series.py`, `config/series.csv` (41 séries), `config/series_pays.yaml` (28 pays), tâche quotidienne `.github/workflows/series.yml`, page `v2/pages/3_Marches_et_series.py`.
+
+Essai réel dans GitHub : 22 séries lues sur 22 hors Stooq (changes BCE, réserves COFER du FMI, 8 indicateurs Banque mondiale, 2 d'Our World in Data, inflation INSEE). La Banque mondiale renvoie souvent des erreurs 503 ou des délais dépassés : requêtes par paquets de 8 pays, deux essais, et une série en échec garde ses valeurs de la veille. Durée totale plafonnée à 12 minutes.
+
+Stooq exige depuis début 2026 une clé gratuite obtenue par captcha : secret `STOOQ_API_KEY` à créer par Gabriel (voir `docs/README.md`).
