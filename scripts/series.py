@@ -119,17 +119,27 @@ SOURCES = {"stooq": stooq, "ecb": ecb, "imf": imf, "worldbank": worldbank, "owid
 
 # ---------------------------------------------------------------- stockage
 
-def ecrire(df: pd.DataFrame):
+def ecrire(df: pd.DataFrame, en_echec: list[str]):
+    """Ecrit les series lues ; garde les valeurs deja stockees des series en echec ce jour."""
     jeton = os.environ.get("HF_TOKEN", "").strip()
     if not jeton:
         LOCAL.mkdir(parents=True, exist_ok=True)
-        df.to_parquet(LOCAL / "donnees.parquet", index=False)
+        ancien = LOCAL / "donnees.parquet"
+        if ancien.exists():
+            vieux = pd.read_parquet(ancien)
+            df = pd.concat([df, vieux[vieux["serie_id"].isin(en_echec)]], ignore_index=True)
+        df.to_parquet(ancien, index=False)
         return "local"
-    from huggingface_hub import HfApi
+    from huggingface_hub import HfApi, hf_hub_download
     api = HfApi(token=jeton)
     conf = yaml.safe_load(open(CONFIG / "stockage.yaml", encoding="utf-8"))
     depot = conf.get("depot_hf") or f'{api.whoami()["name"]}/{conf["nom_par_defaut"]}'
     api.create_repo(depot, repo_type="dataset", private=True, exist_ok=True)
+    try:
+        vieux = pd.read_parquet(hf_hub_download(depot, "series/donnees.parquet", repo_type="dataset", token=jeton))
+        df = pd.concat([df, vieux[vieux["serie_id"].isin(en_echec)]], ignore_index=True)
+    except Exception:  # noqa: BLE001 : premier passage
+        pass
     tmp = Path("/tmp/series_donnees.parquet")
     df.to_parquet(tmp, index=False)
     api.upload_file(path_or_fileobj=str(tmp), path_in_repo="series/donnees.parquet", repo_id=depot,
@@ -171,7 +181,7 @@ def main():
     etat.to_csv(JOURNAL / "series_etat.csv", index=False)
     print(etat[["id", "statut", "points", "derniere_date", "message"]].to_string())
     if tout:
-        print("stockage :", ecrire(pd.concat(tout, ignore_index=True)))
+        print("stockage :", ecrire(pd.concat(tout, ignore_index=True), etat.loc[etat["statut"] != "OK", "id"].tolist()))
     if (etat["statut"] == "OK").sum() == 0:
         sys.exit("aucune serie lue")
 
