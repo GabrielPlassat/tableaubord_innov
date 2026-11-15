@@ -44,3 +44,9 @@ Bilan des trois premiers passages réels :
 Constats : l'API de GDELT refuse les adresses partagées de GitHub ; les requêtes groupées par pays ne renvoient rien. La collecte planifiée de 0 h 23 n'a pas eu lieu : GitHub retarde ou saute parfois les tâches planifiées aux heures chargées (celle de 6 h 23 est partie à 6 h 51). 74 sources sur 138 répondent.
 
 Décision : lecture des **fichiers bruts GKG 2.1** (`data.gdeltproject.org/gdeltv2/`), en anglais et traduits, toutes les tranches de 15 minutes depuis le dernier passage (`journal/gdelt_dernier_fichier.txt`). On garde les articles des aires non occidentales qui portent au moins 3 thèmes utiles (énergie, économie, technologie, Banque mondiale…), 40 au plus par aire et par passage. L'aire se déduit d'une liste de sites connus, puis de l'extension nationale, puis de la langue d'origine (`config/gdelt.yaml`). `zones_pays.csv` est complété de 67 pays.
+
+## 15 novembre : jeu de référence de 100 articles (préparation du Sprint 3)
+
+`tests/reference_100.csv` : 100 articles tirés du stock réel (6 à 11 par aire, 15 langues, un tiers GDELT), pré-étiquetés par Claude, relus et validés par Gabriel (23 corrections). Champs : pertinent, lentille principale, iceberg, aire du sujet, nature ; plusieurs réponses acceptables séparées par `|`. Résultat : 67 OUI, 22 NON, 11 cas laissés ouverts.
+
+Leçon pour le tri : sur les 31 cas limites, Gabriel en a tranché 20, dont 14 en OUI. Il garde tout ce qui touche au pouvoir, aux institutions et aux règles, même sans décision (registre électoral, débat, propagande, répression, sanction, sport comme terrain géopolitique, programme d'aide publique), ainsi que les recherches techniques pointues. Il écarte l'anecdote sans enjeu (protocole, incident de conférence de presse, curiosité naturaliste, commémoration, promotion de produit). D'où `config/consignes/passe1_v2.txt`, plus inclusive que la v1, à comparer au Sprint 3.
