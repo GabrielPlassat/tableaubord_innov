@@ -38,7 +38,7 @@ sources:                       # L5, section 5
 
 collecte:                      # L5, sections 3.4 et 3.5 (Sprint 2)
   plafond_par_aire_jour:       # articles retenus au plus, par aire de source et par jour
-    defaut: 150
+    defaut: 300
     EU: 120
     US: 100
   age_max_jours: 7            # on ignore les articles publies il y a plus de 7 jours
