@@ -1,4 +1,5 @@
 """Evaluation du classement d'Albert sur le jeu de reference de 100 articles (Sprint 3).
+# Relance : 16/11/2026, secret ALBERT_API_KEY ajouté.
 
 Compare : tri article par article (consigne v1 et v2) et tri par lots de 20 (v2), avec le
 modele de tri ; fiche (passe 2, consigne v3) avec le modele de fiche, sur tous les articles.
