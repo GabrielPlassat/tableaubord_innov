@@ -243,10 +243,10 @@ def lire_gdelt(conf: dict) -> tuple[list[dict], int, list[str]]:
     # Par aire : une part "dans le champ" (themes forts, les plus riches d'abord) et une part
     # "libre", tiree au hasard, pour garder les evolutions de societe et les projets locaux.
     import random
-    maxi = conf.get("max_par_aire", 40)
     part_libre = conf.get("part_libre", 0.25)
     gardes = []
     for aire in {a["aire_source"] for a in uniques}:
+        maxi = (conf.get("max_par_aire_specifique") or {}).get(aire, conf.get("max_par_aire", 40))
         dans_aire = [a for a in uniques if a["aire_source"] == aire]
         forts_a = [a for a in dans_aire if a["_fort"]]
         libres_a = [a for a in dans_aire if not a["_fort"]]
