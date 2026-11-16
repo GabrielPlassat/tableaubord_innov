@@ -6,7 +6,7 @@ name: Collecte
 on:
   workflow_dispatch:
   schedule:
-    - cron: "23 */6 * * *"   # a 0 h 23, 6 h 23, 12 h 23 et 18 h 23 UTC
+    - cron: "23 */3 * * *"   # toutes les 3 heures : GitHub saute souvent des passages planifies
 
 permissions:
   contents: write
