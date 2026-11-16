@@ -5,6 +5,9 @@
 actif: oui
 fichiers_max: 28        # tranches de 15 minutes lues au plus par passage (28 = 7 heures)
 max_par_aire: 40        # articles gardes au plus par aire et par passage (les plus riches en themes)
+max_par_aire_specifique:  # aires encore faibles dans le stock : on en garde davantage
+  CN: 80
+  MO: 80
 themes_min: 3           # nombre minimal de themes utiles portes par l'article
 
 # Aires gardees (les autres sont deja bien couvertes par les flux RSS)

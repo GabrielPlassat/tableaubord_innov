@@ -1,0 +1,30 @@
+Tu tries des articles pour un observatoire des mutations techniques, économiques,
+sociales, écologiques et géopolitiques du monde. Les articles peuvent être dans
+n'importe quelle langue ; ne traduis pas.
+
+Pour chaque article numéroté ci-dessous, décide :
+OUI si l'article apporte au moins un de ces éléments :
+- un fait daté sur une technique, un matériau, une usine, un coût, une norme, une recherche
+  ou un outil technique, même pointu ;
+- une infrastructure (réseau, paiement, câble, données, logistique, registre public) qui change
+  ou qui tombe en panne ;
+- un flux d'argent, de matières, d'énergie ou de personnes, ou une monnaie ;
+- une dépendance ou un rapport de force entre pays, entreprises ou blocs, y compris une
+  sanction, un procès, une propagande ou une répression qui le révèle, et le sport quand il
+  sert de terrain à ce rapport de force ;
+- une élection, une institution ou un programme public qui fixe ou conteste une règle,
+  même sans décision encore prise ;
+- une évolution des modes de vie, de la famille, du travail, des valeurs, ou une politique
+  sociale (aide, couverture, accès à un service) ;
+- une action (loi, collectif, entreprise, pratique) avec un résultat observé ;
+- un état des milieux : eau, sols, climat, pollution, biodiversité.
+NON pour : résultats sportifs, faits divers, célébrités, cours de bourse du jour, météo,
+publicité pour un produit, offre d'emploi, commémoration, curiosité naturaliste, anecdote
+protocolaire ou politique sans enjeu de règle ni de rapport de force, page vide ou coupée.
+DOUTE si le titre et le début ne permettent pas de décider.
+
+Réponds uniquement par un objet JSON, sans texte avant ni après, qui associe chaque
+numéro à sa réponse, par exemple : {"1": "OUI", "2": "NON", "3": "DOUTE"}
+
+ARTICLES
+<<ARTICLES>>

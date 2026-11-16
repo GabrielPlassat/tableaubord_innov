@@ -26,6 +26,8 @@ import pandas as pd
 import requests
 import yaml
 
+sys.path.insert(0, str(Path(__file__).parent))   # pour importer classement.py
+
 RACINE = Path(__file__).resolve().parents[1]
 CONFIG = RACINE / "config"
 JOURNAL = RACINE / "journal"
@@ -38,6 +40,10 @@ COLONNES = [
     "id", "url", "url_canonique", "titre_original", "langue", "date_publication", "date_collecte",
     "source_id", "source_nom", "type_source", "aire_source", "ancrage", "lien_pouvoir",
     "extrait", "longueur_texte", "texte_source", "reprises", "sources_reprises", "urls_reprises", "classe",
+    # Sprint 3 : classement
+    "tri", "titre_fr", "resume", "nature", "aire_sujet", "pays", "lentille_principale", "lentille_secondaire",
+    "iceberg", "horizon", "technologies", "indice_maturite", "levier_famille", "entites", "chiffres_cles",
+    "confiance", "modele", "version_consigne", "date_classement",
 ]
 
 
@@ -243,10 +249,10 @@ def lire_gdelt(conf: dict) -> tuple[list[dict], int, list[str]]:
     # Par aire : une part "dans le champ" (themes forts, les plus riches d'abord) et une part
     # "libre", tiree au hasard, pour garder les evolutions de societe et les projets locaux.
     import random
-    maxi = conf.get("max_par_aire", 40)
     part_libre = conf.get("part_libre", 0.25)
     gardes = []
     for aire in {a["aire_source"] for a in uniques}:
+        maxi = (conf.get("max_par_aire_specifique") or {}).get(aire, conf.get("max_par_aire", 40))
         dans_aire = [a for a in uniques if a["aire_source"] == aire]
         forts_a = [a for a in dans_aire if a["_fort"]]
         libres_a = [a for a in dans_aire if not a["_fort"]]
@@ -261,15 +267,79 @@ def lire_gdelt(conf: dict) -> tuple[list[dict], int, list[str]]:
     return gardes, len(noms), erreurs[:5]
 
 
-def mesurer_page(url: str) -> int:
-    """Longueur du texte lisible de la page. Le texte n'est jamais conserve."""
+def lire_page(url: str) -> str:
+    """Texte lisible de la page, garde en memoire le temps du classement, jamais stocke."""
     try:
         import trafilatura
         brut = trafilatura.fetch_url(url)
-        texte = trafilatura.extract(brut) if brut else None
-        return len(texte or "")
+        return (trafilatura.extract(brut) or "")[:8000] if brut else ""
     except Exception:  # noqa: BLE001
-        return 0
+        return ""
+
+
+# ---------------------------------------------------------------- classement (Sprint 3)
+
+def classer(nouveaux: list[dict], textes: dict, existant: pd.DataFrame, conf: dict) -> dict:
+    """Tri par lots de tous les nouveaux articles, puis fiche pour les OUI et DOUTE, dans la
+    limite du quota quotidien d'Albert, a part egale entre les aires. Modifie les articles
+    sur place. Renvoie des compteurs pour le journal."""
+    c = {"tri_oui": 0, "tri_non": 0, "tri_doute": 0, "fiches": 0, "fiches_echec": 0, "fiches_reportees": 0}
+    if str(conf.get("actif", "oui")).lower() != "oui" or not nouveaux:
+        return c
+    import json as _json
+    from classement import Albert, ficher, trier_lot
+    albert = Albert()
+    tris = trier_lot(albert, [(a["titre_original"], a["extrait"] or textes.get(a["url"], "")[:200]) for a in nouveaux])
+    for a, t in zip(nouveaux, tris):
+        a["tri"] = t
+        c["tri_" + {"OUI": "oui", "NON": "non"}.get(t, "doute")] += 1
+
+    # quota du jour : fiches deja faites aujourd'hui
+    jour = MAINTENANT.date().isoformat()
+    deja = 0
+    if len(existant) and "date_classement" in existant:
+        deja = existant["date_classement"].fillna("").astype(str).str.startswith(jour).sum()
+    reste = max(0, min(conf.get("fiches_par_jour", 700) - deja, conf.get("fiches_max_par_passage", 150)))
+
+    # a part egale entre les aires : on prend tour a tour un article de chaque aire
+    candidats: dict[str, list[dict]] = {}
+    for a in nouveaux:
+        if a["tri"] != "NON":
+            candidats.setdefault(a["aire_source"], []).append(a)
+    choisis = []
+    while len(choisis) < reste and any(candidats.values()):
+        for aire in list(candidats):
+            if candidats[aire] and len(choisis) < reste:
+                choisis.append(candidats[aire].pop(0))
+    c["fiches_reportees"] = sum(len(v) for v in candidats.values())
+
+    def une(a):
+        texte = a["_texte_flux"] if len(a["_texte_flux"]) >= 500 else (textes.get(a["url"]) or a["_texte_flux"])
+        try:
+            return a, ficher(albert, a["titre_original"], a["langue"], texte)
+        except Exception as e:  # noqa: BLE001
+            return a, (None, str(e)[:80])
+
+    with ThreadPoolExecutor(max_workers=conf.get("fils", 3)) as ex:
+        for a, (f, modele) in ex.map(une, choisis):
+            if not f:
+                c["fiches_echec"] += 1
+                continue
+            a.update({
+                "titre_fr": f.get("titre_fr") or "", "resume": (f.get("resume") or "")[:900],
+                "nature": f.get("nature") or "", "aire_sujet": ";".join(f.get("aire_sujet") or []),
+                "pays": ";".join(f.get("pays") or []), "lentille_principale": f.get("lentille_principale") or "",
+                "lentille_secondaire": f.get("lentille_secondaire") or "", "iceberg": f.get("iceberg") or "",
+                "horizon": f.get("horizon") or "", "technologies": ";".join(map(str, f.get("technologies") or [])),
+                "indice_maturite": f.get("indice_maturite") or "", "levier_famille": f.get("levier_famille") or "",
+                "entites": _json.dumps(f.get("entites") or [], ensure_ascii=False),
+                "chiffres_cles": _json.dumps(f.get("chiffres_cles") or [], ensure_ascii=False),
+                "confiance": str(f.get("confiance") or ""), "modele": modele, "version_consigne": "passe1_lot_v2+passe2_v3",
+                "date_classement": MAINTENANT.isoformat(timespec="seconds"), "classe": True,
+            })
+            c["fiches"] += 1
+    c["appels_albert"] = albert.appels
+    return c
 
 
 # ---------------------------------------------------------------- stockage
@@ -505,20 +575,29 @@ def main():
     # 4. Plafond par aire
     nouveaux, ecartes = appliquer_plafond(nouveaux, existant, sc.get("plafond_par_aire_jour", {"defaut": 150}))
 
-    # 5. Mesure du texte disponible (texte jete aussitot)
+    # 5. Texte disponible : celui du flux, sinon la page (gardee en memoire, jamais stockee)
     seuil_txt = sc.get("texte_min_flux", 500)
     a_lire = [a for a in nouveaux if len(a["_texte"]) < seuil_txt][: sc.get("pages_max_par_passage", 300)]
     with ThreadPoolExecutor(max_workers=8) as ex:
-        longueurs = dict(zip([a["url"] for a in a_lire], ex.map(mesurer_page, [a["url"] for a in a_lire])))
+        textes = dict(zip([a["url"] for a in a_lire], ex.map(lire_page, [a["url"] for a in a_lire])))
     for a in nouveaux:
         lf = len(a["_texte"])
-        lp = longueurs.get(a["url"], 0)
+        lp = len(textes.get(a["url"], ""))
         if lf >= seuil_txt or lf >= lp:
             a["longueur_texte"], a["texte_source"] = lf, ("FLUX" if lf else "TITRE")
         else:
             a["longueur_texte"], a["texte_source"] = lp, "PAGE"
         a["extrait"] = a["_texte"][: sc.get("extrait_max", 280)]
-        del a["_texte"]
+        a["_texte_flux"] = a.pop("_texte")
+
+    # 5 bis. Classement par Albert (tri, puis fiche dans la limite du quota)
+    try:
+        compteurs.update(classer(nouveaux, textes, existant, seuils.get("classement", {})))
+    except Exception as e:  # noqa: BLE001 : sans Albert, la collecte continue sans classement
+        erreurs.append(f"classement : {type(e).__name__} : {e}"[:200])
+    for a in nouveaux:
+        a.pop("_texte_flux", None)
+    del textes
 
     # 6. Numerotation et ecriture
     jour = MAINTENANT.strftime("%Y%m%d")
@@ -526,7 +605,7 @@ def main():
     for k, a in enumerate(nouveaux, start=deja + 1):
         a["id"] = f"F-{jour}-{k:04d}"
         a["date_collecte"] = MAINTENANT.isoformat(timespec="seconds")
-        a["classe"] = False
+        a.setdefault("classe", False)
     ajout = pd.DataFrame(nouveaux, columns=COLONNES)
     modifie_prec = len(existant) and existant["reprises"].astype(float).sum() != avant_reprises
     sorties = {}
@@ -537,7 +616,7 @@ def main():
         if m == mois or modifie_prec:
             if len(part):
                 part["reprises"] = part["reprises"].astype(int)
-                sorties[m] = part[COLONNES]
+                sorties[m] = part.reindex(columns=COLONNES)
     if len(ajout) or modifie_prec:
         stock.ecrire(sorties, f"Collecte du {MAINTENANT:%Y-%m-%d %H:%M} : {len(ajout)} fiches")
 
