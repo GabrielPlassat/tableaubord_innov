@@ -20,6 +20,18 @@ AIRES = {"EU", "US", "CN", "JK", "IN", "ASE", "RU", "GO", "MO", "AF", "LA", "OC"
 LENTILLES = {"TEC", "INF", "MON", "PUI", "SOC", "SOL", "MIL"}
 
 
+def _zones() -> dict:
+    import pandas as pd
+    z = pd.read_csv(RACINE / "config" / "zones_pays.csv", dtype=str, keep_default_na=False)
+    d = dict(zip(z["pays"], z["zone"]))
+    d.pop("EU", None)        # "EU" designe les institutions europeennes dans cette table
+    d.update({"UK": "EU", "EU": "EU"})
+    return d
+
+
+ZONES = _zones()
+
+
 def modeles() -> dict:
     return yaml.safe_load(open(RACINE / "config" / "modeles.yaml", encoding="utf-8"))["albert"]
 
@@ -128,7 +140,13 @@ def ficher(albert: Albert, titre: str, langue: str, texte: str, version: str = "
     f = extraire_json(rep)
     if f is None:
         return None, m
-    f["aire_sujet"] = [a for a in (f.get("aire_sujet") or []) if a in AIRES]
+    # L'aire se deduit d'abord des pays cites (table config/zones_pays.csv) : plus sur que le code
+    # propose par le modele, qui confond par exemple JK et CN, ou met GLO par defaut.
+    pays = [p.upper() for p in (f.get("pays") or []) if isinstance(p, str)]
+    f["pays"] = pays
+    par_pays = list(dict.fromkeys(ZONES.get(p) for p in pays if ZONES.get(p)))
+    propose = [a for a in (f.get("aire_sujet") or []) if a in AIRES]
+    f["aire_sujet"] = par_pays[:3] or propose
     for k in ("lentille_principale", "lentille_secondaire"):
         if f.get(k) not in LENTILLES:
             f[k] = None

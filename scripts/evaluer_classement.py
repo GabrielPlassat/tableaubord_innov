@@ -1,5 +1,5 @@
 """Evaluation du classement d'Albert sur le jeu de reference de 100 articles (Sprint 3).
-# Relance : 16/11/2026, secret ALBERT_API_KEY ajouté.
+# Relance : 16/11/2026, aire deduite des pays, consigne v3 precisee.
 
 Compare : tri article par article (consigne v1 et v2) et tri par lots de 20 (v2), avec le
 modele de tri ; fiche (passe 2, consigne v3) avec le modele de fiche, sur tous les articles.
@@ -74,6 +74,7 @@ def main():
                 l.update({"lentille_principale": f.get("lentille_principale") or "",
                           "lentille_secondaire": f.get("lentille_secondaire") or "",
                           "iceberg": f.get("iceberg") or "", "aire_sujet": ";".join(f["aire_sujet"]),
+                          "pays": ";".join(f["pays"]),
                           "nature": f.get("nature") or "", "confiance": f.get("confiance"),
                           "titre_fr": f.get("titre_fr", ""), "resume": f.get("resume", "")})
         except Exception as e:  # noqa: BLE001

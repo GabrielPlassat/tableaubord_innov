@@ -13,14 +13,22 @@ CHAMPS
   avec leur unité et leur année. Aucun adjectif de jugement. Si l'article est une
   opinion, commence par « L'auteur soutient que ».
 
-"nature" : FAIT (rapporte des événements ou des données) | ANALYSE (explique, met en
-  contexte) | OPINION (défend une thèse) | COMMUNICATION (texte d'une entreprise, d'un
-  gouvernement ou d'une organisation sur elle-même, ou article qui le reprend sans
-  recul).
+"nature" : FAIT (rapporte des événements ou des données, même avec un peu de contexte :
+  c'est le cas de la plupart des dépêches et articles d'actualité) | ANALYSE (l'article
+  est construit pour expliquer des causes, des mécanismes ou des conséquences, au-delà de
+  l'événement) | OPINION (défend une thèse : tribune, éditorial, chronique, entretien
+  centré sur un avis) | COMMUNICATION (texte d'une entreprise, d'un gouvernement ou d'une
+  organisation sur elle-même, ou article qui le reprend sans recul).
 
-"aire_sujet" : 1 à 3 codes parmi EU US CN JK IN ASE RU GO MO AF LA OC GLO.
-  De qui ou de quoi parle l'article, pas d'où il est écrit.
-"pays" : 0 à 3 codes ISO à deux lettres.
+"pays" : 1 à 3 codes ISO à deux lettres des pays dont parle l'article (pas le pays du
+  journal). Liste vide seulement si l'article ne concerne aucun pays en particulier.
+"aire_sujet" : 1 à 3 codes. De qui ou de quoi parle l'article, pas d'où il est écrit.
+  EU Europe (dont Royaume-Uni, Suisse, Ukraine) | US États-Unis et Canada | CN Chine et
+  Hong Kong | JK Japon, Corée du Sud, Taïwan | IN Inde, Pakistan, Bangladesh, Sri Lanka,
+  Népal | ASE Asie du Sud-Est | RU Russie, Asie centrale, Caucase | GO pays du Golfe |
+  MO Turquie, Iran, Égypte, Maghreb, Levant, Israël, Irak | AF Afrique subsaharienne |
+  LA Amérique latine | OC Australie, Nouvelle-Zélande | GLO seulement si l'article ne
+  porte sur aucune zone en particulier.
 
 "lentille_principale" : un code. Celle sans laquelle l'article n'existerait pas.
 "lentille_secondaire" : un code ou null.
