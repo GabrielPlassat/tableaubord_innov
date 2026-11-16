@@ -320,18 +320,28 @@ def classer(nouveaux: list[dict], textes: dict, existant: pd.DataFrame, conf: di
         except Exception as e:  # noqa: BLE001
             return a, (None, str(e)[:80])
 
+    def txt(v) -> str:
+        """Le modele renvoie parfois une liste ou un objet la ou on attend du texte."""
+        if v is None:
+            return ""
+        if isinstance(v, (list, tuple)):
+            return " ".join(txt(x) for x in v)
+        if isinstance(v, dict):
+            return _json.dumps(v, ensure_ascii=False)
+        return str(v)
+
     with ThreadPoolExecutor(max_workers=conf.get("fils", 3)) as ex:
         for a, (f, modele) in ex.map(une, choisis):
             if not f:
                 c["fiches_echec"] += 1
                 continue
             a.update({
-                "titre_fr": f.get("titre_fr") or "", "resume": (f.get("resume") or "")[:900],
-                "nature": f.get("nature") or "", "aire_sujet": ";".join(f.get("aire_sujet") or []),
-                "pays": ";".join(f.get("pays") or []), "lentille_principale": f.get("lentille_principale") or "",
-                "lentille_secondaire": f.get("lentille_secondaire") or "", "iceberg": f.get("iceberg") or "",
-                "horizon": f.get("horizon") or "", "technologies": ";".join(map(str, f.get("technologies") or [])),
-                "indice_maturite": f.get("indice_maturite") or "", "levier_famille": f.get("levier_famille") or "",
+                "titre_fr": txt(f.get("titre_fr")), "resume": txt(f.get("resume"))[:900],
+                "nature": txt(f.get("nature")), "aire_sujet": ";".join(f.get("aire_sujet") or []),
+                "pays": ";".join(map(str, f.get("pays") or [])), "lentille_principale": txt(f.get("lentille_principale")),
+                "lentille_secondaire": txt(f.get("lentille_secondaire")), "iceberg": txt(f.get("iceberg")),
+                "horizon": txt(f.get("horizon")), "technologies": ";".join(map(str, f.get("technologies") or [])),
+                "indice_maturite": txt(f.get("indice_maturite")), "levier_famille": txt(f.get("levier_famille")),
                 "entites": _json.dumps(f.get("entites") or [], ensure_ascii=False),
                 "chiffres_cles": _json.dumps(f.get("chiffres_cles") or [], ensure_ascii=False),
                 "confiance": str(f.get("confiance") or ""), "modele": modele, "version_consigne": "passe1_lot_v2+passe2_v3",
@@ -616,7 +626,10 @@ def main():
         if m == mois or modifie_prec:
             if len(part):
                 part["reprises"] = part["reprises"].astype(int)
-                sorties[m] = part.reindex(columns=COLONNES)
+                part = part.reindex(columns=COLONNES)
+                for col in COLONNES[COLONNES.index("tri"):]:      # colonnes du classement : toujours du texte
+                    part[col] = part[col].map(lambda v: "" if v is None or (isinstance(v, float) and v != v) else str(v))
+                sorties[m] = part
     if len(ajout) or modifie_prec:
         stock.ecrire(sorties, f"Collecte du {MAINTENANT:%Y-%m-%d %H:%M} : {len(ajout)} fiches")
 
