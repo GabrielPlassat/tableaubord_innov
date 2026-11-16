@@ -6,7 +6,7 @@ albert:
   # GET /v1/models (affichee par le carnet). La meme cle Albert sert pour tous.
   tri: ministral-3-8b-instruct-2512              # passe 1 (choix du 14/11/2026)
   fiche: mistral-small-3-2-24b-instruct-2506     # passe 2 : lentille, iceberg, nature, aire, resume
-  consigne_fiche: v4                             # config/consignes/passe2_v4.txt (16/11/2026)
+  consigne_fiche: v5                             # config/consignes/passe2_v5.txt (16/11/2026)
   secours: [gemma-4-31b-it, deepseek-v4-flash-0731]  # essayes dans l'ordre si le modele choisi disparait
   vecteurs: bge-m3                     # embeddings multilingues disponibles sur Albert (a confirmer au Sprint 3)
 claude:

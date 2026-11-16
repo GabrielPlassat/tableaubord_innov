@@ -1,0 +1,88 @@
+Tu remplis une fiche d'analyse à partir d'un article. L'article peut être dans
+n'importe quelle langue ; ta fiche est en français.
+
+Réponds uniquement par un objet JSON valide, sans texte avant ni après. N'utilise que
+les codes listés. Si un champ ne s'applique pas, mets la valeur prévue pour ce cas.
+Ne déduis rien que le texte ne dise pas. Le texte peut être court (titre et chapeau seulement) : classe alors sur ce que tu as, et mets "confiance" à 1.
+
+CHAMPS
+
+"titre_fr" : titre traduit fidèlement.
+
+"resume" : 3 à 5 phrases neutres. Qui, quoi, où, quand, combien. Reprends les chiffres
+  avec leur unité, et les dates exactement comme le texte les donne : n'invente jamais
+  une année que le texte ne donne pas. Aucun adjectif de jugement. Si l'article est une
+  opinion, commence par « L'auteur soutient que ».
+
+"nature" : FAIT (rapporte des événements ou des données, même avec un peu de contexte :
+  c'est le cas de la plupart des dépêches et articles d'actualité) | ANALYSE (l'article
+  est construit pour expliquer des causes, des mécanismes ou des conséquences, au-delà de
+  l'événement) | OPINION (défend une thèse : tribune, éditorial, chronique, entretien
+  centré sur un avis) | COMMUNICATION (texte d'une entreprise, d'un gouvernement ou d'une
+  organisation sur elle-même, ou article qui le reprend sans recul).
+
+"pays" : 1 à 3 codes ISO à deux lettres des pays dont parle l'article (pas le pays du
+  journal). Liste vide seulement si l'article ne concerne aucun pays en particulier.
+"aire_sujet" : 1 à 3 codes. De qui ou de quoi parle l'article, pas d'où il est écrit.
+  EU Europe (dont Royaume-Uni, Suisse, Ukraine) | US États-Unis et Canada | CN Chine et
+  Hong Kong | JK Japon, Corée du Sud, Taïwan | IN Inde, Pakistan, Bangladesh, Sri Lanka,
+  Népal | ASE Asie du Sud-Est | RU Russie, Asie centrale, Caucase | GO pays du Golfe |
+  MO Turquie, Iran, Égypte, Maghreb, Levant, Israël, Irak | AF Afrique subsaharienne |
+  LA Amérique latine | OC Australie, Nouvelle-Zélande | GLO seulement si l'article ne
+  porte sur aucune zone en particulier.
+
+"lentille_principale" : un code. Celle sans laquelle l'article n'existerait pas.
+"lentille_secondaire" : un code ou null.
+  TEC techniques, matériaux, production, industrie, recherche technique ou médicale |
+  INF infrastructures, réseaux (énergie, transport, télécoms), paiements, données,
+    plateformes numériques, normes techniques |
+  MON monnaies, dette, budgets, prix, investissements, flux de richesses, finance informelle |
+  PUI rapports de force : entre pays ou blocs (guerre, sanctions, alliances, diplomatie,
+    commerce stratégique), ou entre le pouvoir et ce qui le conteste (grandes entreprises,
+    gouvernance de l'IA, répression). Pas une élection, un procès ou un fait divers ordinaires |
+  SOC modes de vie, famille, travail, emploi, éducation, santé, valeurs, culture, religion,
+    démographie, migrations, vie politique et justice ordinaires |
+  SOL une action (loi, collectif, entreprise, pratique) DÉJÀ engagée ET dont l'article cite
+    un résultat observé. Une étude, une mesure, un constat, une annonce, un plan, une
+    dénonciation : pas SOL |
+  MIL eau, sols, climat, pollution, biodiversité, énergie comme ressource physique,
+    limites physiques, y compris les études scientifiques sur ces milieux.
+  Chaque lentille vaut les autres : aucune n'est un choix par défaut.
+
+"iceberg" : le niveau le plus profond que l'article traite explicitement.
+  N1 un événement | N2 une série, une évolution chiffrée | N3 la règle, l'infrastructure
+  ou le rapport de force qui produit l'évolution | N4 la croyance qui fait paraître
+  cette structure évidente. En cas d'hésitation entre deux niveaux, prends le moins
+  profond.
+
+"horizon" : H1 moins de 2 ans | H2 2 à 10 ans | H3 plus de 10 ans. L'horizon des
+  effets dont parle l'article.
+
+"technologies" : 0 à 3 noms pris dans la liste fournie. Si absent de la liste :
+  "NOUVEAU: nom".
+"indice_maturite" : COUT | VOLUME | NORME | MARCHE_PUBLIC | USINE | ECHEC | OCCASION |
+  BREVET_PUBLI | AUCUN. Le plus net.
+
+"levier_famille" : seulement si une lentille est SOL. FA un prix, une subvention, un
+  stock, un équipement | FB un délai, une boucle de correction, une information rendue
+  visible | FC une règle, un droit, un pouvoir donné aux acteurs | FD un but ou une
+  vision du monde. Sinon AUCUN.
+
+"entites" : jusqu'à 8 objets {"nom": forme la plus courante en français ou en anglais,
+  "type": ETAT | ENTREPRISE | COLLECTIF | VILLE | INSTITUTION | PERSONNE | RESEAU,
+  "pays": code ISO ou null}.
+
+"chiffres_cles" : jusqu'à 3 objets {"valeur", "unite", "annee", "objet",
+  "source_citee"}. "source_citee" vaut null si l'article ne dit pas d'où vient le
+  chiffre.
+
+"confiance" : 3 texte clair et complet | 2 texte partiel ou ambigu | 1 texte trop
+  court, coupé ou incompréhensible.
+
+LISTE DES TECHNOLOGIES
+<<TECHNOLOGIES>>
+
+ARTICLE
+Titre : <<TITRE>>
+Langue : <<LANGUE>>
+Texte : <<TEXTE>>
