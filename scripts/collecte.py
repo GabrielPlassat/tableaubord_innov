@@ -344,7 +344,7 @@ def classer(nouveaux: list[dict], textes: dict, existant: pd.DataFrame, conf: di
                 "indice_maturite": txt(f.get("indice_maturite")), "levier_famille": txt(f.get("levier_famille")),
                 "entites": _json.dumps(f.get("entites") or [], ensure_ascii=False),
                 "chiffres_cles": _json.dumps(f.get("chiffres_cles") or [], ensure_ascii=False),
-                "confiance": str(f.get("confiance") or ""), "modele": modele, "version_consigne": "passe1_lot_v2+passe2_v3",
+                "confiance": str(f.get("confiance") or ""), "modele": modele, "version_consigne": "passe1_lot_v2+passe2_" + str(__import__("classement").modeles().get("consigne_fiche", "v3")),
                 "date_classement": MAINTENANT.isoformat(timespec="seconds"), "classe": True,
             })
             c["fiches"] += 1
