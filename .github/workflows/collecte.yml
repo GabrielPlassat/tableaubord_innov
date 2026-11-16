@@ -1,6 +1,6 @@
 # Collecte des articles toutes les 6 heures (Sprint 2, sans classement).
 # Lancement manuel : onglet Actions > "Collecte" > Run workflow.
-# Secret necessaire : HF_TOKEN (jeton Hugging Face avec droit d'ecriture).
+# Secrets : HF_TOKEN (jeton Hugging Face avec droit d'ecriture), ALBERT_API_KEY (classement).
 name: Collecte
 
 on:
@@ -18,7 +18,7 @@ concurrency:
 jobs:
   collecte:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -30,7 +30,8 @@ jobs:
       - name: Collecter
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: python scripts/collecte.py
+          ALBERT_API_KEY: ${{ secrets.ALBERT_API_KEY }}
+        run: python -u scripts/collecte.py
       - name: Enregistrer le journal
         if: always()
         run: |

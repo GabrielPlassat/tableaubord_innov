@@ -47,3 +47,9 @@ collecte:                      # L5, sections 3.4 et 3.5 (Sprint 2)
   texte_min_flux: 500          # en dessous (caracteres), on tente de lire la page pour mesurer le texte
   pages_max_par_passage: 300   # nombre de pages lues au plus a chaque collecte
   extrait_max: 280             # caracteres du chapeau du flux conserves (pas de texte complet)
+
+classement:                    # Sprint 3 : classement par Albert dans la collecte
+  actif: oui
+  fiches_par_jour: 700         # quota d'Albert : environ 1 000 requetes et 2,5 millions de mots-jetons par jour et par modele
+  fiches_max_par_passage: 150  # au plus par collecte (environ 8 minutes avec 3 fils)
+  fils: 3                      # fiches demandees en parallele

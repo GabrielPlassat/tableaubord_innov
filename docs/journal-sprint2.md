@@ -64,3 +64,15 @@ Bourses : Stooq abandonné (clé par captcha introuvable chez Gabriel), remplac�
 ## 15 novembre : réparation des flux morts
 
 Sur 65 sources en échec : 13 réparées et vérifiées par l'audit (INSEE publications conjoncturelles et chiffres détaillés, La Tribune, Connaissance des énergies, BRI discours de banquiers centraux, Federal Register toutes agences / Énergie / Transports via son API, Agence européenne de l'environnement, Nature, Commission européenne communiqués et actualités, Scroll.in) ; 18 désactivées parce qu'elles refusent les robots (Parlement européen, Conseil de l'UE, OCDE, AIE, Légifrance, FTC, Usine Nouvelle, Arab News, Addis Standard, Substack…), sans contournement ; 28 désactivées faute de flux trouvé ou en sommeil ; 6 gardées car en erreur passagère (429, 504, délai : VentureBeat, JRC, Atomico, Animal Político, Huxiu, 36Kr à surveiller). Plusieurs désactivées sont déjà couvertes par GDELT (Arab News, Xinhua, Huxiu) ou par la tâche Series (FMI). Pistes suivantes pour les institutions qui bloquent les flux : API open data du Parlement européen, API Légifrance (inscription PISTE), données OCDE en SDMX.
+
+# Sprint 3 – Classement
+
+## 16 novembre : évaluation sur le jeu de référence (`docs/evaluation-sprint3.md`)
+
+Tri (Ministral) : par lots de 20 avec la consigne v2, 92 % d'accord, 100 % des articles pertinents retrouvés, 64 % des hors-sujet écartés ; article par article, la v2 laisse presque tout passer (9 % de NON écartés) et la v1 en écarte 41 %. Le tri par lots est retenu : meilleur et 20 fois moins de requêtes.
+
+Fiche (Mistral Small, consigne v3 sans axe, précipitation ni rebond) : lentille 76 % (95 % en comptant la secondaire), iceberg 68 %, nature 80 %, aire du sujet 84 %, JSON 100 %. Premier passage : aire à 51 % (le modèle mettait GLO partout et confondait JK et CN) ; corrigé en déduisant l'aire des pays cités (`config/zones_pays.csv`) et en précisant la consigne. Sur 85 articles, l'incertitude est d'environ ±5 points.
+
+## 16 novembre : classement dans la collecte
+
+À chaque collecte : tri par lots de tous les nouveaux articles, puis fiche pour les OUI et DOUTE, dans la limite de 700 fiches par jour et 150 par passage (`config/seuils.yaml`, section `classement`), à part égale entre les aires de source. Le texte utilisé est celui du flux, sinon la page lue, gardé en mémoire et jamais stocké. Les articles écartés restent dans le stock avec `tri = NON` (au lieu d'un fichier de rejets à part, plus simple). Les articles en surplus restent sans fiche (`classe = False`) ; un rattrapage pourra les classer plus tard sur leur titre et leur extrait. Page « Fiches » : filtres par lentille, aire du sujet, iceberg et nature.

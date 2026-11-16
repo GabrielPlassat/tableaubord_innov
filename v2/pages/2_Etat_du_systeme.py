@@ -43,9 +43,11 @@ st.subheader("Historique des collectes")
 vue = ex.rename(columns={
     "debut": "Début (UTC)", "duree_s": "Durée (s)", "sources_lues": "Sources", "sources_erreur": "En échec",
     "articles_vus": "Vus", "deja_connus": "Déjà connus", "doublons_titre": "Reprises", "ecartes_plafond": "Plafond",
-    "nouveaux": "Nouvelles", "gdelt_articles": "Dont GDELT", "erreurs": "Erreurs"})
+    "nouveaux": "Nouvelles", "gdelt_articles": "Dont GDELT", "tri_non": "Écartées au tri",
+    "fiches": "Fiches classées", "fiches_reportees": "Classement reporté", "erreurs": "Erreurs"})
 colonnes = [k for k in ["Début (UTC)", "Durée (s)", "Sources", "En échec", "Vus", "Déjà connus", "Reprises",
-                        "Plafond", "Nouvelles", "Dont GDELT", "Erreurs"] if k in vue]
+                        "Plafond", "Nouvelles", "Dont GDELT", "Écartées au tri", "Fiches classées",
+                        "Classement reporté", "Erreurs"] if k in vue]
 st.dataframe(vue[colonnes].iloc[::-1], width="stretch", hide_index=True)
 
 # ------------------------------------------------------------ sources en échec
