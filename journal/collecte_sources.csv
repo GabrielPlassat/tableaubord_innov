@@ -1,8 +1,8 @@
 id,dernier_succes,premier_echec,derniere_erreur,articles_dernier_passage,statut
-insee-informations-rapides,2026-11-18,,,3,OK
+insee-informations-rapides,2026-11-18,,,4,OK
 insee-communiques-de-presse,2026-11-18,,,0,OK
 banque-de-france-publications,,2026-11-14,HTTP 404,0,ECHEC
-bce-communiques-officiels,2026-11-18,,,4,OK
+bce-communiques-officiels,2026-11-18,,,6,OK
 ocde-actualites,,2026-11-14,HTTP 403,0,ECHEC
 fmi-actualites,,2026-11-14,HTTP 404,0,ECHEC
 le-grand-continent,2026-11-18,,,10,OK
@@ -16,7 +16,7 @@ actu-environnement,,2026-11-14,HTTP 404,0,ECHEC
 revolution-energetique,2026-11-18,,,10,OK
 pv-magazine-france,2026-11-18,,,10,OK
 european-energy-review,,2026-11-14,SSLError,0,ECHEC
-carbon-brief,2026-11-18,,,3,OK
+carbon-brief,2026-11-18,,,2,OK
 oil-price,2026-11-18,,,15,OK
 enerzine,2026-11-16,2026-11-17,ConnectionError,0,ECHEC
 investing-com-petrole-commodites,2026-11-18,,,10,OK
@@ -31,7 +31,7 @@ github-trending-python,2026-11-18,,,16,OK
 github-trending-javascript,2026-11-18,,,13,OK
 changelog-nightly,,2026-11-14,HTTP 404,0,ECHEC
 hugging-face-daily-papers,2026-11-18,,,50,OK
-hugging-face-blog-officiel,2026-11-18,,,7,OK
+hugging-face-blog-officiel,2026-11-18,,,6,OK
 hf-leaderboard-chatbot-arena,,2026-11-14,HTTP 401,0,ECHEC
 benedict-evans,2026-11-18,,,0,OK
 stephane-schultz-15marches,2026-11-14,2026-11-14,HTTP 403,0,ECHEC
@@ -42,12 +42,12 @@ tariq-krim,2026-11-18,,,1,OK
 philippe-meda,2026-11-18,,,0,OK
 bernard-marr,2026-11-18,,,4,OK
 roger-spitz,,2026-11-14,HTTP 404,0,ECHEC
-tim-o-reilly,2026-11-18,,,10,OK
+tim-o-reilly,2026-11-18,,,11,OK
 kai-fu-lee,2026-11-18,,,0,OK
 rui-ma,,2026-11-14,HTTP 404,0,ECHEC
 zeyi-yang,2026-11-18,,,0,OK
 scott-galloway,2026-11-18,,,0,OK
-cory-doctorow,2026-11-18,,,3,OK
+cory-doctorow,2026-11-18,,,4,OK
 tomi-adeyrun,,2026-11-14,HTTP 403,0,ECHEC
 andile-masuku,,2026-11-14,Aucun article lisible,0,ECHEC
 rebecca-enonchong,,2026-11-14,HTTP 404,0,ECHEC
@@ -67,8 +67,8 @@ eur-lex-nouvelles-publications-en,,2026-11-14,Aucun article lisible,0,ECHEC
 eur-lex-nouvelles-publications-fr,,2026-11-14,Aucun article lisible,0,ECHEC
 ai-act-observatory,2026-11-18,,,1,OK
 federal-register-toutes-agences,2026-11-18,,,5,OK
-federal-register-dept-of-energy,2026-11-18,,,24,OK
-federal-register-dept-of-transportation,2026-11-18,,,31,OK
+federal-register-dept-of-energy,2026-11-18,,,32,OK
+federal-register-dept-of-transportation,2026-11-18,,,40,OK
 ftc-communiques-officiels,,2026-11-14,HTTP 403,0,ECHEC
 nist-actualites-standards-tech,2026-11-18,,,0,OK
 tech-policy-press,,2026-11-14,Aucun article lisible,0,ECHEC
@@ -84,9 +84,9 @@ techniques-ingenieur,,2026-11-14,Aucun article lisible,0,ECHEC
 decideurs-magazine,,2026-11-14,HTTP 404,0,ECHEC
 the-batch-deeplearning-ai,,2026-11-14,HTTP 403,0,ECHEC
 venturebeat-ai,,2026-11-14,HTTP 429,0,ECHEC
-nature-news,2026-11-18,,,40,OK
+nature-news,2026-11-18,,,42,OK
 commission-eu-dae-numerique-ia,2026-11-18,,,30,OK
-commission-eu-dg-ener-energie,2026-11-18,,,5,OK
+commission-eu-dg-ener-energie,2026-11-18,,,6,OK
 commission-eu-dg-move-transport,,2026-11-14,HTTP 404,0,ECHEC
 commission-eu-dg-connect,,2026-11-14,HTTP 404,0,ECHEC
 jrc-science-hub-actualites,,2026-11-14,HTTP 404,0,ECHEC
@@ -103,20 +103,20 @@ hankyoreh-english,2026-11-18,,,30,OK
 the-hindu,2026-11-18,,,60,OK
 scroll-in,2026-11-18,,,100,OK
 the-wire,,2026-11-14,Aucun article lisible,0,ECHEC
-mongabay-india,2026-11-18,,,11,OK
+mongabay-india,2026-11-18,,,13,OK
 amar-ujala,2026-11-18,,,11,OK
-dawn,2026-11-18,,,29,OK
+dawn,2026-11-18,,,26,OK
 the-daily-star-bangladesh,2026-11-18,,,0,OK
 mongabay-indonesia,2026-11-18,,,20,OK
-cnn-indonesia,2026-11-18,,,100,OK
-vnexpress,2026-11-18,,,41,OK
+cnn-indonesia,2026-11-18,,,10,OK
+vnexpress,2026-11-18,,,60,OK
 rappler,2026-11-18,,,10,OK
 cna-channel-newsasia,2026-11-18,,,20,OK
 allafrica-derniers-titres,2026-11-18,,,33,OK
 premium-times,2026-11-18,,,15,OK
 techcabal,2026-11-18,,,10,OK
-daily-maverick,2026-11-18,,,49,OK
-the-conversation-africa,2026-11-18,,,20,OK
+daily-maverick,2026-11-18,,,50,OK
+the-conversation-africa,2026-11-18,,,19,OK
 jeune-afrique,2026-11-18,,,30,OK
 addis-standard,,2026-11-14,HTTP 403,0,ECHEC
 mongabay-latam,2026-11-18,,,30,OK
@@ -133,7 +133,7 @@ mada-masr,2026-11-18,,,0,OK
 tass,2026-11-18,,,100,OK
 kommersant,2026-11-18,,,100,OK
 meduza,2026-11-18,,,30,OK
-global-voices,2026-11-18,,,13,OK
-global-voices-en-francais,2026-11-18,,,0,OK
-dialogue-earth,2026-11-18,,,2,OK
+global-voices,2026-11-18,,,14,OK
+global-voices-en-francais,2026-11-18,,,2,OK
+dialogue-earth,2026-11-18,,,4,OK
 dialogue-earth-en-espagnol,2026-11-18,,,2,OK
