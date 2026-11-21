@@ -5,6 +5,11 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
+import importlib
+
+import commun
+
+importlib.reload(commun)  # Streamlit Cloud garde parfois l'ancienne version de commun.py en memoire
 from commun import (NOMS_AIRES, ORDRE_AIRES, charger_executions, charger_fiches, charger_seuils,
                     charger_sources, charger_suivi_sources, regles_diversite)
 

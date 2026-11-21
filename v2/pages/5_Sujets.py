@@ -1,6 +1,11 @@
 """Sujets : articles regroupés par le sens, quelle que soit leur langue (Sprint 3)."""
 import streamlit as st
 
+import importlib
+
+import commun
+
+importlib.reload(commun)  # Streamlit Cloud garde parfois l'ancienne version de commun.py en memoire
 from commun import NOMS_AIRES, charger_sujets
 
 st.set_page_config(page_title="Sujets", page_icon="◈", layout="wide")
