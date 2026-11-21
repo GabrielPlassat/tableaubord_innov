@@ -1,5 +1,5 @@
 """Evaluation du classement d'Albert sur le jeu de reference de 100 articles (Sprint 3).
-# Relance : 16/11/2026, aire deduite des pays, consigne v3 precisee.
+# Relance : 21/11/2026, consigne de fiche v5.
 
 Compare : tri article par article (consigne v1 et v2) et tri par lots de 20 (v2), avec le
 modele de tri ; fiche (passe 2, consigne v3) avec le modele de fiche, sur tous les articles.
