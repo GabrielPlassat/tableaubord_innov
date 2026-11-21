@@ -1,8 +1,8 @@
 # Évaluation du classement (Sprint 3)
 
-*16/11/2026 10:33 UTC · jeu de référence de 100 articles · pages lues : 90% · appels à Albert : 305*
+*21/11/2026 16:09 UTC · jeu de référence de 100 articles · pages lues : 90% · appels à Albert : 305*
 
-Modèle de tri : `ministral-3-8b-instruct-2512` · modèle de fiche : `mistral-small-3-2-24b-instruct-2506` · consignes : passe1 v1, v2, lot v2 ; passe2 v4.
+Modèle de tri : `ministral-3-8b-instruct-2512` · modèle de fiche : `mistral-small-3-2-24b-instruct-2506` · consignes : passe1 v1, v2, lot v2 ; passe2 v5.
 
 ## Tri (passe 1)
 
@@ -14,22 +14,22 @@ Modèle de tri : `ministral-3-8b-instruct-2512` · modèle de fiche : `mistral-s
 | réponses illisibles                 | 0 %                       | 0 %                       | 0 %                  |
 
 
-Durée moyenne : 0.4 s par article et par consigne ; par lots : 4 s pour les 100 articles.
+Durée moyenne : 0.2 s par article et par consigne ; par lots : 4 s pour les 100 articles.
 
 ## Fiche (passe 2), sur les 85 articles étiquetés
 
 |                                   | accord   |
 |:----------------------------------|:---------|
 | JSON valide                       | 100 %    |
-| lentille principale               | 71 %     |
-| lentille principale ou secondaire | 92 %     |
-| iceberg                           | 69 %     |
+| lentille principale               | 87 %     |
+| lentille principale ou secondaire | 95 %     |
+| iceberg                           | 73 %     |
 | aire du sujet                     | 85 %     |
-| nature                            | 80 %     |
+| nature                            | 79 %     |
 
 
-Durée moyenne : 10.2 s par fiche. Seuils visés (L2) : lentille 80 %, iceberg 65 %, aire 90 %, nature 80 %, JSON 98 %.
+Durée moyenne : 7.9 s par fiche. Seuils visés (L2) : lentille 80 %, iceberg 65 %, aire 90 %, nature 80 %, JSON 98 %.
 
-Répartition des lentilles principales proposées : INF 27, SOC 24, TEC 15, MON 13, SOL 10, PUI 7, MIL 4
+Répartition des lentilles principales proposées : PUI 36, SOC 22, MON 15, TEC 11, MIL 6, SOL 5, INF 5
 
 Détail article par article : `journal/evaluation_sprint3.csv`.
