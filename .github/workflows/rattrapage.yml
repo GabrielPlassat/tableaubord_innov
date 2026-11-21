@@ -1,0 +1,47 @@
+# Travail de nuit : tri du stock ancien, fiches en attente, vecteurs, sujets (Sprint 3).
+# Lancement manuel : onglet Actions > "Rattrapage et sujets" > Run workflow.
+# Secrets : HF_TOKEN, ALBERT_API_KEY.
+name: Rattrapage et sujets
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "41 22 * * *"   # chaque nuit a 22 h 41 UTC
+  push:
+    branches-ignore: [main]  # essai sur une branche quand le script change
+    paths:
+      - scripts/rattrapage.py
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collecte            # jamais en meme temps qu'une collecte : les deux ecrivent les fiches
+  cancel-in-progress: false
+
+jobs:
+  rattrapage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: scripts/requirements-collecte.txt
+      - run: pip install -r scripts/requirements-collecte.txt
+      - name: Rattraper, vectoriser, regrouper
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          ALBERT_API_KEY: ${{ secrets.ALBERT_API_KEY }}
+        run: python -u scripts/rattrapage.py
+      - name: Enregistrer le journal
+        if: always()
+        run: |
+          git config user.name "innovation-radar-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add journal/executions.csv journal/sujets_bilan.csv 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -m "Rattrapage du $(date -u +%F)"
+          for i in 1 2 3; do git pull --rebase -q origin "$GITHUB_REF_NAME" && git push -q origin "HEAD:$GITHUB_REF_NAME" && break; sleep 5; done

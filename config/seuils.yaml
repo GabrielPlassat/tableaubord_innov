@@ -53,3 +53,11 @@ classement:                    # Sprint 3 : classement par Albert dans la collec
   fiches_par_jour: 700         # quota d'Albert : environ 1 000 requetes et 2,5 millions de mots-jetons par jour et par modele
   fiches_max_par_passage: 250  # au plus par collecte : GitHub ne lance qu'environ 3 collectes par jour
   fils: 3                      # fiches demandees en parallele
+  tri_rattrapage_max: 6000     # articles anciens tries au plus par nuit (300 requetes par lots de 20)
+
+sujets:                        # Sprint 3 : vecteurs et regroupement des sujets (travail de nuit)
+  fenetre_jours: 14            # on regroupe les articles des 14 derniers jours
+  similarite_min: 0.85         # 0 a 1 : au-dessus, deux articles traitent du meme sujet (a regler a l'usage)
+  taille_min: 3                # un sujet compte au moins 3 articles
+  vecteurs_max: 20000          # vecteurs calcules au plus par nuit
+  lot_vecteurs: 32             # textes envoyes a Albert par requete
