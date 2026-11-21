@@ -65,7 +65,7 @@ parlement-eu-textes-adoptes,,2026-11-14,HTTP 403,0,ECHEC
 parlement-eu-communiques-comites,,2026-11-14,HTTP 403,0,ECHEC
 eur-lex-nouvelles-publications-en,,2026-11-14,Aucun article lisible,0,ECHEC
 eur-lex-nouvelles-publications-fr,,2026-11-14,Aucun article lisible,0,ECHEC
-ai-act-observatory,2026-11-21,,,0,OK
+ai-act-observatory,2026-11-21,2026-11-21,ReadTimeout,0,ECHEC
 federal-register-toutes-agences,2026-11-21,,,9,OK
 federal-register-dept-of-energy,2026-11-21,,,31,OK
 federal-register-dept-of-transportation,2026-11-21,,,52,OK
@@ -86,7 +86,7 @@ the-batch-deeplearning-ai,,2026-11-14,HTTP 403,0,ECHEC
 venturebeat-ai,,2026-11-14,HTTP 429,0,SIGNALEE
 nature-news,2026-11-21,,,75,OK
 commission-eu-dae-numerique-ia,2026-11-21,,,30,OK
-commission-eu-dg-ener-energie,2026-11-21,,,8,OK
+commission-eu-dg-ener-energie,2026-11-21,,,9,OK
 commission-eu-dg-move-transport,,2026-11-14,HTTP 404,0,ECHEC
 commission-eu-dg-connect,,2026-11-14,HTTP 404,0,ECHEC
 jrc-science-hub-actualites,,2026-11-14,HTTP 404,0,SIGNALEE
@@ -105,11 +105,11 @@ scroll-in,2026-11-21,,,100,OK
 the-wire,,2026-11-14,Aucun article lisible,0,ECHEC
 mongabay-india,2026-11-21,,,12,OK
 amar-ujala,2026-11-21,,,11,OK
-dawn,2026-11-21,2026-11-21,HTTP 403,0,ECHEC
+dawn,2026-11-21,,,28,OK
 the-daily-star-bangladesh,2026-11-21,,,0,OK
 mongabay-indonesia,2026-11-21,,,20,OK
-cnn-indonesia,2026-11-21,,,100,OK
-vnexpress,2026-11-21,,,49,OK
+cnn-indonesia,2026-11-21,,,10,OK
+vnexpress,2026-11-21,,,52,OK
 rappler,2026-11-21,,,10,OK
 cna-channel-newsasia,2026-11-21,,,20,OK
 allafrica-derniers-titres,2026-11-21,,,33,OK
@@ -130,7 +130,7 @@ al-jazeera-english,2026-11-21,,,25,OK
 the-national-eau,2026-11-21,,,100,OK
 arab-news,2026-11-14,2026-11-14,HTTP 403,0,ECHEC
 mada-masr,2026-11-21,,,0,OK
-tass,2026-11-21,,,100,OK
+tass,2026-11-21,,,58,OK
 kommersant,2026-11-21,,,100,OK
 meduza,2026-11-21,,,30,OK
 global-voices,2026-11-21,,,15,OK
