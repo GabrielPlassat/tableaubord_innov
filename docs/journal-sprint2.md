@@ -76,3 +76,9 @@ Fiche (Mistral Small, consigne v3 sans axe, précipitation ni rebond) : lentille
 ## 16 novembre : classement dans la collecte
 
 À chaque collecte : tri par lots de tous les nouveaux articles, puis fiche pour les OUI et DOUTE, dans la limite de 700 fiches par jour et 150 par passage (`config/seuils.yaml`, section `classement`), à part égale entre les aires de source. Le texte utilisé est celui du flux, sinon la page lue, gardé en mémoire et jamais stocké. Les articles écartés restent dans le stock avec `tri = NON` (au lieu d'un fichier de rejets à part, plus simple). Les articles en surplus restent sans fiche (`classe = False`) ; un rattrapage pourra les classer plus tard sur leur titre et leur extrait. Page « Fiches » : filtres par lentille, aire du sujet, iceberg et nature.
+
+## 21 novembre : consigne de fiche v5 retenue
+
+Évaluation sur le jeu de référence (`docs/evaluation-sprint3.md`) : lentille principale 87 % (75 % en v3, 71 % en v4), avec secondaire 95 %, iceberg 73 %, aire 85 %, nature 79 %, JSON 100 %. La v5 définit PUI comme rapport de force (entre pays ou blocs, ou face au pouvoir : grandes entreprises, gouvernance de l'IA, répression), range la politique et la justice ordinaires en SOC, exclut études et constats de SOL, interdit d'inventer une date. La collecte passe à la v5 et à 250 fiches par passage (GitHub ne lance qu'environ 3 collectes par jour sur les 8 prévues). L'évaluation ne se lance plus automatiquement sur main.
+
+Bilan des collectes du 16 au 21 novembre : 13 passages réussis, 150 fiches chacun (environ 1 950 fiches), 6 à 9 sources en erreur par passage sur 92, tri : environ 68 % OUI, 11 % DOUTE, 21 % NON. Stock de novembre : 17 202 articles dont 5 287 GDELT ; aucune aire au-dessus de 12,3 %, Europe 4,6 %, États-Unis 4,7 %, Chine 8,6 %, Moyen-Orient 6,5 %. Séries : 42 sur 42 chaque soir.
