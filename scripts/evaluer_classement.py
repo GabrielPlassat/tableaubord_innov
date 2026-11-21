@@ -1,5 +1,5 @@
 """Evaluation du classement d'Albert sur le jeu de reference de 100 articles (Sprint 3).
-# Relance : 16/11/2026, aire deduite des pays, consigne v3 precisee.
+# Relance : 21/11/2026, consigne de fiche v5.
 
 Compare : tri article par article (consigne v1 et v2) et tri par lots de 20 (v2), avec le
 modele de tri ; fiche (passe 2, consigne v3) avec le modele de fiche, sur tous les articles.
@@ -123,7 +123,7 @@ def main():
     md = [f"# Évaluation du classement (Sprint 3)\n",
           f"*{datetime.now(timezone.utc):%d/%m/%Y %H:%M} UTC · jeu de référence de {len(ref)} articles · "
           f"pages lues : {pages:.0%} · appels à Albert : {albert.appels}*\n",
-          f"Modèle de tri : `{m['tri']}` · modèle de fiche : `{m['fiche']}` · consignes : passe1 v1, v2, lot v2 ; passe2 v3.\n",
+          f"Modèle de tri : `{m['tri']}` · modèle de fiche : `{m['fiche']}` · consignes : passe1 v1, v2, lot v2 ; passe2 {m.get('consigne_fiche', 'v3')}.\n",
           "## Tri (passe 1)\n", (tri * 100).round(0).astype(int).astype(str).add(" %").to_markdown(), "\n",
           f"Durée moyenne : {d['duree_tri_s'].mean():.1f} s par article et par consigne ; "
           f"par lots : {duree_lot:.0f} s pour les {len(ref)} articles.\n",
@@ -131,6 +131,8 @@ def main():
           (fiche * 100).round(0).astype(int).astype(str).add(" %").to_frame("accord").to_markdown(), "\n",
           f"Durée moyenne : {d['duree_fiche_s'].mean():.1f} s par fiche. Seuils visés (L2) : lentille 80 %, "
           "iceberg 65 %, aire 90 %, nature 80 %, JSON 98 %.\n",
+          "Répartition des lentilles principales proposées : "
+          + ", ".join(f"{k} {v}" for k, v in d["lentille_principale"].value_counts().items()) + "\n",
           "Détail article par article : `journal/evaluation_sprint3.csv`.\n"]
     (RACINE / "docs" / "evaluation-sprint3.md").write_text("\n".join(md), encoding="utf-8")
     print("\n".join(md))

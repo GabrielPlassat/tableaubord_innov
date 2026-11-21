@@ -128,9 +128,10 @@ def trier_lot(albert: Albert, articles: list[tuple[str, str]], taille: int = 20)
 _TECHNO = None
 
 
-def ficher(albert: Albert, titre: str, langue: str, texte: str, version: str = "v3") -> tuple[dict | None, str]:
+def ficher(albert: Albert, titre: str, langue: str, texte: str, version: str | None = None) -> tuple[dict | None, str]:
     """Fiche d'analyse (dict) ou None si le JSON est illisible, et le modele utilise."""
     global _TECHNO
+    version = version or modeles().get("consigne_fiche", "v3")
     if _TECHNO is None:
         _TECHNO = liste_technologies()
     c = (consigne(f"passe2_{version}.txt").replace("<<TECHNOLOGIES>>", _TECHNO).replace("<<TITRE>>", titre)

@@ -51,5 +51,5 @@ collecte:                      # L5, sections 3.4 et 3.5 (Sprint 2)
 classement:                    # Sprint 3 : classement par Albert dans la collecte
   actif: oui
   fiches_par_jour: 700         # quota d'Albert : environ 1 000 requetes et 2,5 millions de mots-jetons par jour et par modele
-  fiches_max_par_passage: 150  # au plus par collecte (environ 8 minutes avec 3 fils)
+  fiches_max_par_passage: 250  # au plus par collecte : GitHub ne lance qu'environ 3 collectes par jour
   fils: 3                      # fiches demandees en parallele
