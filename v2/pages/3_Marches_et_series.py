@@ -4,6 +4,11 @@ import plotly.express as px
 import streamlit as st
 import yaml
 
+import importlib
+
+import commun
+
+importlib.reload(commun)  # Streamlit Cloud garde parfois l'ancienne version de commun.py en memoire
 from commun import NOMS_AIRES, RACINE, charger_series
 
 st.set_page_config(page_title="Marchés et séries", page_icon="◈", layout="wide")

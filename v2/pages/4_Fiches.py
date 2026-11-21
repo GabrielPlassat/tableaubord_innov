@@ -4,6 +4,11 @@ from datetime import datetime, timezone
 import pandas as pd
 import streamlit as st
 
+import importlib
+
+import commun
+
+importlib.reload(commun)  # Streamlit Cloud garde parfois l'ancienne version de commun.py en memoire
 from commun import NOMS_AIRES, ORDRE_AIRES, charger_fiches
 
 st.set_page_config(page_title="Fiches", page_icon="◈", layout="wide")

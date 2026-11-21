@@ -1,6 +1,11 @@
 """Innovation Radar v2 - page d'accueil (sera le cockpit a partir du Sprint 5)."""
 import streamlit as st
 
+import importlib
+
+import commun
+
+importlib.reload(commun)  # Streamlit Cloud garde parfois l'ancienne version de commun.py en memoire
 from commun import charger_seuils, charger_sources, indicateur_diversite, parts_par_aire
 
 st.set_page_config(page_title="Innovation Radar v2", page_icon="◈", layout="wide")
