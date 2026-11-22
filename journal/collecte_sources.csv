@@ -105,11 +105,11 @@ scroll-in,2026-11-22,,,100,OK
 the-wire,,2026-11-14,Aucun article lisible,0,ECHEC
 mongabay-india,2026-11-22,,,12,OK
 amar-ujala,2026-11-22,,,11,OK
-dawn,2026-11-22,,,28,OK
+dawn,2026-11-22,,,29,OK
 the-daily-star-bangladesh,2026-11-22,,,0,OK
 mongabay-indonesia,2026-11-22,,,20,OK
-cnn-indonesia,2026-11-22,,,100,OK
-vnexpress,2026-11-22,,,52,OK
+cnn-indonesia,2026-11-22,,,10,OK
+vnexpress,2026-11-22,,,55,OK
 rappler,2026-11-22,,,10,OK
 cna-channel-newsasia,2026-11-22,,,20,OK
 allafrica-derniers-titres,2026-11-22,,,33,OK
@@ -127,10 +127,10 @@ el-desconcierto,,2026-11-14,HTTP 404,0,ECHEC
 animal-politico,,2026-11-14,HTTP 504,0,SIGNALEE
 attaqa,2026-11-22,,,10,OK
 al-jazeera-english,2026-11-22,,,25,OK
-the-national-eau,2026-11-22,,,99,OK
+the-national-eau,2026-11-22,,,95,OK
 arab-news,2026-11-14,2026-11-14,HTTP 403,0,ECHEC
 mada-masr,2026-11-22,,,0,OK
-tass,2026-11-22,,,55,OK
+tass,2026-11-22,,,43,OK
 kommersant,2026-11-22,,,100,OK
 meduza,2026-11-22,,,30,OK
 global-voices,2026-11-22,,,15,OK
