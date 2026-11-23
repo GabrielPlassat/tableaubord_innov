@@ -2,7 +2,7 @@ id,dernier_succes,premier_echec,derniere_erreur,articles_dernier_passage,statut
 insee-informations-rapides,2026-11-23,,,10,OK
 insee-communiques-de-presse,2026-11-23,,,0,OK
 banque-de-france-publications,,2026-11-14,HTTP 404,0,ECHEC
-bce-communiques-officiels,2026-11-23,,,6,OK
+bce-communiques-officiels,2026-11-23,,,5,OK
 ocde-actualites,,2026-11-14,HTTP 403,0,ECHEC
 fmi-actualites,,2026-11-14,HTTP 404,0,ECHEC
 le-grand-continent,2026-11-23,,,10,OK
@@ -23,14 +23,14 @@ investing-com-petrole-commodites,2026-11-23,,,10,OK
 energytrend-prix-solaire,,2026-11-14,HTTP 404,0,ECHEC
 bloombergnef-batteries-energie,2026-11-23,,,4,OK
 fxstreet-devises-crypto,,2026-11-14,HTTP 403,0,ECHEC
-cointelegraph-bitcoin-crypto,2026-11-23,,,26,OK
+cointelegraph-bitcoin-crypto,2026-11-23,,,25,OK
 xinhua-economie-yuan-chine,,2026-11-14,ConnectionError,0,ECHEC
 epoch-ai-performances-llm,,2026-11-14,HTTP 404,0,ECHEC
 github-trending-tous-langages,2026-11-23,,,16,OK
 github-trending-python,2026-11-23,,,23,OK
 github-trending-javascript,2026-11-23,,,11,OK
 changelog-nightly,,2026-11-14,HTTP 404,0,ECHEC
-hugging-face-daily-papers,2026-11-23,,,50,OK
+hugging-face-daily-papers,2026-11-23,,,46,OK
 hugging-face-blog-officiel,2026-11-23,,,7,OK
 hf-leaderboard-chatbot-arena,,2026-11-14,HTTP 401,0,ECHEC
 benedict-evans,2026-11-23,,,0,OK
@@ -42,7 +42,7 @@ tariq-krim,2026-11-23,,,1,OK
 philippe-meda,2026-11-23,,,0,OK
 bernard-marr,2026-11-23,,,4,OK
 roger-spitz,,2026-11-14,HTTP 404,0,ECHEC
-tim-o-reilly,2026-11-23,,,9,OK
+tim-o-reilly,2026-11-23,,,8,OK
 kai-fu-lee,2026-11-23,,,0,OK
 rui-ma,,2026-11-14,HTTP 404,0,ECHEC
 zeyi-yang,2026-11-23,,,0,OK
@@ -66,9 +66,9 @@ parlement-eu-communiques-comites,,2026-11-14,HTTP 403,0,ECHEC
 eur-lex-nouvelles-publications-en,,2026-11-14,Aucun article lisible,0,ECHEC
 eur-lex-nouvelles-publications-fr,,2026-11-14,Aucun article lisible,0,ECHEC
 ai-act-observatory,2026-11-23,,,0,OK
-federal-register-toutes-agences,2026-11-23,,,9,OK
-federal-register-dept-of-energy,2026-11-23,,,31,OK
-federal-register-dept-of-transportation,2026-11-23,,,52,OK
+federal-register-toutes-agences,2026-11-23,,,7,OK
+federal-register-dept-of-energy,2026-11-23,,,25,OK
+federal-register-dept-of-transportation,2026-11-23,,,43,OK
 ftc-communiques-officiels,,2026-11-14,HTTP 403,0,ECHEC
 nist-actualites-standards-tech,2026-11-23,,,2,OK
 tech-policy-press,,2026-11-14,Aucun article lisible,0,ECHEC
@@ -86,10 +86,10 @@ the-batch-deeplearning-ai,,2026-11-14,HTTP 403,0,ECHEC
 venturebeat-ai,,2026-11-14,HTTP 429,0,SIGNALEE
 nature-news,2026-11-23,,,75,OK
 commission-eu-dae-numerique-ia,2026-11-23,,,30,OK
-commission-eu-dg-ener-energie,2026-11-23,,,8,OK
+commission-eu-dg-ener-energie,2026-11-23,,,10,OK
 commission-eu-dg-move-transport,,2026-11-14,HTTP 404,0,ECHEC
 commission-eu-dg-connect,,2026-11-14,HTTP 404,0,ECHEC
-jrc-science-hub-actualites,,2026-11-14,HTTP 404,0,SIGNALEE
+jrc-science-hub-actualites,,2026-11-14,HTTP 429,0,SIGNALEE
 parlement-eu-think-tank-etudes,,2026-11-14,HTTP 403,0,ECHEC
 conseil-ue-rss-actualites,,2026-11-14,HTTP 403,0,ECHEC
 enisa-cybersecurite-eu,,2026-11-14,HTTP 404,0,ECHEC
@@ -103,23 +103,23 @@ hankyoreh-english,2026-11-23,,,30,OK
 the-hindu,2026-11-23,,,60,OK
 scroll-in,2026-11-23,,,100,OK
 the-wire,,2026-11-14,Aucun article lisible,0,ECHEC
-mongabay-india,2026-11-23,,,12,OK
+mongabay-india,2026-11-23,,,14,OK
 amar-ujala,2026-11-23,,,11,OK
-dawn,2026-11-22,2026-11-23,HTTP 403,0,ECHEC
+dawn,2026-11-23,,,25,OK
 the-daily-star-bangladesh,2026-11-23,,,0,OK
 mongabay-indonesia,2026-11-23,,,20,OK
 cnn-indonesia,2026-11-23,,,10,OK
-vnexpress,2026-11-23,,,55,OK
+vnexpress,2026-11-23,,,49,OK
 rappler,2026-11-23,,,10,OK
 cna-channel-newsasia,2026-11-23,,,20,OK
 allafrica-derniers-titres,2026-11-23,,,33,OK
 premium-times,2026-11-23,,,15,OK
 techcabal,2026-11-23,,,10,OK
-daily-maverick,2026-11-23,,,50,OK
-the-conversation-africa,2026-11-23,,,18,OK
+daily-maverick,2026-11-23,,,51,OK
+the-conversation-africa,2026-11-23,,,17,OK
 jeune-afrique,2026-11-23,,,30,OK
 addis-standard,,2026-11-14,HTTP 403,0,ECHEC
-mongabay-latam,2026-11-23,,,30,OK
+mongabay-latam,2026-11-23,,,29,OK
 agencia-brasil,2026-11-23,,,10,OK
 folha-de-s-paulo,2026-11-23,,,100,OK
 ciper-chile,2026-11-23,,,16,OK
@@ -127,13 +127,13 @@ el-desconcierto,,2026-11-14,HTTP 404,0,ECHEC
 animal-politico,,2026-11-14,HTTP 504,0,SIGNALEE
 attaqa,2026-11-23,,,10,OK
 al-jazeera-english,2026-11-23,,,25,OK
-the-national-eau,2026-11-23,,,80,OK
+the-national-eau,2026-11-23,,,90,OK
 arab-news,2026-11-14,2026-11-14,HTTP 403,0,ECHEC
 mada-masr,2026-11-23,,,0,OK
-tass,2026-11-23,,,48,OK
+tass,2026-11-23,,,100,OK
 kommersant,2026-11-23,,,100,OK
 meduza,2026-11-23,,,30,OK
 global-voices,2026-11-23,,,14,OK
-global-voices-en-francais,2026-11-23,,,2,OK
+global-voices-en-francais,2026-11-23,,,3,OK
 dialogue-earth,2026-11-23,,,5,OK
 dialogue-earth-en-espagnol,2026-11-23,,,2,OK
