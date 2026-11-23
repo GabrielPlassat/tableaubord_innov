@@ -1,93 +1,93 @@
 id,nom,url,aire_source,langue,date_audit,statut,code_http,nb_articles,dernier_article,message,duree_s
-insee-informations-rapides,INSEE - Publications conjoncturelles,https://www.insee.fr/fr/flux/3,EU,fr,2026-11-21,OK,200,115,2026-11-20,,0.8
-insee-communiques-de-presse,INSEE - Chiffres détaillés,https://www.insee.fr/fr/flux/4,EU,fr,2026-11-21,OK,200,37,2026-11-10,,0.6
-bce-communiques-officiels,BCE - Communiqués officiels,https://www.ecb.europa.eu/rss/press.html,EU,en,2026-11-21,OK,200,15,2026-11-20,,0.6
-le-grand-continent,Le Grand Continent,https://legrandcontinent.eu/fr/feed/,EU,fr,2026-11-21,OK,200,10,2026-11-21,,0.3
-alternatives-economiques,Alternatives Économiques,https://www.alternatives-economiques.fr/rss.xml,EU,fr,2026-11-21,OK,200,10,2026-11-21,,0.4
-la-tribune-economie,La Tribune Économie,https://www.latribune.fr/feed.xml,EU,fr,2026-11-21,OK,200,20,2026-11-21,,0.2
-project-syndicate,Project Syndicate,https://www.project-syndicate.org/rss,EU,en,2026-11-21,OK,200,20,2026-11-20,,0.5
-connaissance-des-energies,Connaissance des Énergies,https://www.connaissancedesenergies.org/rss.xml,EU,fr,2026-11-21,OK,200,30,2026-11-20,,0.2
-revolution-energetique,Révolution Énergétique,https://www.revolution-energetique.com/feed/,EU,fr,2026-11-21,OK,200,50,2026-11-21,,1.4
-pv-magazine-france,PV Magazine France,https://www.pv-magazine.fr/feed/,EU,fr,2026-11-21,OK,200,10,2026-11-20,,0.3
-carbon-brief,Carbon Brief,https://www.carbonbrief.org/feed/,EU,en,2026-11-21,OK,200,12,2026-11-17,,0.4
-oil-price,Oil Price,https://oilprice.com/rss/main,US,en,2026-11-21,OK,200,15,2026-11-21,,0.3
-enerzine,Enerzine,https://www.enerzine.com/feed,EU,fr,2026-11-21,OK,200,10,2026-11-21,,1.3
-investing-com-petrole-commodites,Investing.com - Pétrole & Commodités,https://www.investing.com/rss/news_11.rss,MO,en,2026-11-21,OK,200,10,2026-11-21,,0.2
-bloombergnef-batteries-energie,BloombergNEF - Batteries & Énergie,https://about.bnef.com/feed/,US,en,2026-11-21,OK,200,10,2026-11-20,,0.2
-cointelegraph-bitcoin-crypto,CoinTelegraph - Bitcoin & Crypto,https://cointelegraph.com/rss/tag/bitcoin,US,en,2026-11-21,OK,200,30,2026-11-20,,0.2
-github-trending-tous-langages,GitHub Trending - Tous langages,https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml,US,en,2026-11-21,OK,200,16,,,0.9
-github-trending-python,GitHub Trending - Python,https://mshibanami.github.io/GitHubTrendingRSS/daily/python.xml,US,en,2026-11-21,OK,200,23,,,1.5
-github-trending-javascript,GitHub Trending - JavaScript,https://mshibanami.github.io/GitHubTrendingRSS/daily/javascript.xml,US,en,2026-11-21,OK,200,11,,,0.3
-hugging-face-daily-papers,Hugging Face - Daily Papers,https://papers.takara.ai/api/feed,US,en,2026-11-21,OK,200,50,2026-11-19,,0.9
-hugging-face-blog-officiel,Hugging Face - Blog officiel,https://huggingface.co/blog/feed.xml,US,en,2026-11-21,OK,200,915,2026-11-20,,0.6
-benedict-evans,Benedict Evans,https://www.ben-evans.com/benedictevans/rss.xml,EU,en,2026-11-21,OK,200,20,2026-09-03,,1.0
-azeem-azhar,Azeem Azhar,https://www.exponentialview.co/feed,EU,en,2026-11-21,OK,200,20,2026-11-16,,1.0
-jack-clark,Jack Clark,https://jack-clark.net/feed/,US,en,2026-11-21,OK,200,10,2026-11-16,,0.7
-kate-raworth,Kate Raworth,https://www.kateraworth.com/feed/,EU,en,2026-11-21,ENDORMI,200,10,2020-09-30,Dernier article de plus de 90 jours,2.4
-tariq-krim,Tariq Krim,https://www.cybernetica.fr/rss/,EU,fr,2026-11-21,OK,200,15,2026-11-15,,0.7
-philippe-meda,Philippe Méda,https://www.icopilots.com/rss/,EU,fr,2026-11-21,OK,200,15,2026-11-09,,0.9
-bernard-marr,Bernard Marr,https://bernardmarr.com/feed/,EU,en,2026-11-21,OK,200,10,2026-11-17,,1.4
-tim-o-reilly,Tim O'Reilly,https://www.oreilly.com/radar/feed/index.xml,US,en,2026-11-21,OK,200,15,2026-11-20,,0.6
-kai-fu-lee,Kai-Fu Lee,https://medium.com/feed/@kaifulee,CN,en,2026-11-21,ENDORMI,200,10,2024-10-19,Dernier article de plus de 90 jours,0.4
-zeyi-yang,Zeyi Yang,https://www.technologyreview.com/author/zeyi-yang/feed/,US,en,2026-11-21,ENDORMI,200,10,2024-08-07,Dernier article de plus de 90 jours,0.3
-scott-galloway,Scott Galloway,https://www.profgalloway.com/feed/,US,en,2026-11-21,ENDORMI,200,29,2017-06-09,Dernier article de plus de 90 jours,0.4
-cory-doctorow,Cory Doctorow,https://pluralistic.net/feed/,US,en,2026-11-21,OK,200,30,2026-11-20,,0.7
-niklas-zennstrom,Niklas Zennström,https://atomico.com/insights/feed/,EU,en,2026-11-21,ERREUR,429,0,,HTTP 429,0.2
-cecilia-skingsley,BRI - Discours de banquiers centraux,https://www.bis.org/doclist/cbspeeches.rss,GLO,en,2026-11-21,OK,200,50,2026-11-19,,1.1
-ronaldo-lemos,Ronaldo Lemos,https://medium.com/feed/@lemos_ronaldo,LA,en,2026-11-21,ENDORMI,200,6,2017-09-29,Dernier article de plus de 90 jours,0.5
-ai-act-observatory,AI Act Observatory,https://artificialintelligenceact.eu/feed/,EU,en,2026-11-21,OK,200,28,2026-11-13,,1.2
-federal-register-toutes-agences,Federal Register - Toutes agences,https://www.federalregister.gov/api/v1/documents.rss?conditions[significant]=1,US,en,2026-11-21,OK,200,26,2026-11-23,,0.2
-federal-register-dept-of-energy,Federal Register - Dept of Energy,https://www.federalregister.gov/api/v1/documents.rss?conditions[agencies][]=energy-department,US,en,2026-11-21,OK,200,142,2026-11-23,,0.2
-federal-register-dept-of-transportation,Federal Register - Dept of Transportation,https://www.federalregister.gov/api/v1/documents.rss?conditions[agencies][]=transportation-department,US,en,2026-11-21,OK,200,194,2026-11-23,,0.3
-nist-actualites-standards-tech,NIST - Actualités standards & tech,https://www.nist.gov/news-events/news/rss.xml,US,en,2026-11-21,OK,200,40,2026-11-19,,0.2
-eea-agence-environnement-eu,EEA - Agence Environnement EU,https://www.eea.europa.eu/en/newsroom/news/rss.xml,EU,en,2026-11-21,OK,200,25,2026-11-20,,0.6
-mit-technology-review,MIT Technology Review,https://www.technologyreview.com/feed/,US,en,2026-11-21,OK,200,10,2026-11-20,,0.2
-techcrunch,TechCrunch,https://techcrunch.com/feed/,US,en,2026-11-21,OK,200,20,2026-11-21,,0.2
-wired,Wired,https://www.wired.com/feed/rss,US,en,2026-11-21,OK,200,50,2026-11-21,,0.2
-the-verge,The Verge,https://www.theverge.com/rss/index.xml,US,en,2026-11-21,OK,200,10,2026-11-21,,0.2
-next-inpact,Next INpact,https://next.ink/feed/,EU,fr,2026-11-21,OK,200,50,2026-11-21,,1.9
-venturebeat-ai,VentureBeat AI,https://venturebeat.com/category/ai/feed/,US,en,2026-11-21,ERREUR,429,0,,HTTP 429,0.2
-nature-news,Nature News,https://www.nature.com/nature.rss,EU,en,2026-11-21,OK,200,75,2026-11-20,,0.2
-commission-eu-dae-numerique-ia,Commission EU - Communiqués de presse,https://ec.europa.eu/commission/presscorner/api/rss?language=en&pagesize=30,EU,en,2026-11-21,OK,200,30,2026-11-21,,1.2
-commission-eu-dg-ener-energie,Commission EU - Actualités,https://commission.europa.eu/news/feed_en,EU,en,2026-11-21,OK,200,30,2026-11-20,,0.8
-jrc-science-hub-actualites,JRC Science Hub actualités,https://joint-research-centre.ec.europa.eu/rss.xml,EU,en,2026-11-21,ERREUR,404,0,,HTTP 404,0.6
-36kr,36Kr,https://36kr.com/feed,CN,zh,2026-11-21,VIDE,200,0,,Aucun article lisible (page qui n'est pas un flux ?),2.1
-huxiu,Huxiu (虎嗅),https://www.huxiu.com/rss/0.xml,CN,zh,2026-11-21,ERREUR,,0,,"ReadTimeout: HTTPSConnectionPool(host='www.huxiu.com', port=443): Read timed out. (read timeout=25)",27.2
-south-china-morning-post-chine,South China Morning Post - Chine,https://www.scmp.com/rss/91/feed,CN,en,2026-11-21,OK,200,50,2026-11-21,,0.6
-nhk-actualites,NHK - Actualites,https://www3.nhk.or.jp/rss/news/cat0.xml,JK,ja,2026-11-21,ENDORMI,200,7,2026-08-08,Dernier article de plus de 90 jours,0.4
-nhk-economie,NHK - Economie,https://www3.nhk.or.jp/rss/news/cat5.xml,JK,ja,2026-11-21,ENDORMI,200,86,2026-08-08,Dernier article de plus de 90 jours,0.2
-yonhap,Yonhap (연합뉴스),https://www.yna.co.kr/rss/news.xml,JK,ko,2026-11-21,OK,200,120,2026-11-21,,1.5
-hankyoreh-english,Hankyoreh English,https://english.hani.co.kr/rss/,JK,en,2026-11-21,OK,200,30,,,1.7
-the-hindu,The Hindu,https://www.thehindu.com/feeder/default.rss,IN,en,2026-11-21,OK,200,60,2026-11-21,,0.4
-scroll-in,Scroll.in,https://feeds.feedburner.com/ScrollinArticles.rss,IN,en,2026-11-21,OK,200,100,2026-11-21,,0.3
-mongabay-india,Mongabay India,https://india.mongabay.com/feed/,IN,en,2026-11-21,OK,200,20,2026-11-20,,0.2
-amar-ujala,Amar Ujala,https://www.amarujala.com/rss/breaking-news.xml,IN,hi,2026-11-21,OK,200,11,2026-11-21,,0.1
-dawn,Dawn,https://www.dawn.com/feeds/home,IN,en,2026-11-21,OK,200,27,2026-11-21,,0.2
-the-daily-star-bangladesh,The Daily Star (Bangladesh),https://www.thedailystar.net/frontpage/rss.xml,IN,en,2026-11-21,ENDORMI,200,10,2022-07-22,Dernier article de plus de 90 jours,0.2
-mongabay-indonesia,Mongabay Indonesia,https://www.mongabay.co.id/feed/,ASE,id,2026-11-21,OK,200,20,2026-11-21,,0.4
-cnn-indonesia,CNN Indonesia,https://www.cnnindonesia.com/rss,ASE,id,2026-11-21,OK,200,100,2026-11-21,,0.2
-vnexpress,VnExpress,https://vnexpress.net/rss/tin-moi-nhat.rss,ASE,vi,2026-11-21,OK,200,49,2026-11-21,,1.9
-rappler,Rappler,https://www.rappler.com/feed/,ASE,en,2026-11-21,OK,200,10,2026-11-21,,0.3
-cna-channel-newsasia,CNA (Channel NewsAsia),https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml,ASE,en,2026-11-21,OK,200,20,2026-11-21,,0.3
-allafrica-derniers-titres,allAfrica - Derniers titres,https://allafrica.com/tools/headlines/rdf/latest/headlines.rdf,AF,en,2026-11-21,OK,200,33,2026-11-21,,0.2
-premium-times,Premium Times,https://www.premiumtimesng.com/feed,AF,en,2026-11-21,OK,200,15,2026-11-21,,0.9
-techcabal,TechCabal,https://techcabal.com/feed/,AF,en,2026-11-21,OK,200,10,2026-11-21,,1.5
-daily-maverick,Daily Maverick,https://www.dailymaverick.co.za/dmrss/,AF,en,2026-11-21,OK,200,53,2026-11-21,,0.1
-the-conversation-africa,The Conversation Africa,https://theconversation.com/africa/articles.atom,AF,en,2026-11-21,OK,200,50,2026-11-20,,0.5
-jeune-afrique,Jeune Afrique,https://www.jeuneafrique.com/feed/,AF,fr,2026-11-21,OK,200,30,2026-11-21,,0.2
-mongabay-latam,Mongabay Latam,https://es.mongabay.com/feed/,LA,es,2026-11-21,OK,200,30,2026-11-21,,0.3
-agencia-brasil,Agencia Brasil,https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml,LA,pt,2026-11-21,OK,200,10,2026-11-21,,0.4
-folha-de-s-paulo,Folha de S.Paulo,https://feeds.folha.uol.com.br/emcimadahora/rss091.xml,LA,pt,2026-11-21,OK,200,100,2026-11-21,,1.2
-ciper-chile,CIPER Chile,https://www.ciperchile.cl/feed/,LA,es,2026-11-21,OK,200,16,2026-11-21,,3.8
-animal-politico,Animal Politico,https://www.animalpolitico.com/feed,LA,es,2026-11-21,ERREUR,504,0,,HTTP 504,0.4
-attaqa,Attaqa (الطاقة),https://attaqa.net/feed/,GO,ar,2026-11-21,OK,200,10,2026-11-21,,0.9
-al-jazeera-english,Al Jazeera English,https://www.aljazeera.com/xml/rss/all.xml,GO,en,2026-11-21,OK,200,25,2026-11-21,,0.2
-the-national-eau,The National (EAU),https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml,GO,en,2026-11-21,OK,200,100,2026-11-21,,0.5
-mada-masr,Mada Masr,https://www.madamasr.com/en/feed/,MO,en,2026-11-21,OK,200,10,2026-10-27,,0.5
-tass,TASS,https://tass.com/rss/v2.xml,RU,en,2026-11-21,OK,200,77,2026-11-21,,1.2
-kommersant,Kommersant (Коммерсантъ),https://www.kommersant.ru/RSS/news.xml,RU,ru,2026-11-21,OK,200,499,2026-11-21,,2.4
-meduza,Meduza (Медуза),https://meduza.io/rss/all,RU,ru,2026-11-21,OK,200,30,2026-11-21,,0.2
-global-voices,Global Voices,https://globalvoices.org/feed/,GLO,en,2026-11-21,OK,200,15,2026-11-21,,1.4
-global-voices-en-francais,Global Voices en francais,https://fr.globalvoices.org/feed/,GLO,fr,2026-11-21,OK,200,10,2026-11-18,,0.9
-dialogue-earth,Dialogue Earth,https://dialogue.earth/feed/,GLO,en,2026-11-21,OK,200,10,2026-11-19,,1.8
-dialogue-earth-en-espagnol,Dialogue Earth en espagnol,https://dialogue.earth/es/feed/,LA,es,2026-11-21,OK,200,10,2026-11-18,,3.2
+insee-informations-rapides,INSEE - Publications conjoncturelles,https://www.insee.fr/fr/flux/3,EU,fr,2026-11-23,OK,200,112,2026-11-20,,1.0
+insee-communiques-de-presse,INSEE - Chiffres détaillés,https://www.insee.fr/fr/flux/4,EU,fr,2026-11-23,OK,200,36,2026-11-10,,0.7
+bce-communiques-officiels,BCE - Communiqués officiels,https://www.ecb.europa.eu/rss/press.html,EU,en,2026-11-23,OK,200,15,2026-11-23,,0.4
+le-grand-continent,Le Grand Continent,https://legrandcontinent.eu/fr/feed/,EU,fr,2026-11-23,OK,200,10,2026-11-23,,0.6
+alternatives-economiques,Alternatives Économiques,https://www.alternatives-economiques.fr/rss.xml,EU,fr,2026-11-23,OK,200,10,2026-11-23,,0.3
+la-tribune-economie,La Tribune Économie,https://www.latribune.fr/feed.xml,EU,fr,2026-11-23,OK,200,20,2026-11-23,,0.1
+project-syndicate,Project Syndicate,https://www.project-syndicate.org/rss,EU,en,2026-11-23,OK,200,20,2026-11-20,,0.5
+connaissance-des-energies,Connaissance des Énergies,https://www.connaissancedesenergies.org/rss.xml,EU,fr,2026-11-23,OK,200,30,2026-11-20,,0.2
+revolution-energetique,Révolution Énergétique,https://www.revolution-energetique.com/feed/,EU,fr,2026-11-23,OK,200,50,2026-11-23,,1.2
+pv-magazine-france,PV Magazine France,https://www.pv-magazine.fr/feed/,EU,fr,2026-11-23,OK,200,10,2026-11-23,,0.4
+carbon-brief,Carbon Brief,https://www.carbonbrief.org/feed/,EU,en,2026-11-23,OK,200,12,2026-11-17,,0.4
+oil-price,Oil Price,https://oilprice.com/rss/main,US,en,2026-11-23,OK,200,15,2026-11-23,,0.4
+enerzine,Enerzine,https://www.enerzine.com/feed,EU,fr,2026-11-23,OK,200,10,2026-11-23,,1.2
+investing-com-petrole-commodites,Investing.com - Pétrole & Commodités,https://www.investing.com/rss/news_11.rss,MO,en,2026-11-23,OK,200,10,2026-11-23,,0.2
+bloombergnef-batteries-energie,BloombergNEF - Batteries & Énergie,https://about.bnef.com/feed/,US,en,2026-11-23,OK,200,10,2026-11-20,,0.5
+cointelegraph-bitcoin-crypto,CoinTelegraph - Bitcoin & Crypto,https://cointelegraph.com/rss/tag/bitcoin,US,en,2026-11-23,OK,200,30,2026-11-23,,0.1
+github-trending-tous-langages,GitHub Trending - Tous langages,https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml,US,en,2026-11-23,OK,200,16,,,1.3
+github-trending-python,GitHub Trending - Python,https://mshibanami.github.io/GitHubTrendingRSS/daily/python.xml,US,en,2026-11-23,OK,200,23,,,0.9
+github-trending-javascript,GitHub Trending - JavaScript,https://mshibanami.github.io/GitHubTrendingRSS/daily/javascript.xml,US,en,2026-11-23,OK,200,11,,,0.3
+hugging-face-daily-papers,Hugging Face - Daily Papers,https://papers.takara.ai/api/feed,US,en,2026-11-23,OK,200,50,2026-11-19,,1.1
+hugging-face-blog-officiel,Hugging Face - Blog officiel,https://huggingface.co/blog/feed.xml,US,en,2026-11-23,OK,200,916,2026-11-23,,0.9
+benedict-evans,Benedict Evans,https://www.ben-evans.com/benedictevans/rss.xml,EU,en,2026-11-23,OK,200,20,2026-09-03,,1.0
+azeem-azhar,Azeem Azhar,https://www.exponentialview.co/feed,EU,en,2026-11-23,OK,200,20,2026-11-23,,1.0
+jack-clark,Jack Clark,https://jack-clark.net/feed/,US,en,2026-11-23,OK,200,10,2026-11-16,,0.9
+kate-raworth,Kate Raworth,https://www.kateraworth.com/feed/,EU,en,2026-11-23,ENDORMI,200,10,2020-09-30,Dernier article de plus de 90 jours,2.9
+tariq-krim,Tariq Krim,https://www.cybernetica.fr/rss/,EU,fr,2026-11-23,OK,200,15,2026-11-22,,0.6
+philippe-meda,Philippe Méda,https://www.icopilots.com/rss/,EU,fr,2026-11-23,OK,200,15,2026-11-09,,0.6
+bernard-marr,Bernard Marr,https://bernardmarr.com/feed/,EU,en,2026-11-23,OK,200,10,2026-11-17,,1.2
+tim-o-reilly,Tim O'Reilly,https://www.oreilly.com/radar/feed/index.xml,US,en,2026-11-23,OK,200,15,2026-11-20,,0.4
+kai-fu-lee,Kai-Fu Lee,https://medium.com/feed/@kaifulee,CN,en,2026-11-23,ENDORMI,200,10,2024-10-19,Dernier article de plus de 90 jours,0.3
+zeyi-yang,Zeyi Yang,https://www.technologyreview.com/author/zeyi-yang/feed/,US,en,2026-11-23,ENDORMI,200,10,2024-08-07,Dernier article de plus de 90 jours,0.2
+scott-galloway,Scott Galloway,https://www.profgalloway.com/feed/,US,en,2026-11-23,ENDORMI,200,29,2017-06-09,Dernier article de plus de 90 jours,0.3
+cory-doctorow,Cory Doctorow,https://pluralistic.net/feed/,US,en,2026-11-23,OK,200,30,2026-11-23,,1.6
+niklas-zennstrom,Niklas Zennström,https://atomico.com/insights/feed/,EU,en,2026-11-23,ERREUR,429,0,,HTTP 429,0.1
+cecilia-skingsley,BRI - Discours de banquiers centraux,https://www.bis.org/doclist/cbspeeches.rss,GLO,en,2026-11-23,OK,200,50,2026-11-19,,0.5
+ronaldo-lemos,Ronaldo Lemos,https://medium.com/feed/@lemos_ronaldo,LA,en,2026-11-23,ENDORMI,200,6,2017-09-29,Dernier article de plus de 90 jours,0.3
+ai-act-observatory,AI Act Observatory,https://artificialintelligenceact.eu/feed/,EU,en,2026-11-23,OK,200,28,2026-11-13,,1.1
+federal-register-toutes-agences,Federal Register - Toutes agences,https://www.federalregister.gov/api/v1/documents.rss?conditions[significant]=1,US,en,2026-11-23,OK,200,25,2026-11-23,,0.1
+federal-register-dept-of-energy,Federal Register - Dept of Energy,https://www.federalregister.gov/api/v1/documents.rss?conditions[agencies][]=energy-department,US,en,2026-11-23,OK,200,139,2026-11-23,,0.1
+federal-register-dept-of-transportation,Federal Register - Dept of Transportation,https://www.federalregister.gov/api/v1/documents.rss?conditions[agencies][]=transportation-department,US,en,2026-11-23,OK,200,182,2026-11-23,,0.2
+nist-actualites-standards-tech,NIST - Actualités standards & tech,https://www.nist.gov/news-events/news/rss.xml,US,en,2026-11-23,OK,200,40,2026-11-19,,0.0
+eea-agence-environnement-eu,EEA - Agence Environnement EU,https://www.eea.europa.eu/en/newsroom/news/rss.xml,EU,en,2026-11-23,OK,200,25,2026-11-23,,0.6
+mit-technology-review,MIT Technology Review,https://www.technologyreview.com/feed/,US,en,2026-11-23,OK,200,10,2026-11-23,,0.1
+techcrunch,TechCrunch,https://techcrunch.com/feed/,US,en,2026-11-23,OK,200,20,2026-11-23,,0.1
+wired,Wired,https://www.wired.com/feed/rss,US,en,2026-11-23,OK,200,50,2026-11-23,,0.1
+the-verge,The Verge,https://www.theverge.com/rss/index.xml,US,en,2026-11-23,OK,200,10,2026-11-23,,0.1
+next-inpact,Next INpact,https://next.ink/feed/,EU,fr,2026-11-23,OK,200,50,2026-11-23,,1.6
+venturebeat-ai,VentureBeat AI,https://venturebeat.com/category/ai/feed/,US,en,2026-11-23,ERREUR,429,0,,HTTP 429,0.1
+nature-news,Nature News,https://www.nature.com/nature.rss,EU,en,2026-11-23,OK,200,75,2026-11-23,,0.2
+commission-eu-dae-numerique-ia,Commission EU - Communiqués de presse,https://ec.europa.eu/commission/presscorner/api/rss?language=en&pagesize=30,EU,en,2026-11-23,OK,200,30,2026-11-23,,1.0
+commission-eu-dg-ener-energie,Commission EU - Actualités,https://commission.europa.eu/news/feed_en,EU,en,2026-11-23,OK,200,30,2026-11-22,,0.7
+jrc-science-hub-actualites,JRC Science Hub actualités,https://joint-research-centre.ec.europa.eu/rss.xml,EU,en,2026-11-23,ERREUR,404,0,,HTTP 404,1.0
+36kr,36Kr,https://36kr.com/feed,CN,zh,2026-11-23,VIDE,200,0,,Aucun article lisible (page qui n'est pas un flux ?),1.5
+huxiu,Huxiu (虎嗅),https://www.huxiu.com/rss/0.xml,CN,zh,2026-11-23,ERREUR,,0,,"ReadTimeout: HTTPSConnectionPool(host='www.huxiu.com', port=443): Read timed out. (read timeout=25)",25.5
+south-china-morning-post-chine,South China Morning Post - Chine,https://www.scmp.com/rss/91/feed,CN,en,2026-11-23,OK,200,50,2026-11-23,,0.5
+nhk-actualites,NHK - Actualites,https://www3.nhk.or.jp/rss/news/cat0.xml,JK,ja,2026-11-23,ENDORMI,200,7,2026-08-08,Dernier article de plus de 90 jours,0.6
+nhk-economie,NHK - Economie,https://www3.nhk.or.jp/rss/news/cat5.xml,JK,ja,2026-11-23,ENDORMI,200,86,2026-08-08,Dernier article de plus de 90 jours,0.8
+yonhap,Yonhap (연합뉴스),https://www.yna.co.kr/rss/news.xml,JK,ko,2026-11-23,OK,200,120,2026-11-23,,1.6
+hankyoreh-english,Hankyoreh English,https://english.hani.co.kr/rss/,JK,en,2026-11-23,OK,200,30,,,1.5
+the-hindu,The Hindu,https://www.thehindu.com/feeder/default.rss,IN,en,2026-11-23,OK,200,60,2026-11-23,,0.1
+scroll-in,Scroll.in,https://feeds.feedburner.com/ScrollinArticles.rss,IN,en,2026-11-23,OK,200,100,2026-11-23,,0.5
+mongabay-india,Mongabay India,https://india.mongabay.com/feed/,IN,en,2026-11-23,OK,200,20,2026-11-23,,0.1
+amar-ujala,Amar Ujala,https://www.amarujala.com/rss/breaking-news.xml,IN,hi,2026-11-23,OK,200,11,2026-11-23,,0.1
+dawn,Dawn,https://www.dawn.com/feeds/home,IN,en,2026-11-23,OK,200,27,2026-11-23,,0.2
+the-daily-star-bangladesh,The Daily Star (Bangladesh),https://www.thedailystar.net/frontpage/rss.xml,IN,en,2026-11-23,ENDORMI,200,10,2022-07-22,Dernier article de plus de 90 jours,0.1
+mongabay-indonesia,Mongabay Indonesia,https://www.mongabay.co.id/feed/,ASE,id,2026-11-23,OK,200,20,2026-11-23,,0.6
+cnn-indonesia,CNN Indonesia,https://www.cnnindonesia.com/rss,ASE,id,2026-11-23,OK,200,100,2026-11-23,,0.5
+vnexpress,VnExpress,https://vnexpress.net/rss/tin-moi-nhat.rss,ASE,vi,2026-11-23,OK,200,49,2026-11-23,,2.0
+rappler,Rappler,https://www.rappler.com/feed/,ASE,en,2026-11-23,OK,200,10,2026-11-23,,1.6
+cna-channel-newsasia,CNA (Channel NewsAsia),https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml,ASE,en,2026-11-23,OK,200,20,2026-11-23,,0.1
+allafrica-derniers-titres,allAfrica - Derniers titres,https://allafrica.com/tools/headlines/rdf/latest/headlines.rdf,AF,en,2026-11-23,OK,200,33,2026-11-23,,0.2
+premium-times,Premium Times,https://www.premiumtimesng.com/feed,AF,en,2026-11-23,OK,200,15,2026-11-23,,0.5
+techcabal,TechCabal,https://techcabal.com/feed/,AF,en,2026-11-23,OK,200,10,2026-11-23,,0.7
+daily-maverick,Daily Maverick,https://www.dailymaverick.co.za/dmrss/,AF,en,2026-11-23,OK,200,53,2026-11-23,,0.1
+the-conversation-africa,The Conversation Africa,https://theconversation.com/africa/articles.atom,AF,en,2026-11-23,OK,200,50,2026-11-23,,0.3
+jeune-afrique,Jeune Afrique,https://www.jeuneafrique.com/feed/,AF,fr,2026-11-23,OK,200,30,2026-11-23,,0.5
+mongabay-latam,Mongabay Latam,https://es.mongabay.com/feed/,LA,es,2026-11-23,OK,200,30,2026-11-22,,0.1
+agencia-brasil,Agencia Brasil,https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml,LA,pt,2026-11-23,OK,200,10,2026-11-23,,0.5
+folha-de-s-paulo,Folha de S.Paulo,https://feeds.folha.uol.com.br/emcimadahora/rss091.xml,LA,pt,2026-11-23,OK,200,100,2026-11-23,,1.1
+ciper-chile,CIPER Chile,https://www.ciperchile.cl/feed/,LA,es,2026-11-23,OK,200,16,2026-11-23,,3.5
+animal-politico,Animal Politico,https://www.animalpolitico.com/feed,LA,es,2026-11-23,ERREUR,504,0,,HTTP 504,0.5
+attaqa,Attaqa (الطاقة),https://attaqa.net/feed/,GO,ar,2026-11-23,OK,200,10,2026-11-23,,0.6
+al-jazeera-english,Al Jazeera English,https://www.aljazeera.com/xml/rss/all.xml,GO,en,2026-11-23,OK,200,25,2026-11-23,,0.1
+the-national-eau,The National (EAU),https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml,GO,en,2026-11-23,OK,200,100,2026-11-23,,0.4
+mada-masr,Mada Masr,https://www.madamasr.com/en/feed/,MO,en,2026-11-23,OK,200,10,2026-10-27,,0.3
+tass,TASS,https://tass.com/rss/v2.xml,RU,en,2026-11-23,OK,200,100,2026-11-23,,0.7
+kommersant,Kommersant (Коммерсантъ),https://www.kommersant.ru/RSS/news.xml,RU,ru,2026-11-23,OK,200,349,2026-11-23,,1.5
+meduza,Meduza (Медуза),https://meduza.io/rss/all,RU,ru,2026-11-23,OK,200,30,2026-11-23,,0.4
+global-voices,Global Voices,https://globalvoices.org/feed/,GLO,en,2026-11-23,OK,200,15,2026-11-23,,0.8
+global-voices-en-francais,Global Voices en francais,https://fr.globalvoices.org/feed/,GLO,fr,2026-11-23,OK,200,10,2026-11-22,,0.9
+dialogue-earth,Dialogue Earth,https://dialogue.earth/feed/,GLO,en,2026-11-23,OK,200,10,2026-11-19,,0.5
+dialogue-earth-en-espagnol,Dialogue Earth en espagnol,https://dialogue.earth/es/feed/,LA,es,2026-11-23,OK,200,10,2026-11-18,,0.2
