@@ -2,7 +2,7 @@ id,dernier_succes,premier_echec,derniere_erreur,articles_dernier_passage,statut
 insee-informations-rapides,2026-11-24,,,12,OK
 insee-communiques-de-presse,2026-11-24,,,1,OK
 banque-de-france-publications,,2026-11-14,HTTP 404,0,ECHEC
-bce-communiques-officiels,2026-11-24,,,7,OK
+bce-communiques-officiels,2026-11-24,,,6,OK
 ocde-actualites,,2026-11-14,HTTP 403,0,ECHEC
 fmi-actualites,,2026-11-14,HTTP 404,0,ECHEC
 le-grand-continent,2026-11-24,,,10,OK
@@ -16,22 +16,22 @@ actu-environnement,,2026-11-14,HTTP 404,0,ECHEC
 revolution-energetique,2026-11-24,,,12,OK
 pv-magazine-france,2026-11-24,,,10,OK
 european-energy-review,,2026-11-14,SSLError,0,ECHEC
-carbon-brief,2026-11-24,,,1,OK
+carbon-brief,2026-11-24,,,3,OK
 oil-price,2026-11-24,,,15,OK
 enerzine,2026-11-24,,,10,OK
 investing-com-petrole-commodites,2026-11-24,,,10,OK
 energytrend-prix-solaire,,2026-11-14,HTTP 404,0,ECHEC
 bloombergnef-batteries-energie,2026-11-24,,,5,OK
 fxstreet-devises-crypto,,2026-11-14,HTTP 403,0,ECHEC
-cointelegraph-bitcoin-crypto,2026-11-24,,,27,OK
+cointelegraph-bitcoin-crypto,2026-11-24,,,28,OK
 xinhua-economie-yuan-chine,,2026-11-14,ConnectionError,0,ECHEC
 epoch-ai-performances-llm,,2026-11-14,HTTP 404,0,ECHEC
 github-trending-tous-langages,2026-11-24,,,16,OK
 github-trending-python,2026-11-24,,,23,OK
 github-trending-javascript,2026-11-24,,,11,OK
 changelog-nightly,,2026-11-14,HTTP 404,0,ECHEC
-hugging-face-daily-papers,2026-11-24,,,42,OK
-hugging-face-blog-officiel,2026-11-24,,,9,OK
+hugging-face-daily-papers,2026-11-24,,,33,OK
+hugging-face-blog-officiel,2026-11-24,,,10,OK
 hf-leaderboard-chatbot-arena,,2026-11-14,HTTP 401,0,ECHEC
 benedict-evans,2026-11-24,,,0,OK
 stephane-schultz-15marches,2026-11-14,2026-11-14,HTTP 403,0,ECHEC
@@ -42,7 +42,7 @@ tariq-krim,2026-11-24,,,1,OK
 philippe-meda,2026-11-24,,,1,OK
 bernard-marr,2026-11-24,,,0,OK
 roger-spitz,,2026-11-14,HTTP 404,0,ECHEC
-tim-o-reilly,2026-11-24,,,7,OK
+tim-o-reilly,2026-11-24,,,6,OK
 kai-fu-lee,2026-11-24,,,0,OK
 rui-ma,,2026-11-14,HTTP 404,0,ECHEC
 zeyi-yang,2026-11-24,,,0,OK
@@ -86,10 +86,10 @@ the-batch-deeplearning-ai,,2026-11-14,HTTP 403,0,ECHEC
 venturebeat-ai,,2026-11-14,HTTP 429,0,SIGNALEE
 nature-news,2026-11-24,,,75,OK
 commission-eu-dae-numerique-ia,2026-11-24,,,30,OK
-commission-eu-dg-ener-energie,2026-11-24,,,8,OK
+commission-eu-dg-ener-energie,2026-11-24,,,7,OK
 commission-eu-dg-move-transport,,2026-11-14,HTTP 404,0,ECHEC
 commission-eu-dg-connect,,2026-11-14,HTTP 404,0,ECHEC
-jrc-science-hub-actualites,,2026-11-14,HTTP 404,0,SIGNALEE
+jrc-science-hub-actualites,,2026-11-14,HTTP 429,0,SIGNALEE
 parlement-eu-think-tank-etudes,,2026-11-14,HTTP 403,0,ECHEC
 conseil-ue-rss-actualites,,2026-11-14,HTTP 403,0,ECHEC
 enisa-cybersecurite-eu,,2026-11-14,HTTP 404,0,ECHEC
@@ -103,9 +103,9 @@ hankyoreh-english,2026-11-24,,,30,OK
 the-hindu,2026-11-24,,,60,OK
 scroll-in,2026-11-24,,,100,OK
 the-wire,,2026-11-14,Aucun article lisible,0,ECHEC
-mongabay-india,2026-11-24,,,14,OK
+mongabay-india,2026-11-24,,,12,OK
 amar-ujala,2026-11-24,,,11,OK
-dawn,2026-11-24,,,24,OK
+dawn,2026-11-24,,,27,OK
 the-daily-star-bangladesh,2026-11-24,,,0,OK
 mongabay-indonesia,2026-11-24,,,20,OK
 cnn-indonesia,2026-11-24,,,10,OK
@@ -115,7 +115,7 @@ cna-channel-newsasia,2026-11-24,,,20,OK
 allafrica-derniers-titres,2026-11-24,,,33,OK
 premium-times,2026-11-24,,,15,OK
 techcabal,2026-11-24,,,10,OK
-daily-maverick,2026-11-24,,,47,OK
+daily-maverick,2026-11-24,,,46,OK
 the-conversation-africa,2026-11-24,,,16,OK
 jeune-afrique,2026-11-24,,,30,OK
 addis-standard,,2026-11-14,HTTP 403,0,ECHEC
@@ -133,7 +133,7 @@ mada-masr,2026-11-24,,,0,OK
 tass,2026-11-24,,,100,OK
 kommersant,2026-11-24,,,100,OK
 meduza,2026-11-24,,,30,OK
-global-voices,2026-11-24,,,14,OK
+global-voices,2026-11-24,,,13,OK
 global-voices-en-francais,2026-11-24,,,3,OK
-dialogue-earth,2026-11-24,,,6,OK
-dialogue-earth-en-espagnol,2026-11-24,,,3,OK
+dialogue-earth,2026-11-24,,,3,OK
+dialogue-earth-en-espagnol,2026-11-24,,,2,OK
