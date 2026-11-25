@@ -11,26 +11,26 @@ la-tribune-economie,2026-11-25,,,20,OK
 project-syndicate,2026-11-25,,,20,OK
 aie-actualites,,2026-11-14,HTTP 403,0,ECHEC
 rte-eco2mix-actualites,,2026-11-14,Aucun article lisible,0,ECHEC
-connaissance-des-energies,2026-11-25,,,4,OK
+connaissance-des-energies,2026-11-25,,,5,OK
 actu-environnement,,2026-11-14,HTTP 404,0,ECHEC
-revolution-energetique,2026-11-25,,,13,OK
+revolution-energetique,2026-11-25,,,15,OK
 pv-magazine-france,2026-11-25,,,10,OK
 european-energy-review,,2026-11-14,SSLError,0,ECHEC
-carbon-brief,2026-11-25,,,3,OK
+carbon-brief,2026-11-25,,,4,OK
 oil-price,2026-11-25,,,15,OK
 enerzine,2026-11-25,,,10,OK
 investing-com-petrole-commodites,2026-11-25,,,10,OK
 energytrend-prix-solaire,,2026-11-14,HTTP 404,0,ECHEC
 bloombergnef-batteries-energie,2026-11-25,,,5,OK
 fxstreet-devises-crypto,,2026-11-14,HTTP 403,0,ECHEC
-cointelegraph-bitcoin-crypto,2026-11-25,,,28,OK
+cointelegraph-bitcoin-crypto,2026-11-25,,,27,OK
 xinhua-economie-yuan-chine,,2026-11-14,ConnectionError,0,ECHEC
 epoch-ai-performances-llm,,2026-11-14,HTTP 404,0,ECHEC
 github-trending-tous-langages,2026-11-25,,,16,OK
 github-trending-python,2026-11-25,,,23,OK
 github-trending-javascript,2026-11-25,,,11,OK
 changelog-nightly,,2026-11-14,HTTP 404,0,ECHEC
-hugging-face-daily-papers,2026-11-25,,,26,OK
+hugging-face-daily-papers,2026-11-25,,,50,OK
 hugging-face-blog-officiel,2026-11-25,,,8,OK
 hf-leaderboard-chatbot-arena,,2026-11-14,HTTP 401,0,ECHEC
 benedict-evans,2026-11-25,,,0,OK
@@ -47,7 +47,7 @@ kai-fu-lee,2026-11-25,,,0,OK
 rui-ma,,2026-11-14,HTTP 404,0,ECHEC
 zeyi-yang,2026-11-25,,,0,OK
 scott-galloway,2026-11-25,,,0,OK
-cory-doctorow,2026-11-25,,,4,OK
+cory-doctorow,2026-11-25,,,5,OK
 tomi-adeyrun,,2026-11-14,HTTP 403,0,ECHEC
 andile-masuku,,2026-11-14,Aucun article lisible,0,ECHEC
 rebecca-enonchong,,2026-11-14,HTTP 404,0,ECHEC
@@ -70,7 +70,7 @@ federal-register-toutes-agences,2026-11-25,,,8,OK
 federal-register-dept-of-energy,2026-11-25,,,34,OK
 federal-register-dept-of-transportation,2026-11-25,,,64,OK
 ftc-communiques-officiels,,2026-11-14,HTTP 403,0,ECHEC
-nist-actualites-standards-tech,2026-11-25,,,2,OK
+nist-actualites-standards-tech,2026-11-25,,,1,OK
 tech-policy-press,,2026-11-14,Aucun article lisible,0,ECHEC
 legifrance-journal-officiel,,2026-11-14,HTTP 403,0,ECHEC
 eea-agence-environnement-eu,2026-11-25,,,3,OK
@@ -84,9 +84,9 @@ techniques-ingenieur,,2026-11-14,Aucun article lisible,0,ECHEC
 decideurs-magazine,,2026-11-14,HTTP 404,0,ECHEC
 the-batch-deeplearning-ai,,2026-11-14,HTTP 403,0,ECHEC
 venturebeat-ai,,2026-11-14,HTTP 429,0,SIGNALEE
-nature-news,2026-11-25,,,63,OK
+nature-news,2026-11-25,,,75,OK
 commission-eu-dae-numerique-ia,2026-11-25,,,30,OK
-commission-eu-dg-ener-energie,2026-11-25,,,7,OK
+commission-eu-dg-ener-energie,2026-11-25,,,8,OK
 commission-eu-dg-move-transport,,2026-11-14,HTTP 404,0,ECHEC
 commission-eu-dg-connect,,2026-11-14,HTTP 404,0,ECHEC
 jrc-science-hub-actualites,,2026-11-14,HTTP 404,0,SIGNALEE
@@ -105,17 +105,17 @@ scroll-in,2026-11-25,,,100,OK
 the-wire,,2026-11-14,Aucun article lisible,0,ECHEC
 mongabay-india,2026-11-25,,,12,OK
 amar-ujala,2026-11-25,,,11,OK
-dawn,2026-11-25,,,28,OK
+dawn,2026-11-25,,,27,OK
 the-daily-star-bangladesh,2026-11-25,,,0,OK
 mongabay-indonesia,2026-11-25,,,20,OK
-cnn-indonesia,2026-11-25,,,100,OK
+cnn-indonesia,2026-11-25,,,10,OK
 vnexpress,2026-11-25,,,53,OK
 rappler,2026-11-25,,,10,OK
 cna-channel-newsasia,2026-11-25,,,20,OK
 allafrica-derniers-titres,2026-11-25,,,33,OK
 premium-times,2026-11-25,,,15,OK
 techcabal,2026-11-25,,,10,OK
-daily-maverick,2026-11-25,,,43,OK
+daily-maverick,2026-11-25,,,46,OK
 the-conversation-africa,2026-11-25,,,15,OK
 jeune-afrique,2026-11-25,,,30,OK
 addis-standard,,2026-11-14,HTTP 403,0,ECHEC
@@ -133,7 +133,7 @@ mada-masr,2026-11-25,,,0,OK
 tass,2026-11-25,,,100,OK
 kommersant,2026-11-25,,,100,OK
 meduza,2026-11-25,,,30,OK
-global-voices,2026-11-25,,,13,OK
-global-voices-en-francais,2026-11-25,,,3,OK
-dialogue-earth,2026-11-25,,,4,OK
+global-voices,2026-11-25,,,11,OK
+global-voices-en-francais,2026-11-25,,,4,OK
+dialogue-earth,2026-11-25,,,3,OK
 dialogue-earth-en-espagnol,2026-11-25,,,1,OK
