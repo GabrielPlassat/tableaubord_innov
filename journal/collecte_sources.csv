@@ -2,7 +2,7 @@ id,dernier_succes,premier_echec,derniere_erreur,articles_dernier_passage,statut
 insee-informations-rapides,2026-11-27,,,12,OK
 insee-communiques-de-presse,2026-11-27,,,3,OK
 banque-de-france-publications,,2026-11-14,HTTP 404,0,ECHEC
-bce-communiques-officiels,2026-11-27,,,7,OK
+bce-communiques-officiels,2026-11-27,,,8,OK
 ocde-actualites,,2026-11-14,HTTP 403,0,ECHEC
 fmi-actualites,,2026-11-14,HTTP 404,0,ECHEC
 le-grand-continent,2026-11-27,,,10,OK
@@ -11,12 +11,12 @@ la-tribune-economie,2026-11-27,,,20,OK
 project-syndicate,2026-11-27,,,20,OK
 aie-actualites,,2026-11-14,HTTP 403,0,ECHEC
 rte-eco2mix-actualites,,2026-11-14,Aucun article lisible,0,ECHEC
-connaissance-des-energies,2026-11-27,,,3,OK
+connaissance-des-energies,2026-11-27,,,4,OK
 actu-environnement,,2026-11-14,HTTP 404,0,ECHEC
 revolution-energetique,2026-11-27,,,15,OK
 pv-magazine-france,2026-11-27,,,10,OK
 european-energy-review,,2026-11-14,SSLError,0,ECHEC
-carbon-brief,2026-11-27,,,4,OK
+carbon-brief,2026-11-27,,,5,OK
 oil-price,2026-11-27,,,15,OK
 enerzine,2026-11-27,,,10,OK
 investing-com-petrole-commodites,2026-11-27,,,10,OK
@@ -42,12 +42,12 @@ tariq-krim,2026-11-27,,,1,OK
 philippe-meda,2026-11-27,,,1,OK
 bernard-marr,2026-11-27,,,0,OK
 roger-spitz,,2026-11-14,HTTP 404,0,ECHEC
-tim-o-reilly,2026-11-27,,,5,OK
+tim-o-reilly,2026-11-27,,,3,OK
 kai-fu-lee,2026-11-27,,,0,OK
 rui-ma,,2026-11-14,HTTP 404,0,ECHEC
 zeyi-yang,2026-11-27,,,0,OK
 scott-galloway,2026-11-27,,,0,OK
-cory-doctorow,2026-11-27,,,4,OK
+cory-doctorow,2026-11-27,,,5,OK
 tomi-adeyrun,,2026-11-14,HTTP 403,0,ECHEC
 andile-masuku,,2026-11-14,Aucun article lisible,0,ECHEC
 rebecca-enonchong,,2026-11-14,HTTP 404,0,ECHEC
@@ -86,10 +86,10 @@ the-batch-deeplearning-ai,,2026-11-14,HTTP 403,0,ECHEC
 venturebeat-ai,,2026-11-14,HTTP 429,0,SIGNALEE
 nature-news,2026-11-27,,,75,OK
 commission-eu-dae-numerique-ia,2026-11-27,,,30,OK
-commission-eu-dg-ener-energie,2026-11-27,,,5,OK
+commission-eu-dg-ener-energie,2026-11-27,,,4,OK
 commission-eu-dg-move-transport,,2026-11-14,HTTP 404,0,ECHEC
 commission-eu-dg-connect,,2026-11-14,HTTP 404,0,ECHEC
-jrc-science-hub-actualites,,2026-11-14,HTTP 404,0,SIGNALEE
+jrc-science-hub-actualites,,2026-11-14,HTTP 429,0,SIGNALEE
 parlement-eu-think-tank-etudes,,2026-11-14,HTTP 403,0,ECHEC
 conseil-ue-rss-actualites,,2026-11-14,HTTP 403,0,ECHEC
 enisa-cybersecurite-eu,,2026-11-14,HTTP 404,0,ECHEC
@@ -103,12 +103,12 @@ hankyoreh-english,2026-11-27,,,30,OK
 the-hindu,2026-11-27,,,60,OK
 scroll-in,2026-11-27,,,100,OK
 the-wire,,2026-11-14,Aucun article lisible,0,ECHEC
-mongabay-india,2026-11-27,,,12,OK
+mongabay-india,2026-11-27,,,11,OK
 amar-ujala,2026-11-27,,,11,OK
-dawn,2026-11-27,,,26,OK
+dawn,2026-11-27,,,28,OK
 the-daily-star-bangladesh,2026-11-27,,,0,OK
 mongabay-indonesia,2026-11-27,,,20,OK
-cnn-indonesia,2026-11-27,,,100,OK
+cnn-indonesia,2026-11-27,,,10,OK
 vnexpress,2026-11-27,,,48,OK
 rappler,2026-11-27,,,10,OK
 cna-channel-newsasia,2026-11-27,,,20,OK
