@@ -124,14 +124,14 @@ def main():
         groupes = groupes.sort_values(["nb_aires_source", "taille"], ascending=False)
         # combien de sujets le budget permet (environ 0,02 $ chacun en traitement differe)
         marge = budget.get("arret_dollars", 60) - deja
-        n_max = min(conf.get("sujets_par_semaine", 120), int(marge / 0.03))
+        n_max = min(int(os.environ.get("LIMITE_SUJETS") or conf.get("sujets_par_semaine", 120)), int(marge / 0.03))
         groupes = groupes.head(n_max)
         mois = MAINTENANT.strftime("%Y-%m")
         mois_prec = (MAINTENANT.replace(day=1) - timedelta(days=1)).strftime("%Y-%m")
         fiches = pd.concat([stock.lire(m) for m in (mois_prec, mois)], ignore_index=True)
         fiches = fiches.reindex(columns=C.COLONNES).fillna("")
         fiches = fiches.set_index("id", drop=False)
-        consigne = (RACINE / "config" / "consignes" / "a0_sujets_v1.txt").read_text(encoding="utf-8")
+        consigne = (RACINE / "config" / "consignes" / "a0_sujets_v2.txt").read_text(encoding="utf-8")
         requetes, sujets = [], []
         for k, g in enumerate(groupes.itertuples()):
             ids = [i for i in g.ids.split(";") if i in fiches.index]
@@ -140,7 +140,7 @@ def main():
             x = choisir_fiches(fiches.loc[ids], conf.get("fiches_par_sujet", 15))
             cid = f"s{k:04d}"
             requetes.append({"custom_id": cid, "params": {
-                "model": modele, "max_tokens": 2500,
+                "model": modele, "max_tokens": 4000,
                 "system": [{"type": "text", "text": consigne, "cache_control": {"type": "ephemeral"}}],
                 "messages": [{"role": "user", "content": message_sujet(x)}]}})
             sujets.append({"custom_id": cid, "groupe": g.groupe, "taille": int(g.taille),
@@ -176,10 +176,12 @@ def main():
 
     usage = {"entree": 0, "sortie": 0, "cache_lu": 0, "cache_ecrit": 0}
     resultats = {}
+    arrets = 0
     for r in client.messages.batches.results(batch_id):
         if r.result.type != "succeeded":
             continue
         m = r.result.message
+        arrets += int(getattr(m, "stop_reason", "") == "max_tokens")
         u = m.usage
         usage["entree"] += u.input_tokens or 0
         usage["sortie"] += u.output_tokens or 0
@@ -187,6 +189,7 @@ def main():
         usage["cache_ecrit"] += getattr(u, "cache_creation_input_tokens", 0) or 0
         resultats[r.custom_id] = extraire_json("".join(c.text for c in m.content if c.type == "text"))
     cout = noter_cout("etiquetage_sujets", modele, usage, batch=True, ref=batch_id)
+    bilan["arrets_longueur"] = arrets
 
     lignes = []
     for s in entrees.to_dict("records"):
@@ -198,7 +201,7 @@ def main():
         rb = e.get("rebond") or {}
         lv = e.get("levier") or {}
         lignes.append({**{k: v for k, v in s.items() if k != "custom_id"},
-                       "date_etiquetage": MAINTENANT.date().isoformat(), "modele": modele, "consigne": "a0_sujets_v1",
+                       "date_etiquetage": MAINTENANT.date().isoformat(), "modele": modele, "consigne": "a0_sujets_v2",
                        "sujet_coherent": bool(e.get("sujet_coherent", True)), "titre": e.get("titre", ""),
                        "resume": e.get("resume", ""), "angle_mort": e.get("angle_mort") or "",
                        "lectures_par_aire": json.dumps(e.get("lectures_par_aire") or [], ensure_ascii=False),
