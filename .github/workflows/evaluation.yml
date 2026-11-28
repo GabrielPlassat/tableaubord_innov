@@ -9,7 +9,7 @@ on:
   push:
     branches-ignore: [main]   # sur main, seulement a la main : l'evaluation consomme environ 300 appels a Albert
     paths:
-      - config/consignes/**
+      - config/consignes/passe*.txt
       - config/modeles.yaml
       - scripts/classement.py
       - scripts/evaluer_classement.py

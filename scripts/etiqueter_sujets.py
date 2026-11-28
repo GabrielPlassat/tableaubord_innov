@@ -54,15 +54,17 @@ def cout_du_mois() -> float:
     return float(d[d["date"].str.startswith(MAINTENANT.strftime("%Y-%m"))]["cout_dollars"].sum())
 
 
-def noter_cout(tache: str, modele: str, usage: dict, batch: bool):
+def noter_cout(tache: str, modele: str, usage: dict, batch: bool, ref: str = ""):
     _, t, red = tarifs()
     p = t.get(modele, {"entree": 4.0, "sortie": 20.0, "cache_lu": 0.2, "cache_ecrit": 5.0})
     k = red if batch else 1.0
     cout = k * (usage["entree"] * p["entree"] + usage["sortie"] * p["sortie"]
                 + usage["cache_lu"] * p["cache_lu"] + usage["cache_ecrit"] * p["cache_ecrit"]) / 1e6
-    ligne = pd.DataFrame([{"date": MAINTENANT.isoformat(timespec="seconds"), "tache": tache, "modele": modele,
-                           "batch": batch, **usage, "cout_dollars": round(cout, 4)}])
     f = JOURNAL / "couts.csv"
+    if ref and f.exists() and ref in f.read_text():
+        return cout                               # deja compte (traitement recupere une seconde fois)
+    ligne = pd.DataFrame([{"date": MAINTENANT.isoformat(timespec="seconds"), "tache": tache, "modele": modele,
+                           "batch": batch, **usage, "cout_dollars": round(cout, 4), "ref": ref}])
     ligne.to_csv(f, mode="a", header=not f.exists(), index=False)
     return cout
 
@@ -179,7 +181,7 @@ def main():
         usage["cache_lu"] += getattr(u, "cache_read_input_tokens", 0) or 0
         usage["cache_ecrit"] += getattr(u, "cache_creation_input_tokens", 0) or 0
         resultats[r.custom_id] = extraire_json("".join(c.text for c in m.content if c.type == "text"))
-    cout = noter_cout("etiquetage_sujets", modele, usage, batch=True)
+    cout = noter_cout("etiquetage_sujets", modele, usage, batch=True, ref=batch_id)
 
     lignes = []
     for s in entrees.to_dict("records"):
@@ -208,6 +210,9 @@ def main():
                        "confiance": e.get("confiance") or "", "raison_confiance": e.get("raison_confiance") or "",
                        "ce_qu_on_ne_sait_pas": e.get("ce_qu_on_ne_sait_pas") or ""})
     et = pd.DataFrame(lignes)
+    for col in et.columns:                         # le modele renvoie parfois un nombre la ou on attend du texte
+        if et[col].dtype == object:
+            et[col] = et[col].map(lambda v: "" if v is None else (json.dumps(v, ensure_ascii=False) if isinstance(v, (list, dict)) else str(v)))
     if len(et):
         from huggingface_hub import CommitOperationAdd
         tmp = Path("/tmp/etiquettes.parquet")
