@@ -61,3 +61,10 @@ sujets:                        # Sprint 3 : vecteurs et regroupement des sujets 
   taille_min: 3                # un sujet compte au moins 3 articles
   vecteurs_max: 20000          # vecteurs calcules au plus par nuit
   lot_vecteurs: 32             # textes envoyes a Albert par requete
+
+agents:                        # Sprint 4
+  sujets_par_semaine: 120      # sujets etiquetes au plus chaque lundi par Opus (environ 0,02 $ chacun)
+  sujet_taille_min: 5          # ... de 5 articles au moins,
+  sujet_aires_min: 2           # ... ou couverts par au moins 2 aires de source
+  fiches_par_sujet: 15         # fiches transmises par sujet au plus (les plus variees en aires)
+  attente_batch_minutes: 150   # attente du traitement differe ; au-dela, resultat recupere au passage suivant

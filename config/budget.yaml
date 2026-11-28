@@ -4,3 +4,10 @@ arret_dollars: 60      # au-dela : seuls la synthese hebdomadaire et le curateur
 # Rappel : fixez aussi un plafond de 60 $ par mois dans la console Anthropic. C'est le seul vrai verrou.
 assistant_questions_max_mois: 150
 dossiers_max_mois: 2
+
+# Tarifs en dollars par million de mots-jetons. Opus verifie le 28/11/2026 ; Sonnet et Haiku a verifier.
+tarifs:
+  claude-opus-5-5:      {entree: 4.0, sortie: 20.0, cache_lu: 0.20, cache_ecrit: 5.0}
+  claude-sonnet-5-5:    {entree: 2.0, sortie: 10.0, cache_lu: 0.10, cache_ecrit: 2.5}
+  claude-haiku-5-5:     {entree: 1.0, sortie: 5.0, cache_lu: 0.05, cache_ecrit: 1.25}
+reduction_batch: 0.5   # traitement differe : moitie prix
