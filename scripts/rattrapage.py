@@ -91,7 +91,24 @@ def sujets(df: pd.DataFrame, vec: pd.DataFrame, conf: dict) -> tuple[pd.DataFram
                 ra, rb = racine(a), racine(b)
                 if ra != rb:
                     parent[rb] = ra
-    d["groupe"] = [racine(i) for i in range(n)]
+    comp = np.array([racine(i) for i in range(n)])
+    # Les composantes connexes enchainent les ressemblances de proche en proche (A ressemble a B,
+    # B a C...) : un gros groupe peut reunir plusieurs histoires. On redecoupe les gros groupes par
+    # un regroupement "moyen", ou chaque article doit ressembler a l'ensemble du groupe.
+    from sklearn.cluster import AgglomerativeClustering
+    groupe = comp.copy()
+    prochain = n
+    for c in np.unique(comp):
+        membres = np.nonzero(comp == c)[0]
+        if len(membres) <= conf.get("taille_sans_controle", 12):
+            continue
+        ac = AgglomerativeClustering(n_clusters=None, metric="cosine", linkage="average",
+                                     distance_threshold=1 - conf.get("similarite_moyenne_min", 0.80))
+        etiquettes = ac.fit_predict(m[membres])
+        for e in np.unique(etiquettes):
+            groupe[membres[etiquettes == e]] = prochain
+            prochain += 1
+    d["groupe"] = groupe
     taille = d.groupby("groupe")["id"].transform("count")
     d = d[taille >= conf.get("taille_min", 3)]
     if d.empty:
