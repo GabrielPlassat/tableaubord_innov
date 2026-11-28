@@ -36,7 +36,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          LIMITE_SUJETS: ${{ github.ref_name == 'main' && '' || '20' }}   # sur une branche d'essai : 20 sujets seulement
+          LIMITE_SUJETS: ${{ github.ref_name != 'main' && '20' || '' }}   # sur une branche d'essai : 20 sujets seulement
         run: python -u scripts/etiqueter_sujets.py
       - name: Enregistrer le journal et les couts
         if: always()

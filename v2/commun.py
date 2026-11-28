@@ -158,3 +158,20 @@ def charger_sujets():
         return pd.read_parquet(hf_hub_download(depot, "sujets/groupes.parquet", repo_type="dataset", token=jeton)), depot
     except Exception as e:  # noqa: BLE001
         return None, f"Pas encore de sujets ({type(e).__name__}) : ils sont calculés chaque nuit."
+
+
+@st.cache_data(ttl=1800, show_spinner="Lecture des étiquettes des agents…")
+def charger_etiquettes():
+    """Sujets de la semaine étiquetés par Opus (sujets/etiquettes.parquet). Renvoie (tableau ou None, message)."""
+    jeton = _jeton_hf()
+    if not jeton:
+        locale = RACINE / "donnees_locales" / "sujets" / "etiquettes.parquet"
+        return (pd.read_parquet(locale), "local") if locale.exists() else (None, "Secret HF_TOKEN absent.")
+    from huggingface_hub import HfApi, hf_hub_download
+    with open(RACINE / "config" / "stockage.yaml", encoding="utf-8") as f:
+        conf = yaml.safe_load(f)
+    try:
+        depot = conf.get("depot_hf") or f'{HfApi(token=jeton).whoami()["name"]}/{conf["nom_par_defaut"]}'
+        return pd.read_parquet(hf_hub_download(depot, "sujets/etiquettes.parquet", repo_type="dataset", token=jeton)), depot
+    except Exception as e:  # noqa: BLE001
+        return None, f"Pas encore d'étiquettes ({type(e).__name__}) : elles sont produites chaque lundi."
