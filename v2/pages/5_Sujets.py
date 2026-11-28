@@ -6,7 +6,9 @@ import importlib
 import commun
 
 importlib.reload(commun)  # Streamlit Cloud garde parfois l'ancienne version de commun.py en memoire
-from commun import NOMS_AIRES, charger_sujets
+import json
+
+from commun import NOMS_AIRES, charger_etiquettes, charger_sujets
 
 st.set_page_config(page_title="Sujets", page_icon="◈", layout="wide")
 st.title("Sujets des 14 derniers jours")
@@ -21,6 +23,44 @@ st.markdown(
 )
 if st.button("Recharger"):
     charger_sujets.clear()
+    charger_etiquettes.clear()
+
+AXES = {"T01": "urgence écologique ↔ urgence sociale", "T02": "croissance ↔ autres finalités",
+        "T03": "technique ↔ sobriété", "T04": "marché ↔ État stratège", "T05": "propriété ↔ communs",
+        "T06": "performance ↔ robustesse", "T07": "ordre universel ↔ monde pluriel",
+        "T08": "interdépendance ↔ souveraineté", "T09": "accomplissement de soi ↔ appartenances",
+        "T10": "centres ↔ périphéries", "T11": "contrôle ↔ libertés", "T12": "automatisation ↔ travail humain",
+        "T13": "générations installées ↔ entrantes", "T14": "natalisme ↔ émancipation"}
+POLES = {"A": "pôle A", "B": "pôle B", "LES_DEUX": "les deux", "DEPASSEMENT": "dépassement"}
+
+et, info_et = charger_etiquettes()
+if et is not None and len(et):
+    st.subheader("Lus par les agents cette semaine")
+    st.caption(f"{len(et)} sujets étiquetés par Opus le {et['date_etiquetage'].iloc[0]} : comment chaque aire "
+               "raconte le sujet, ce qu'une aire dit et que les autres taisent, les axes de tension en jeu. "
+               "Les identifiants entre crochets renvoient aux fiches.")
+    axes_vus = sorted({c for c in et["axe1"].dropna() if c})
+    choix_axe = st.selectbox("Axe de tension", ["Tous"] + axes_vus, format_func=lambda c: c if c == "Tous" else f"{c} {AXES.get(c, '')}")
+    vue_et = et if choix_axe == "Tous" else et[et["axes"].str.contains(f'"{choix_axe}"', regex=False)]
+    for _, r in vue_et.iterrows():
+        with st.container(border=True):
+            st.markdown(f"**{r['titre']}**")
+            st.caption(f"{r['taille']} articles · aires {r['aires_source']} · lentille {r['lentille_principale']} · "
+                       f"{r['iceberg']} · précipitation {r['precipitation']} · confiance {r['confiance']}")
+            st.write(r["resume"])
+            for l in json.loads(r["lectures_par_aire"] or "[]"):
+                st.markdown(f"- **{NOMS_AIRES.get(l.get('aire'), l.get('aire'))}** : {l.get('lecture', '')}")
+            if r["angle_mort"]:
+                st.markdown(f"*Angle mort* : {r['angle_mort']}")
+            for a in json.loads(r["axes"] or "[]"):
+                par = ", ".join(f"{p.get('aire')} {POLES.get(p.get('pole'), p.get('pole'))}" for p in a.get("par_aire", []))
+                st.markdown(f"*Tension {a.get('code')} ({AXES.get(a.get('code'), '')})* : {par}")
+            if r["tension_libre"]:
+                st.markdown(f"*Tension hors grille* : {r['tension_libre']}")
+            if r["ce_qu_on_ne_sait_pas"]:
+                st.caption(f"Ce qu'on ne sait pas : {r['ce_qu_on_ne_sait_pas']}")
+    st.divider()
+    st.subheader("Tous les sujets des 14 derniers jours")
 g, info = charger_sujets()
 if g is None:
     st.info(info)

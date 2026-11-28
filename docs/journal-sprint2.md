@@ -88,3 +88,15 @@ Bilan des collectes du 16 au 21 novembre : 13 passages réussis, 150 fiches chac
 `scripts/rattrapage.py`, tâche `.github/workflows/rattrapage.yml` (chaque nuit à 22 h 41 UTC, jamais en même temps qu'une collecte), page `v2/pages/5_Sujets.py`.
 
 Premier passage réel (30 minutes, 643 appels à Albert) : 4 619 articles anciens triés, 400 fiches rattrapées (pages relues puis jetées), 13 252 vecteurs bge-m3, 112 sujets d'au moins 3 articles sur 14 jours, dont 33 couverts par au moins 3 aires de source. Exemples : sommet Xi–Trump–Poutine (28 articles, 9 aires, 7 langues) ; retour de Jensen Huang chez Nvidia (25 articles, 9 aires) ; verdict de la CIJ sur les Rohingyas (16, 6 aires) ; avion électrique chinois (5 articles, 5 aires, arabe, anglais, indonésien, portugais). Seuil de similarité 0,85 : quelques sujets restent coupés en deux (Huang, sommet de Shenzhen) ; à régler à l'usage (`config/seuils.yaml`, section `sujets`).
+
+# Sprint 4 – Agents
+
+## 28 novembre : étiquetage des sujets par Opus (agent A0)
+
+`scripts/etiqueter_sujets.py`, consigne `config/consignes/a0_sujets_v2.txt`, tâche `.github/workflows/agents.yml` (chaque lundi, traitement différé Batch à moitié prix), coûts dans `journal/couts.csv`, bilan dans `journal/agents.csv` et `journal/etiquettes_bilan.csv`. Garde-fou : l'agent ne part pas si le coût du mois atteint `arret_dollars` (60 $), et réduit le nombre de sujets à la marge restante.
+
+Premier essai (consigne v1, 120 sujets) : 78 étiquetés, 42 réponses coupées par la limite de longueur ; 2 axes seulement (le modèle préférait les tensions libres) ; 3,01 $. Les lectures par aire et les angles morts sont d'emblée très bons (Voyager 1 vu d'Indonésie, de Chine, du Brésil ; le premier astronaute pakistanais sur la station chinoise ; la candidature Diallo à la Fifa, que seule la source africaine dit rejetée par l'Afrique).
+
+Consigne v2 (axes cherchés d'abord, réponses plus courtes, 4 000 mots-jetons) sur 20 sujets : 20 sur 20 étiquetés, 15 avec au moins un axe (T07 et T08 en tête, puis T11, T04, T01…), environ 0,03 $ par sujet, soit environ 15 $ par mois pour 120 sujets par semaine. Coût total du mois au 28/11 : 3,66 $.
+
+Page Sujets : nouvelle partie « Lus par les agents cette semaine » (résumé, lecture de chaque aire, angle mort, axes avec le pôle de chaque aire, tension hors grille, ce qu'on ne sait pas), filtrable par axe.

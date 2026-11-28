@@ -8,3 +8,4 @@ huggingface_hub>=0.24
 yfinance>=0.2.50
 openai>=1.40
 tabulate>=0.9
+anthropic>=0.40
