@@ -150,8 +150,13 @@ def main():
             bilan["erreurs"] = "aucun sujet a etiqueter"
             ecrire_bilan(bilan)
             return
-        batch = client.messages.batches.create(requests=requetes)
-        batch_id, entrees = batch.id, pd.DataFrame(sujets)
+        reprise = os.environ.get("REPRENDRE_BATCH", "").strip()
+        if reprise:                               # traitement deja paye dont le suivi a ete perdu
+            batch_id, entrees = reprise, pd.DataFrame(sujets)
+            bilan["reprise"] = reprise
+        else:
+            batch = client.messages.batches.create(requests=requetes)
+            batch_id, entrees = batch.id, pd.DataFrame(sujets)
         EN_ATTENTE.write_text(json.dumps({"batch_id": batch_id, "sujets": sujets}, ensure_ascii=False))
         bilan["envoyes"] = len(requetes)
         print(f"Traitement differe {batch_id} : {len(requetes)} sujets envoyes", flush=True)
